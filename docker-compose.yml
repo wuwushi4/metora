@@ -1,0 +1,260 @@
+name: metora-prod
+
+# ============================================
+# Docker Compose - 正式環境配置
+# 後端應用 + Nginx 反向代理 (前端靜態資源)
+# ============================================
+# 注意：正式環境的 PostgreSQL 和 Redis 為外部服務，
+# 請透過 .env 或 .env.production 設定連線資訊：
+#   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+#   REDIS_URL (例如 redis://your-redis-host:6379/0)
+# ============================================
+
+services:
+  # ==========================================
+  # vLLM 推論服務 (可選)
+  # 啟動方式: docker compose --profile local-llm up -d
+  # ==========================================
+  vllm:
+    profiles: ["local-llm"]
+    image: vllm/vllm-openai:latest
+    container_name: metora_vllm
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Taipei
+    volumes:
+      - ${VLLM_MODELS_PATH:-/opt/ai_models/huggingface/hub}:/models:ro
+    ports:
+      - "8001:8001"
+    ipc: host
+    command:
+      - "/models/${VLLM_MODEL:-Qwen3-VL-8B-Instruct-AWQ-4bit}"
+      - "--served-model-name"
+      - "${VLLM_MODEL:-Qwen3-VL-8B-Instruct-AWQ-4bit}"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8001"
+      - "--enable-auto-tool-choice"
+      - "--tool-call-parser"
+      - "qwen3_xml"
+      - "--reasoning-parser"
+      - "qwen3"
+      - "--max-model-len"
+      - "${VLLM_MAX_MODEL_LEN:-16384}"
+      - "--gpu-memory-utilization"
+      - "${VLLM_GPU_UTILIZATION:-0.75}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s
+    networks:
+      - metora_network
+
+  # ==========================================
+  # 後端 FastAPI 應用
+  # ==========================================
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: metora_backend
+    restart: unless-stopped
+    # 覆蓋 Dockerfile 中的 CMD (移除 --reload)
+    command:
+      - "python"
+      - "-m"
+      - "uvicorn"
+      - "app.main:app"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8002"
+      - "--workers"
+      - "${UVICORN_WORKERS:-1}"
+    environment:
+      # 環境設定
+      ENVIRONMENT: production
+      TZ: Asia/Taipei
+
+      # 資料庫設定 (連接外部 PostgreSQL)
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
+      # Redis 設定 (連接外部 Redis)
+      REDIS_URL: ${REDIS_URL}
+
+      # LLM 提供商 (ollama | vllm | openai | azure_openai | google_gemini)
+      LLM_PROVIDER: ${LLM_PROVIDER:-ollama}
+
+      # Ollama (使用主機上的 Ollama)
+      # Docker 環境必須使用 host.docker.internal
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-gpt-oss:20b}
+
+      # vLLM
+      VLLM_BASE_URL: ${VLLM_BASE_URL:-http://vllm:8001}
+      VLLM_MODEL: ${VLLM_MODEL:-Qwen3-VL-8B-Instruct-AWQ-4bit}
+      VLLM_MAX_TOKENS: ${VLLM_MAX_TOKENS:-8192}
+      VLLM_TEMPERATURE: ${VLLM_TEMPERATURE:-0.7}
+      VLLM_TIMEOUT: ${VLLM_TIMEOUT:-60.0}
+      VLLM_TOP_P: ${VLLM_TOP_P:-0.8}
+      VLLM_TOP_K: ${VLLM_TOP_K:-20}
+
+      # OpenAI
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_MAX_TOKENS: ${OPENAI_MAX_TOKENS:-4096}
+      OPENAI_TEMPERATURE: ${OPENAI_TEMPERATURE:-0.7}
+      OPENAI_TIMEOUT: ${OPENAI_TIMEOUT:-60.0}
+      OPENAI_TOP_P: ${OPENAI_TOP_P:-1.0}
+      OPENAI_ORGANIZATION: ${OPENAI_ORGANIZATION:-}
+
+      # Azure OpenAI
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+      AZURE_OPENAI_DEPLOYMENT_NAME: ${AZURE_OPENAI_DEPLOYMENT_NAME:-}
+      AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION:-2024-08-01-preview}
+      AZURE_OPENAI_MAX_TOKENS: ${AZURE_OPENAI_MAX_TOKENS:-4096}
+      AZURE_OPENAI_TEMPERATURE: ${AZURE_OPENAI_TEMPERATURE:-0.7}
+      AZURE_OPENAI_TIMEOUT: ${AZURE_OPENAI_TIMEOUT:-60.0}
+      AZURE_OPENAI_TOP_P: ${AZURE_OPENAI_TOP_P:-1.0}
+
+      # Google Gemini
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      GOOGLE_GEMINI_MODEL: ${GOOGLE_GEMINI_MODEL:-gemini-2.0-flash}
+      GOOGLE_GEMINI_MAX_TOKENS: ${GOOGLE_GEMINI_MAX_TOKENS:-4096}
+      GOOGLE_GEMINI_TEMPERATURE: ${GOOGLE_GEMINI_TEMPERATURE:-0.7}
+      GOOGLE_GEMINI_TIMEOUT: ${GOOGLE_GEMINI_TIMEOUT:-60.0}
+      GOOGLE_GEMINI_TOP_P: ${GOOGLE_GEMINI_TOP_P:-1.0}
+      GOOGLE_GEMINI_TOP_K: ${GOOGLE_GEMINI_TOP_K:-40}
+
+      # JWT
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+
+      # CORS (正式環境應設定實際域名)
+      CORS_ALLOW_ORIGINS: ${CORS_ALLOW_ORIGINS:-http://localhost}
+
+      # Cookie 安全
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+      COOKIE_SAMESITE: ${COOKIE_SAMESITE:-lax}
+
+      # 日誌
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      SHOW_SQL: ${SHOW_SQL:-false}
+
+      # 速率限制
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+
+      # Sandbox 設定
+      SANDBOX_ENABLED: ${SANDBOX_ENABLED:-false}
+      SANDBOX_IMAGE: ${SANDBOX_IMAGE:-metora-sandbox:latest}
+      SANDBOX_TIMEOUT: ${SANDBOX_TIMEOUT:-60}
+      SANDBOX_MEMORY_LIMIT: ${SANDBOX_MEMORY_LIMIT:-512m}
+      SANDBOX_CPU_LIMIT: ${SANDBOX_CPU_LIMIT:-1.0}
+      SANDBOX_NETWORK_ENABLED: ${SANDBOX_NETWORK_ENABLED:-false}
+      SANDBOX_NETWORK_NAME: ${SANDBOX_NETWORK_NAME:-}
+      SANDBOX_MAX_OUTPUT_SIZE: ${SANDBOX_MAX_OUTPUT_SIZE:-1048576}
+      SANDBOX_MAX_ITERATIONS: ${SANDBOX_MAX_ITERATIONS:-8}
+
+      # Chat PDF 上傳設定
+      CHAT_PDF_ENABLED: ${CHAT_PDF_ENABLED:-True}
+      CHAT_PDF_MAX_SIZE: ${CHAT_PDF_MAX_SIZE:-52428800}
+      CHAT_PDF_MAX_PAGES: ${CHAT_PDF_MAX_PAGES:-10}
+      CHAT_PDF_RENDER_DPI: ${CHAT_PDF_RENDER_DPI:-300}
+
+      # 檔案路徑 (容器內路徑，對應到 volumes 掛載)
+      UPLOAD_FILES_ROOT: /uploaded_files/
+      CHAT_FILES_STORAGE_PATH: /uploaded_files/chat_files/
+      HUGGINGFACE_CACHE_DIR: /models/huggingface/hub
+      VECTOR_STORE_DIR: /vector_stores
+      VECTOR_STORE_PROVIDER: ${VECTOR_STORE_PROVIDER:-chroma}
+    volumes:
+      # 資料目錄 (使用 named volumes)
+      - uploaded_files:/uploaded_files
+      - vector_stores:/vector_stores
+      - model_cache:/models/huggingface/hub
+      - ./backend/alembic:/app/alembic  # 掛載遷移檔案
+      # Docker socket (Sandbox 功能需要)
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8002:8002"  # 可透過 nginx 存取，此處保留供直接除錯
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - metora_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # GPU 支援 (如有 NVIDIA GPU)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ==========================================
+  # Nginx 反向代理 (整合前端靜態資源)
+  # ==========================================
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: metora_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      # - "443:443"  # HTTPS (需要 SSL 憑證)
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - metora_network
+    # SSL 憑證掛載 (如果使用 HTTPS)
+    # volumes:
+    #   - /path/to/ssl/certs:/etc/nginx/ssl:ro
+
+# ============================================
+# Volumes (資料持久化)
+# ============================================
+volumes:
+  uploaded_files:
+    driver: local
+    name: metora_uploaded_files
+  vector_stores:
+    driver: local
+    name: metora_vector_stores
+  model_cache:
+    driver: local
+    name: metora_model_cache
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  metora_network:
+    driver: bridge
+    name: metora_network

@@ -1,0 +1,2548 @@
+{
+  "law_metadata": {
+    "name": "動物保護法",
+    "code": "M0060027",
+    "source_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=M0060027",
+    "last_updated": "2021-05-19",
+    "category": "其他",
+    "status": "現行"
+  },
+  "chapters": [
+    {
+      "chapter_num": "1",
+      "chapter_name": "總則",
+      "chapter_display": "第一章",
+      "articles": [
+        {
+          "article_num": "1",
+          "article_display": "第1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "為尊重動物生命及保護動物、增進動物福利，特制定本法。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "動物之保護，依本法之規定。但其他法律有特別之規定者，適用其他法律之規定。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "為什麼要有動物保護法？",
+            "動物保護法的主要精神是什麼？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=1"
+        },
+        {
+          "article_num": "2",
+          "article_display": "第2條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "本法所稱主管機關：在中央為行政院農業委員會；在直轄市為直轄市政府；在縣（市）為縣（市）政府。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "直轄市及縣（市）政府應設機關專責動物保護，執行本法各項工作。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "如果我發現有人虐待動物，應該要向哪個政府單位檢舉？",
+            "動物保護的主管機關是誰？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=2"
+        },
+        {
+          "article_num": "3",
+          "article_display": "第3條",
+          "content": "本法用詞，定義如下：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "動物：指犬、貓及其他人為飼養或管領之脊椎動物，包括經濟動物、實驗動物、寵物及其他動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "經濟動物：指為皮毛、肉用、乳用、役用或其他經濟目的而飼養或管領之動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "實驗動物：指為科學應用目的而飼養或管領之動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "科學應用：指為教學訓練、科學試驗、製造生物製劑、試驗商品、藥物、毒物及移植器官等目的所進行之應用行為。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "寵物：指犬、貓及其他供玩賞、伴侶之目的而飼養或管領之動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "6",
+              "item_display": "六",
+              "content": "寵物食品：指為供應經中央主管機關指定之寵物均衡營養之食料及其他物質。",
+              "subitems": []
+            },
+            {
+              "item_num": "7",
+              "item_display": "七",
+              "content": "飼主：指動物之所有人或實際管領動物之人。",
+              "subitems": []
+            },
+            {
+              "item_num": "8",
+              "item_display": "八",
+              "content": "寵物繁殖場：指為供商業用途而培育、改良或繁殖寵物之場所。",
+              "subitems": []
+            },
+            {
+              "item_num": "9",
+              "item_display": "九",
+              "content": "寵物食品業者：指經營寵物食品之製造、加工、分裝、批發、販賣、輸入或輸出之業者。",
+              "subitems": []
+            },
+            {
+              "item_num": "10",
+              "item_display": "十",
+              "content": "虐待：指除飼養、管領或處置目的之必須行為外，以暴力、不當使用藥品、器物、不作為或其他方法，致傷害動物或使其無法維持正常生理狀態之行為。",
+              "subitems": []
+            },
+            {
+              "item_num": "10",
+              "item_display": "十一",
+              "content": "運送人員：指以運送動物為職業者。",
+              "subitems": []
+            },
+            {
+              "item_num": "20",
+              "item_display": "十二",
+              "content": "屠宰從業人員：指於屠宰場宰殺經濟動物為職業者。",
+              "subitems": []
+            },
+            {
+              "item_num": "30",
+              "item_display": "十三",
+              "content": "展演：在公共場所或公眾得出入之場所以動物供展示、表演或與人互動。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "法律上怎麼定義「虐待」動物？不給牠吃飯算嗎？",
+            "動物保護法保護的「動物」包含哪些？只有貓狗嗎？",
+            "什麼是「經濟動物」？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=3"
+        }
+      ]
+    },
+    {
+      "chapter_num": "2",
+      "chapter_name": "動物之一般保護",
+      "chapter_display": "第二章",
+      "articles": [
+        {
+          "article_num": "4",
+          "article_display": "第4條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "中央主管機關應遴聘專家、學者、相關機關及立案之民間動物保護團體代表，研擬動物保護政策、動物保護教育、動物福利指標、動物福利白皮書，並每季檢討政策成效；其中專家、學者及立案之民間動物保護團體不具政府機關代表身分者，不得少於遴聘總人數之三分之二。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "治療動物疾病之藥物不足時，經中央主管機關公告之人用藥物類別，得由獸醫師（佐）填入診療紀錄使用於犬、貓及非經濟動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "前項人用藥物用於犬、貓及非經濟動物之使用、管理及其他應遵行事項之辦法，由中央主管機關會同中央衛生主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["31"]
+          },
+          "note": null,
+          "scenarios": [
+            "我家狗狗生病了，獸醫說沒有專門的藥，可以用人的藥嗎？這樣合法嗎？",
+            "是誰在負責制定台灣的動物保護政策？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=4"
+        },
+        {
+          "article_num": "4-1",
+          "article_display": "第4-1條",
+          "content": "各級政府應普及動物倫理與動物保護法規相關之教育及學習，以提升國民動物保護知識，並落實於十二年國民基本教育課綱中。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "政府有規定學校要教動物保護的觀念嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=4-1"
+        },
+        {
+          "article_num": "5",
+          "article_display": "第5條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "動物之飼主為自然人者，以成年人為限。未成年人飼養動物者，以其法定代理人或監護人為飼主。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "飼主對於其管領之動物，應依下列規定辦理：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "提供適當、乾淨且無害之食物及二十四小時充足、乾淨之飲水。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "提供安全、乾淨、通風、排水、適當及適量之遮蔽、照明與溫度之生活環境。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "提供法定動物傳染病之必要防治。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "避免其遭受騷擾、虐待或傷害。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "以籠子飼養寵物者，其籠內空間應足供寵物充分伸展，並應提供充分之籠外活動時間。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "以繩或鍊圈束寵物者，其繩或鍊應長於寵物身形且足供寵物充分伸展、活動，使用安全、舒適、透氣且保持適當鬆緊度之項圈，並應適時提供充分之戶外活動時間。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "不得以汽、機車牽引寵物。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "有發生危害之虞時，應將寵物移置安全處，並給予逃生之機會。"
+                },
+                {
+                  "subitem_num": "9",
+                  "subitem_display": "九",
+                  "content": "不得長時間將寵物留置密閉空間內，並應開啟對流孔洞供其呼吸。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十",
+                  "content": "提供其他妥善之照顧。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十一",
+                  "content": "除絕育外，不得對寵物施以非必要或不具醫療目的之手術。"
+                }
+              ]
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "飼主飼養之動物，除得交送動物收容處所或直轄市、縣（市）主管機關指定之場所收容處理外，不得棄養。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["25","25-1","29","30","30-1","32","33", "33-1"]
+          },
+          "note": null,
+          "scenarios": [
+            "我看到鄰居把狗狗養在很小的籠子裡，整天都不放出來，這樣有沒有違法？",
+            "如果我不想養我的寵物了，可以直接把它丟掉嗎？",
+            "看到有人用機車牽著狗跑步，這樣是可以的嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=5"
+        },
+        {
+          "article_num": "6",
+          "article_display": "第6條",
+          "content": "任何人不得騷擾、虐待或傷害動物。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["25","25-1","27-1","30","30-1","33-1"]
+          },
+          "note": null,
+          "scenarios": [
+            "有人用棍子、石頭等物品毆打路邊的流浪貓狗",
+            "看到有人踢打、拖行、摔打寵物或動物",
+            "發現有人用刀具、電擊棒等工具傷害動物",
+            "目擊有人虐待動物，如燙傷、刺傷、長期挨餓",
+            "有人故意追逐、驚嚇動物，造成動物受傷或痛苦",
+            "用車輛故意輾壓、撞擊動物",
+            "故意嚇唬鄰居的狗，讓牠一直叫，算不算騷擾動物？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=6"
+        },
+        {
+          "article_num": "6-1",
+          "article_display": "第6-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "任何人不得以動物進行展演。但申請經直轄市、縣（市）主管機關許可，或屬中央主管機關公告免經許可之展演動物類型、條件、方式或場所者，不在此限。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項申請人，以具有社會教育機構、休閒農場、觀光遊樂業或其他經主管機關指定之資格者為限；且申請人或其僱用之相關人員曾因違反第二十五條、第二十五條之一第一項之規定經有罪判決確定者，直轄市、縣（市）主管機關應不予許可前項之申請。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "第一項申請人應依直轄市、縣（市）主管機關之通知繳納保證金、投保責任保險或以其他方式擔保展演動物未獲得妥善飼養、照護或安置時，直轄市、縣（市）主管機關得以保證金、保險給付或擔保金額使用於妥善飼養、照護、安置或其他相關用途。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "展演動物者應具備適當設施、專任人員、向主管機關申報展演動物相關資訊並接受主管機關之評鑑。評鑑不合格者，主管機關應令其限期改善；屆期未改善者，主管機關得廢止其許可。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "第一項展演動物之申請條件、程序、應檢附文件、許可條件、許可期間、第二項申請人、相關人員資格、第三項繳納保證金、投保責任保險或其他擔保之方式、金額、用途、前項專任人員、設施、申報資訊、動物飼養照護、評鑑、廢止及其他應遵行事項之辦法，由中央主管機關定之。",
+              "subitems": []
+            },
+            {
+              "item_num": "6",
+              "item_display": "六",
+              "content": "本法中華民國一百零七年五月二十二日修正之條文施行前已展演動物者，得於修正施行之日起一年內繼續展演，不受第一項規定之限制。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["25","25-1","26","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "街頭藝人可以隨便帶猴子出來表演嗎？",
+            "我想開一間動物展演的咖啡廳，需要申請許可嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=6-1"
+        },
+        {
+          "article_num": "6-2",
+          "article_display": "第6-2條",
+          "content": "各政府部門之檢疫犬、緝毒犬、警犬、搜救犬或國防軍犬，其每周工時、服務年限、終老送養與其他應遵行事項，由中央主管機關定之。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "警犬或搜救犬退休後都去哪裡了？法律有保障牠們嗎？",
+            "工作犬（像緝毒犬）有工時限制嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=6-2"
+        },
+        {
+          "article_num": "7",
+          "article_display": "第7條",
+          "content": "飼主應防止其所飼養動物無故侵害他人之生命、身體、自由或財產。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["32"]
+          },
+          "note": null,
+          "scenarios": [
+            "我的鄰居養的狗很兇，常常跑出來追人，飼主有責任管好嗎？",
+            "如果我的寵物咬傷了人，我要負什麼法律責任？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=7"
+        },
+        {
+          "article_num": "8",
+          "article_display": "第8條",
+          "content": "中央主管機關得指定公告禁止飼養、輸出或輸入之動物。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["26","32","36"]
+          },
+          "note": null,
+          "scenarios": [
+            "我可以在台灣養浣熊當寵物嗎？",
+            "哪些動物是法律規定禁止飼養的？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=8"
+        },
+        {
+          "article_num": "9",
+          "article_display": "第9條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "運送動物應注意其食物、飲水、排泄、環境及安全，並避免動物遭受驚嚇、痛苦或傷害。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "經中央主管機關公告之動物種類，其運送人員應經運送職前講習結業，取得證書，始得執行運送業務。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "前項運送人員經運送職前講習結業並執行業務後，每二年應接受一次在職講習；其運送人員講習、動物運送工具、方式及其他應遵行事項之辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["31"]
+          },
+          "note": null,
+          "scenarios": [
+            "運送動物（例如豬、雞）的公司需要遵守什麼規定嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=9"
+        },
+        {
+          "article_num": "10",
+          "article_display": "第10條",
+          "content": "對動物不得有下列之行為：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "以直接、間接賭博、娛樂、營業、宣傳或其他不當目的，進行動物之間或人與動物間之搏鬥。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "以直接、間接賭博為目的，利用動物進行競技行為。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "以直接、間接賭博或其他不當目的，而有虐待動物之情事，進行動物交換或贈與。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "於運輸、拍賣、繫留等過程中，使用暴力、不當電擊等方式驅趕動物，或以刀具等具傷害性方式標記。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "於屠宰場內，經濟動物未經人道昏厥，予以灌水、灌食、綑綁、拋投、丟擲、切割及放血。",
+              "subitems": []
+            },
+            {
+              "item_num": "6",
+              "item_display": "六",
+              "content": "其他有害社會善良風俗之行為。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["27","27-1","33","33-1"]
+          },
+          "note": null,
+          "scenarios": [
+            "舉辦鬥狗或鬥雞比賽是犯法的嗎？",
+            "為了賭博而讓動物比賽，會觸犯動物保護法嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=10"
+        },
+        {
+          "article_num": "11",
+          "article_display": "第11條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "飼主對於受傷或罹病之動物，應給與必要之醫療。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "動物之醫療及手術，應基於動物健康或管理上需要，由獸醫師施行。但因緊急狀況或基於科學應用之目的或其他經中央主管機關公告之情形者，不在此限。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["30","31","33","33-1"]
+          },
+          "note": null,
+          "scenarios": [
+            "我的寵物生病了，但我沒錢帶牠去看醫生，這樣會不會違法？",
+            "我自己可以幫我的貓咪剪尾巴嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=11"
+        },
+        {
+          "article_num": "12",
+          "article_display": "第12條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "對動物不得任意宰殺。但有下列情事之一者，不在此限：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "為肉用、皮毛用，或餵飼其他動物之經濟利用目的。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "為科學應用目的。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "為控制動物群體疾病或品種改良之目的。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "為控制經濟動物數量過賸，並經主管機關許可。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "為解除動物傷病之痛苦。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "為避免對人類生命、身體、健康、自由、財產或公共安全有立即危險。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "收容於動物收容處所或直轄市、縣（市）主管機關指定之場所，經獸醫師檢查患有法定傳染病、重病無法治癒、嚴重影響環境衛生之動物或其他緊急狀況，嚴重影響人畜健康或公共安全。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "其他依本法規定或經中央主管機關公告之事由。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "中央主管機關得公告禁止宰殺前項第一款之動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "任何人不得因第一項第一款所定事由，有下列行為之一：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "宰殺犬、貓或販賣、購買、食用或持有其屠體、內臟或含有其成分之食品。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "販賣經中央主管機關公告禁止宰殺動物之屠體。"
+                }
+              ]
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "依第十四條第二項規定准許認領、認養之動物，不包括依第八條公告禁止飼養或輸入之動物。但公告前已飼養或輸入，並依第三十六條第一項辦理登記者，准由原飼主認領。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "本法中華民國一百零四年一月二十三日修正之條文施行之日起二年內，收容於動物收容處所或直轄市、縣（市）主管機關指定之場所，經通知或公告超過十二日而無人認領、認養或適當處置之動物，得予以宰殺，不適用第一項規定。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第八條"],
+            "resolved": ["8"],
+            "forward_refs": ["8"],
+            "backward_refs": ["14","21","25","25-1","27","27-1","33-1","36"]
+          },
+          "note": null,
+          "scenarios": [
+            "聽說有些地方還在吃狗肉，請問在台灣吃狗肉或貓肉是合法的嗎？",
+            "在什麼情況下才能合法地宰殺動物？",
+            "路上看到流浪狗受了重傷很痛苦，我可以自己結束牠的生命嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=12"
+        },
+        {
+          "article_num": "13",
+          "article_display": "第13條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "依前條第一項所定事由宰殺動物時，應以使動物產生最少痛苦之人道方式為之，並遵行下列規定：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "除主管機關公告之情況外，不得於公共場所或公眾得出入之場所宰殺動物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "為解除寵物傷病之痛苦而宰殺寵物，除緊急情況外，應由獸醫師執行之。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "宰殺收容於動物收容處所或直轄市、縣（市）主管機關指定場所之動物，應由獸醫師或在獸醫師監督下執行之。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "宰殺數量過賸之動物，應依主管機關許可之方式為之。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "中央主管機關得依實際需要，訂定以人道方式宰殺動物之準則。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "經濟動物之屠宰從業人員，每年應接受主管機關辦理或委託辦理之人道屠宰作業講習。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["前條"],
+            "resolved": ["12"],
+            "forward_refs": ["12"],
+            "backward_refs": ["21","30","31"]
+          },
+          "note": null,
+          "scenarios": [
+            "在自家門口殺雞是合法的嗎？",
+            "法律有規定要怎麼宰殺動物才算「人道」嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=13"
+        },
+        {
+          "article_num": "14",
+          "article_display": "第14條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "直轄市、縣（市）主管機關應依據直轄市、縣（市）之人口、遊蕩犬貓數量，於各該直轄市、縣（市）規劃設置動物收容處所，或委託民間機構、團體設置動物收容處所或指定場所，收容及處理下列動物：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "由直轄市或縣（市）政府、其他機構及民眾捕捉之遊蕩動物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "飼主不擬繼續飼養之動物。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "主管機關依本法留置或沒入之動物。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "危難中動物。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項收容動物無從辨識身分，或經依寵物登記或其他可資辨識之資料通知原飼主，自通知之日起超過七日未領回者，直轄市、縣（市）主管機關或動物收容處所得公告民眾認養，或予以絕育或其他收容管理之必要措施。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "中央主管機關應編列經費補助直轄市、縣（市）主管機關設置動物收容處所，辦理絕育、認領及認養等動物保護相關工作；其設置組織準則及公立動物收容處所管理作業規範，由中央主管機關定之。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "直轄市、縣（市）主管機關得訂定獎勵辦法，輔導並協助民間機構、團體設置動物收容處所。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "動物收容處所或直轄市、縣（市）主管機關指定之場所提供服務時，得收取費用；其收費標準，由直轄市、縣（市）主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["33-1"]
+          },
+          "note": null,
+          "scenarios": [
+            "我在路上撿到一隻走失的狗，應該要送到哪裡去？",
+            "如果我沒辦法再養我的貓了，可以把它送到收容所嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=14"
+        },
+        {
+          "article_num": "14-1",
+          "article_display": "第14-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "捕捉動物，不得使用下列方法：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "爆裂物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "毒物。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "電氣。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "腐蝕性物質。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "麻醉槍以外之其他種類槍械。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "獸鋏。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "其他經主管機關公告禁止之方法。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "使用前項各款所定方法捕捉動物者，主管機關得逕予排除或拆除並銷毀之。土地所有人、使用人或管理人不得規避、妨礙或拒絕。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["30"]
+          },
+          "note": null,
+          "scenarios": [
+            "農夫為了保護作物，可以用捕獸鋏來抓野生動物嗎？",
+            "看到有人在山上放捕獸鋏，我可以自己把它拆掉嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=14-1"
+        },
+        {
+          "article_num": "14-2",
+          "article_display": "第14-2條",
+          "content": "非經中央主管機關許可，任何人不得製造、販賣、陳列或輸出入獸鋏。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["30"]
+          },
+          "note": null,
+          "scenarios": [
+            "在五金行買賣捕獸鋏是合法的嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=14-2"
+        }
+      ]
+    },
+    {
+      "chapter_num": "3",
+      "chapter_name": "動物之科學應用",
+      "chapter_display": "第三章",
+      "articles": [
+        {
+          "article_num": "15",
+          "article_display": "第15條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "使用動物進行科學應用，應儘量避免使用活體動物，有使用之必要時，應以最少數目為之，並以使動物產生最少痛苦及傷害之方式為之。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "中央主管機關得依動物之種類，訂定實驗動物之來源、適用範圍及管理辦法。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["24","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "學校或研究機構可以用動物來做實驗嗎？有沒有什麼限制？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=15"
+        },
+        {
+          "article_num": "16",
+          "article_display": "第16條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "進行動物科學應用之機構，應設置實驗動物照護及使用委員會或小組，以督導該機構進行實驗動物之科學應用。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "中央主管機關應遴聘學者、專家、相關機關及立案之民間動物保護團體代表定期監督及管理動物之科學應用；其中至少應含獸醫師及民間動物保護團體代表各一人。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "實驗動物照護及使用委員會或小組之組成、任務及管理之辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["24","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "誰來監督動物實驗的過程，確保它們是合乎人道和法規的？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=16"
+        },
+        {
+          "article_num": "17",
+          "article_display": "第17條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "科學應用後，應立即檢視實驗動物之狀況，如其已失去部分肢體器官或仍持續承受痛苦，而足以影響其生存品質者，應立即以產生最少痛苦之方式宰殺之。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "實驗動物經科學應用後，除有科學應用上之需要，應待其完全恢復生理功能後，始得再進行科學應用。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["24","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "實驗結束後的動物都怎麼處理？",
+            "同一隻白老鼠可以重複被用來做實驗嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=17"
+        },
+        {
+          "article_num": "18",
+          "article_display": "第18條",
+          "content": "高級中等以下學校不得進行主管教育行政機關所定課程綱要以外，足以使動物受傷害或死亡之教學訓練。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["24","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "國中、國小的自然課可以解剖青蛙嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=18"
+        }
+      ]
+    },
+    {
+      "chapter_num": "4",
+      "chapter_name": "寵物之管理",
+      "chapter_display": "第四章",
+      "articles": [
+        {
+          "article_num": "19",
+          "article_display": "第19條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "中央主管機關得指定公告應辦理登記之寵物。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項寵物之出生、取得、轉讓、遺失及死亡，飼主應向直轄市、縣（市）主管機關或其委託之民間機構、團體辦理登記；直轄市、縣（市）主管機關應給與登記寵物身分標識，並應植入晶片。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "前項寵物之登記程序、期限、絕育獎勵與其他應遵行事項及標識管理辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["22","31","33-1","37","38"]
+          },
+          "note": null,
+          "scenarios": [
+            "我養的狗狗需要植入晶片嗎？這是有法律規定的嗎？",
+            "如果我的寵物走失或死亡了，需要去辦理什麼手續嗎？",
+            "寵物登記要去哪裡辦？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=19"
+        },
+        {
+          "article_num": "20",
+          "article_display": "第20條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "寵物出入公共場所或公眾得出入之場所，應由七歲以上之人伴同。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "具攻擊性之寵物出入公共場所或公眾得出入之場所，應由成年人伴同，並採取適當防護措施。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "前項具攻擊性之寵物及其所該採取之防護措施，由中央主管機關公告之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["29","31","33"]
+          },
+          "note": null,
+          "scenarios": [
+            "我養的狗比較兇，帶牠出門需要戴口罩嗎？",
+            "小朋友可以自己帶寵物出門嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=20"
+        },
+        {
+          "article_num": "20-1",
+          "article_display": "第20-1條",
+          "content": "直轄市、縣（市）主管機關應提供適當之公共場地，供飼主攜帶寵物活動與使用。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "哪裡有可以讓狗狗盡情奔跑的寵物公園？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=20-1"
+        },
+        {
+          "article_num": "21",
+          "article_display": "第21條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "應辦理登記之寵物出入公共場所或公眾得出入之場所無人伴同時，任何人均可協助保護送交動物收容處所或直轄市、縣（市）主管機關指定之場所。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項寵物有身分標識者，應儘速通知飼主認領；經通知逾十二日未認領或無身分標識者，依第十二條及第十三條規定處理。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "第一項之寵物有傳染病或其他緊急狀況者，得逕以人道方式宰殺之。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "飼主送交動物收容處所或直轄市、縣（市）主管機關指定場所之寵物，準用前二項規定辦理。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第十二條","第十三條"],
+            "resolved": ["12","13"],
+            "forward_refs": ["12","13"],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "在路上看到一隻沒人牽的狗，看起來是有人養的，我該怎麼辦？",
+            "如果我的寵物被送到收容所，我有幾天的時間可以去領回來？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=21"
+        }
+      ]
+    },
+    {
+      "chapter_num": "4-1",
+      "chapter_name": "寵物繁殖買賣寄養及食品業者之管理",
+      "chapter_display": "第四章之一",
+      "articles": [
+        {
+          "article_num": "22",
+          "article_display": "第22條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "任何人不得販賣特定寵物。但申請經直轄市、縣（市）主管機關許可，並依法領得營業證照之業者，得經營特定寵物之繁殖、買賣或寄養；許可期間，以三年為限。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項特定寵物之種類、繁殖場、買賣或寄養業者應具備之條件、設施、專任人員、申請許可之程序、期限與換證、撤銷或廢止許可之條件、寵物繁殖作業及其他應遵行事項之辦法，由中央主管機關定之。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "第一項業者以外之特定寵物飼主應為寵物絕育，但飼主向直轄市、縣（市）主管機關申報並提出繁殖管理說明後得免絕育，如有繁殖需求亦應申報，並在寵物出生後依第十九條規定，植入晶片，辦理寵物登記。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "直轄市、縣（市）主管機關得要求前項申報飼主，提供特定寵物飼養現況及受轉讓飼主資料。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "依第二項所定辦法施行前，已經營該特定寵物之繁殖場、買賣或寄養業者，應自辦法施行公告之日起二年內，向直轄市或縣（市）主管機關申請許可；屆期未申請者，依第二十五條之一規定處理。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第十九條"],
+            "resolved": ["19"],
+            "forward_refs": ["19"],
+            "backward_refs": ["22-2","25-2","27","28","30-1","37","38"]
+          },
+          "note": null,
+          "scenarios": [
+            "我自己家的貓生了小貓，我可以在網路上賣掉嗎？",
+            "法律有強制規定一定要幫寵物結紮嗎？如果不結紮會怎麼樣？",
+            "想要開寵物店，需要申請什麼許可證？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22"
+        },
+        {
+          "article_num": "22-1",
+          "article_display": "第22-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "直轄市、縣（市）主管機關應定期查核及評鑑寵物繁殖場、寵物買賣或寄養業者；其查核及評鑑之辦法，由中央主管機關定之。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項查核報告應定期公開。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "政府會不會定期檢查寵物店的環境？",
+            "我要怎麼知道哪家寵物繁殖場是合法的？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22-1"
+        },
+        {
+          "article_num": "22-2",
+          "article_display": "第22-2條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "經營第二十二條特定寵物之買賣業者，其寵物來源，應由取得許可證之寵物繁殖場或寵物買賣業者供應之；並應於完成晶片植入後，始得買賣或轉讓他人。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "經營第二十二條特定寵物買賣交易時，寵物繁殖或買賣業者，應備有登載寵物相關資訊之文件，並提供予購買者。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "前項寵物繁殖場、寵物買賣或寄養業者，於電子、平面、電信網路及其他媒體進行廣告行銷宣傳時，應標示其許可證字號。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第二十二條"],
+            "resolved": ["22"],
+            "forward_refs": ["22"],
+            "backward_refs": ["28","30"]
+          },
+          "note": null,
+          "scenarios": [
+            "在寵物店買狗的時候，店家應該要提供給我哪些資料？",
+            "寵物店在網路上打廣告，需要標示許可證字號嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22-2"
+        },
+        {
+          "article_num": "22-3",
+          "article_display": "第22-3條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "寵物食品製造、加工或輸入業者，應就所營之寵物食品向中央主管機關申報。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項業者應申報之寵物食品種類、申報內容、方式、期限、程序、其他相關管理事項之辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["31"]
+          },
+          "note": null,
+          "scenarios": [
+            "寵物食品的製造或進口需要向政府申報嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22-3"
+        },
+        {
+          "article_num": "22-4",
+          "article_display": "第22-4條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "寵物食品有下列情形之一者，不得製造、加工、分裝、批發、販賣、輸入、輸出、贈與或意圖販賣而公開陳列：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "染有病原微生物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "有害寵物健康物質之含量超出安全容許量。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "逾有效日期。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "未依規定標示、標示不明或標示不全。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項病原微生物之種類、有害寵物健康物質之種類及其安全容許量之標準，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["23-2","27","29"]
+          },
+          "note": null,
+          "scenarios": [
+            "我買到的寵物飼料過期了，店家這樣賣是合法的嗎？",
+            "如果寵物吃了有問題的飼料生病了，業者有責任嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22-4"
+        },
+        {
+          "article_num": "22-5",
+          "article_display": "第22-5條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "寵物食品應以中文及通用符號，顯著標示下列事項於容器、包裝或說明書之上：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "品名。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "淨重、容量、數量或度量等；其淨重、容量或度量應標示法定度量衡單位，必要時，得加註其他單位。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "所使用主要原料、添加物名稱。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "營養成分及含量。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "製造、加工業者名稱、地址及電話。輸入者並應加註輸入業者及國內負責廠商名稱、地址、電話及原產地。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "有效日期或製造日期。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "保存期限、保存方法及條件。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "適用寵物種類、方法及其他應注意事項。"
+                },
+                {
+                  "subitem_num": "9",
+                  "subitem_display": "九",
+                  "content": "其他經中央主管機關公告指定標示之事項。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "對於寵物食品所為之標示、宣傳或廣告，不得有不實、誇張或易生誤解之情形。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "寵物食品容器、包裝有下列情形之一者，不得製造、販賣、輸入、輸出或使用：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "有毒。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "易生不良化學作用。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "其他足以危害健康。"
+                }
+              ]
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["29"]
+          },
+          "note": null,
+          "scenarios": [
+            "寵物食品的包裝上一定要標示哪些資訊？",
+            "寵物飼料廣告號稱有療效，這是真的嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=22-5"
+        }
+      ]
+    },
+    {
+      "chapter_num": "5",
+      "chapter_name": "行政監督",
+      "chapter_display": "第五章",
+      "articles": [
+        {
+          "article_num": "23",
+          "article_display": "第23條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "直轄市、縣（市）主管機關應置專任動物保護檢查員，並得甄選義務動物保護員，協助動物保護檢查工作。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "動物保護檢查員得出入動物比賽、宰殺、繁殖、買賣、寄養、展示及其他營業場所、訓練、動物科學應用場所，稽查、取締違反本法規定之有關事項。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "對於前項稽查、取締，不得規避、妨礙或拒絕。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "第二項之稽查，直轄市、縣（市）主管機關得委任、委託或委辦其他機關（構），法人、團體或個人辦理。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "動物保護檢查員於執行職務時，應出示有關執行職務之證明文件或顯示足資辨別之標誌；必要時，得請警察人員協助。",
+              "subitems": []
+            },
+            {
+              "item_num": "6",
+              "item_display": "六",
+              "content": "直轄市、縣（市）政府警察局協助動物保護檢查員執行本法有關動物保護之工作，應經相關專業訓練。",
+              "subitems": []
+            },
+            {
+              "item_num": "7",
+              "item_display": "七",
+              "content": "為期本法之有效實施，主管機關應逐年編列預算，推動流浪犬族群控制、多元創新性認領養、工作犬、校園犬計畫及確保收容管理品質等動物保護有關工作。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["29"]
+          },
+          "note": null,
+          "scenarios": [
+            "誰有權力進入寵物繁殖場或屠宰場進行檢查？",
+            "如果動物保護檢查員要來稽查，店家可以拒絕嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=23"
+        },
+        {
+          "article_num": "23-1",
+          "article_display": "第23-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "直轄市、縣（市）主管機關得會同有關機關派員進入寵物食品業者之營業及相關場所，執行檢查或抽樣檢驗。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "直轄市、縣（市）主管機關為前項檢查或抽樣檢驗，得命前項寵物食品業者提供生產、進貨、出貨或庫存管理等相關文件及紀錄。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "檢查人員執行第一項檢查或抽樣檢驗時，應出示證明文件或顯示足資辨別之標誌。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "對於第一項之檢查或抽樣檢驗，寵物食品業者不得規避、妨礙或拒絕。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": ["29"]
+          },
+          "note": null,
+          "scenarios": [
+            "政府會抽查市面上的寵物食品嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=23-1"
+        },
+        {
+          "article_num": "23-2",
+          "article_display": "第23-2條",
+          "content": "寵物食品經檢查或檢驗確認含有或超過依第二十二條之四第二項所定標準中有關病原微生物種類或有害寵物健康物質安全容許量者，直轄市或縣（市）主管機關應命其限期回收、銷毀或為其他適當之處置。",
+          "items": [],
+          "references": {
+            "raw_text": ["第二十二條之四"],
+            "resolved": ["22-4"],
+            "forward_refs": ["22-4"],
+            "backward_refs": ["27"]
+          },
+          "note": null,
+          "scenarios": [
+            "如果發現某牌子的飼料有問題，政府會怎麼處理？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=23-2"
+        },
+        {
+          "article_num": "24",
+          "article_display": "第24條",
+          "content": "直轄市或縣（市）主管機關對於違反第十五條、第十六條第一項、第十七條或第十八條規定之機構、學校，應先通知限期改善或為必要之處置。",
+          "items": [],
+          "references": {
+            "raw_text": ["第十五條","第十六條","第十七條","第十八條"],
+            "resolved": ["15","16","17","18"],
+            "forward_refs": ["15","16","17","18"],
+            "backward_refs": ["29"]
+          },
+          "note": null,
+          "scenarios": [
+            "如果大學的動物實驗室違反規定，會馬上被處罰嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=24"
+        }
+      ]
+    },
+    {
+      "chapter_num": "6",
+      "chapter_name": "罰則",
+      "chapter_display": "第六章",
+      "articles": [
+        {
+          "article_num": "25",
+          "article_display": "第25條",
+          "content": "有下列情事之一者，處二年以下有期徒刑或拘役，併科新臺幣二十萬元以上二百萬元以下罰金：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "違反第五條第二項、第六條或第十二條第一項規定，宰殺、故意傷害或使動物遭受傷害，致動物肢體嚴重殘缺或重要器官功能喪失。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反第十二條第二項或第三項第一款規定，宰殺犬、貓或經中央主管機關公告禁止宰殺之動物。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條","第十二條"],
+            "resolved": ["5","6","12"],
+            "forward_refs": ["5","6","12"],
+            "backward_refs": ["25-1","25-2","33-1","33-2","37"]
+          },
+          "note": null,
+          "scenarios": [
+            "故意把動物打到重傷，會有什麼樣的刑責？",
+            "殺害流浪狗或流浪貓會被關嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=25"
+        },
+        {
+          "article_num": "25-1",
+          "article_display": "第25-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "違反第五條第二項、第六條、第十二條第一項、第二項或第三項第一款規定，使用藥物、槍械，致複數動物死亡情節重大者，處一年以上五年以下有期徒刑，併科新臺幣五十萬元以上五百萬元以下罰金。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "有前條或前項情形之一者，主管機關得公布其姓名、照片及違法事實。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條","第十二條","前條"],
+            "resolved": ["5","6","12","25"],
+            "forward_refs": ["5","6","12","25"],
+            "backward_refs": ["25-2","33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "用毒藥毒死很多流浪動物，罪會不會更重？",
+            "虐待動物的人，政府會公布他們的名字跟照片嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=25-1"
+        },
+        {
+          "article_num": "25-2",
+          "article_display": "第25-2條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "違反第二十二條第一項規定，未經直轄市或縣（市）主管機關許可，擅自經營特定寵物之繁殖場、買賣或寄養業者，處新臺幣十萬元以上三百萬元以下罰鍰，並令其停止營業；拒不停止營業者，按次處罰之。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前二條之行為人所飼養之動物、前項供繁殖或買賣之特定寵物，直轄市、縣（市）主管機關得沒入之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第二十二條","前二條"],
+            "resolved": ["22","25","25-1"],
+            "forward_refs": ["22","25","25-1"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "沒有拿到許可證就自己開寵物繁殖場，會被罰多少錢？",
+            "非法繁殖場的動物會被怎麼處理？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=25-2"
+        },
+        {
+          "article_num": "26",
+          "article_display": "第26條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情形之一者，處新臺幣五萬元以上二十五萬元以下罰鍰：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "違反第六條之一第一項規定，以動物進行展演。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "違反第八條規定，飼養、輸出或輸入經中央主管機關指定公告禁止飼養、輸出或輸入之動物。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項第一款所涉動物，不問屬於何人所有，直轄市或縣（市）主管機關得沒入之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第六條之一","第八條"],
+            "resolved": ["6-1","8"],
+            "forward_refs": ["6-1","8"],
+            "backward_refs": ["33-1","33-2","36"]
+          },
+          "note": null,
+          "scenarios": [
+            "在夜市擺攤，讓客人付錢跟稀有動物拍照，這樣會被罰款嗎？",
+            "偷偷養了法律不准養的保育類動物當寵物，會受到什麼處罰？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=26"
+        },
+        {
+          "article_num": "27",
+          "article_display": "第27條",
+          "content": "有下列情事之一者，處新臺幣五萬元以上二十五萬元以下罰鍰，並得公布其姓名、照片及違法事實，或限期令其改善；經限期令其改善，屆期未改善者，得按次處罰之：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "違反第十條第一款規定，驅使動物之間或人與動物搏鬥。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反第十條第一款規定，與動物搏鬥。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "違反第十條第二款規定，以直接、間接賭博為目的，利用動物進行競技。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "違反第十條第三款規定，以直接、間接賭博或其他不當目的，進行動物交換與贈與。",
+              "subitems": []
+            },
+            {
+              "item_num": "5",
+              "item_display": "五",
+              "content": "違反第十條第六款規定，其他有害社會善良風俗之利用動物行為。",
+              "subitems": []
+            },
+            {
+              "item_num": "6",
+              "item_display": "六",
+              "content": "違反第十二條第三項規定，販賣、購買、食用或持有犬、貓之屠體、內臟或含有其成分之食品或經中央主管機關公告禁止宰殺動物之屠體。",
+              "subitems": []
+            },
+            {
+              "item_num": "7",
+              "item_display": "七",
+              "content": "寵物繁殖業者違反中央主管機關依第二十二條第二項所定辦法中有關寵物繁殖作業之規定。",
+              "subitems": []
+            },
+            {
+              "item_num": "8",
+              "item_display": "八",
+              "content": "違反第二十二條第三項規定，未為寵物絕育且未申報及提出繁殖管理說明，或未申報繁殖需求而繁殖寵物。",
+              "subitems": []
+            },
+            {
+              "item_num": "9",
+              "item_display": "九",
+              "content": "製造、加工、分裝、批發、販賣、輸入、輸出、贈與或意圖販賣而公開陳列有第二十二條之四第一項第一款或第二款情形之一之寵物食品。",
+              "subitems": []
+            },
+            {
+              "item_num": "10",
+              "item_display": "十",
+              "content": "違反第二十三條之二規定，未於直轄市或縣（市）主管機關所定期限內回收、銷毀或為其他適當處置。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第十條","第十二條","第二十二條","第二十二條之四","第二十三條"],
+            "resolved": ["10","12","22","22-4","23-2"],
+            "forward_refs": ["10","12","22","22-4","23-2"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "賣香肉（狗肉）的店家會被罰多少錢？",
+            "寵物繁殖場如果沒有遵守規定，會有什麼處罰？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=27"
+        },
+        {
+          "article_num": "27-1",
+          "article_display": "第27-1條",
+          "content": "散布、播送或販賣違反第六條、第十條或第十二條第一項之文字、圖畫、聲音、影像、電磁紀錄或其他物品，或公然陳列，或以他法供人觀賞、聽聞者，處一年以下有期徒刑、拘役或科或併科三萬元以下罰金。但為供學術研究或公益用途者，不在此限。",
+          "items": [],
+          "references": {
+            "raw_text": ["第六條","第十條","第十二條"],
+            "resolved": ["6","10","12"],
+            "forward_refs": ["6","10","12"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "在網路上散播虐待動物的影片，這樣也犯法嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=27-1"
+        },
+        {
+          "article_num": "28",
+          "article_display": "第28條",
+          "content": "有下列情事之一者，處新臺幣四萬元以上二十萬元以下罰鍰及令其限期改善外，並得公布其姓名、名稱或照片；屆期不改善者，得按次處罰；經處罰三次者，廢止其許可：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "特定寵物之繁殖、買賣或寄養業者違反中央主管機關依第二十二條第二項所定辦法中有關特定寵物繁殖場、買賣或寄養業者應具備之條件、設施、專任人員之規定。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "寵物買賣業者違反第二十二條之二第一項規定，其寵物來源由未取得許可證之寵物繁殖場或寵物買賣業者供應，或未完成晶片植入即進行買賣、轉讓他人。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第二十二條","第二十二條之二"],
+            "resolved": ["22","22-2"],
+            "forward_refs": ["22","22-2"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "如果寵物店的環境很髒亂，業者會被處罰嗎？",
+            "寵物店賣的幼犬沒有植入晶片，這樣合法嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=28"
+        },
+        {
+          "article_num": "29",
+          "article_display": "第29條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，處新臺幣三萬元以上十五萬元以下罰鍰：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "違反第五條第三項規定，棄養動物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "違反第六條之一第五項所定辦法中有關保證金、投保責任保險或其他擔保方式、專任人員、設施、申報資訊、動物飼養照護之規定。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "違反第十五條第一項、第十七條或第十八條規定，未依第二十四條規定限期改善或為必要之處置。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "違反第十六條第一項規定，未成立實驗動物照護及使用委員會或小組。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "違反第二十條第二項規定，無成年人伴同或未採取適當防護措施，使具攻擊性寵物出入於公共場所或公眾得出入之場所。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "違反第二十三條第三項規定，規避、妨礙或拒絕動物保護檢查員依法執行職務。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "製造、加工、分裝、批發、販賣、輸入、輸出、贈與或意圖販賣而公開陳列有第二十二條之四第一項第三款或第四款情形之一之寵物食品。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "違反第二十二條之五第一項有關標示之規定，經限期令其改善，屆期未改善。"
+                },
+                {
+                  "subitem_num": "9",
+                  "subitem_display": "九",
+                  "content": "違反第二十二條之五第二項有關標示、宣傳或廣告不得有不實、誇張或使人產生誤解之規定。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十",
+                  "content": "違反第二十二條之五第三項規定，製造、販賣、輸入、輸出或使用有第二十二條之五第三項各款情形之一之寵物食品容器或包裝。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十一",
+                  "content": "違反第二十三條之一第四項規定，規避、妨礙或拒絕檢查人員之檢查或抽樣檢驗。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "前項第二款或第三款所涉動物，不問屬於何人所有，直轄市或縣（市）主管機關得沒入之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條之一","第十五條","第十六條","第十七條","第十八條","第二十條","第二十二條之四","第二十二條之五","第二十三條","第二十三條之一","第二十四條"],
+            "resolved": ["5","6-1","15","16","17","18","20","22-4","22-5","23","23-1","24"],
+            "forward_refs": ["5","6-1","15","16","17","18","20","22-4","22-5","23","23-1","24"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "把不要的寵物丟到山上，會被罰多少錢？",
+            "帶比特犬出門沒有用牽繩和口罩，會有什麼罰則？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=29"
+        },
+        {
+          "article_num": "30",
+          "article_display": "第30條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，處新臺幣一萬五千元以上七萬五千元以下罰鍰：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "違反第五條第二項第一款至第十款各款之一或第六條規定，故意傷害或使動物遭受傷害，而未達動物肢體嚴重殘缺、重要器官功能喪失或死亡，或過失傷害或使動物遭受傷害，致動物肢體嚴重殘缺、重要器官功能喪失或死亡。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "違反第五條第二項第十一款規定，寵物除絕育目的外，給予非必要或不具醫療目的之手術行為。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "違反第十一條第一項規定，對於受傷或罹病動物，飼主未給與必要之醫療，經直轄市或縣（市）主管機關通知限期改善，屆期未改善。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "違反第十三條第一項第一款規定，於公共場所或公眾得出入之場所宰殺動物。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "違反第十三條第一項第四款規定，未依主管機關許可方法宰殺數量過賸之動物。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "違反第十三條第二項規定，未依中央主管機關所定宰殺動物相關準則宰殺動物。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "違反第十四條之一第一項規定，使用禁止之方法捕捉動物。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "違反第十四條之二規定，未經中央主管機關許可，製造、販賣、陳列或輸出入獸鋏。"
+                },
+                {
+                  "subitem_num": "9",
+                  "subitem_display": "九",
+                  "content": "違反第二十二條之二第二項規定，寵物繁殖或買賣業者於寵物買賣交易時，拒未提供購買者有關寵物資訊之文件。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十",
+                  "content": "違反第二十二條之二第三項規定，寵物繁殖、買賣或寄養業者於電子、平面、電信網路及其他媒體進行廣告行銷宣傳時，未標示其許可證字號。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反前項第一款至第八款規定之一，經裁罰處分送達之日起，五年內故意再次違反前項第一款至第八款規定之一者，處二年以下有期徒刑。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條","第十一條","第十三條","第十四條之一","第十四條之二","第二十二條之二"],
+            "resolved": ["5","6","11","13","14-1","14-2","22-2"],
+            "forward_refs": ["5","6","11","13","14-1","14-2","22-2"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "打傷動物但沒有到很嚴重的程度，會被罰錢嗎？",
+            "飼主一直不帶生病的寵物去看醫生，會有什麼處罰？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=30"
+        },
+        {
+          "article_num": "30-1",
+          "article_display": "第30-1條",
+          "content": "有下列情事之一者，處新臺幣三千元以上一萬五千元以下罰鍰，並得按次處罰之：",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "違反第五條第二項第一款至第十款規定，未達動物受傷狀況，經限期令其改善，屆期仍未改善。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反第五條第二項第一款至第十款及第六條規定，過失傷害或使動物遭受傷害，而未達動物肢體嚴重殘缺、重要器官功能喪失或死亡。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "違反第二十二條第四項，不提供其特定寵物飼養現況及受轉讓飼主資料，經限期令其改善，屆期仍未改善。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條","第二十二條"],
+            "resolved": ["5","6","22"],
+            "forward_refs": ["5","6","22"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "鄰居的狗看起來都沒東西吃喝，被通知改善後還是不改，會怎麼樣？",
+            "因為我的疏忽讓寵物受傷了，但傷勢不重，這樣會被罰嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=30-1"
+        },
+        {
+          "article_num": "31",
+          "article_display": "第31條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，處新臺幣三千元以上一萬五千元以下罰鍰，並得限期令其改善；經限期令其改善，屆期未改善者，得按次處罰之：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "獸醫師（佐）違反第四條第二項規定，使用未經公告之藥物類別、使用於經濟動物，或任何人違反依第四條第三項所定辦法中有關應遵行事項之規定。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "運送人違反第九條第二項規定，未經職前講習結業取得證書即執行動物運送業務。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "運送人違反第九條第三項規定，每二年未接受主管機關辦理或委託辦理之在職講習。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "運送人違反中央主管機關依第九條第三項所定辦法中有關運送工具或方式之規定。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "違反第十一條第二項規定，未基於動物健康或管理上之需要施行動物醫療及手術。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "違反第十三條第一項第二款規定，未具獸醫師資格非因緊急情況宰殺寵物。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "違反第十三條第一項第三款規定，未由獸醫師或未在獸醫師監督下宰殺動物。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "飼主違反中央主管機關依第十九條第三項所定辦法中有關辦理寵物之出生、取得、轉讓、遺失或死亡登記期限之規定。"
+                },
+                {
+                  "subitem_num": "9",
+                  "subitem_display": "九",
+                  "content": "飼主違反第二十條第一項規定，使寵物無七歲以上人伴同，出入於公共場所或公眾得出入之場所。"
+                },
+                {
+                  "subitem_num": "10",
+                  "subitem_display": "十",
+                  "content": "未依第二十二條之三第一項規定申報，或違反第二十二條之三第二項所定辦法中有關申報內容、方式、期限、程序及其他相關管理事項之規定，經限期令其改善，屆期仍未改善。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反前項第四款至第七款規定之一，經裁罰處分送達之日起，二年內故意再次違反前項第四款至第七款規定之一者，處一年以下有期徒刑。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第四條","第九條","第十一條","第十三條","第十九條","第二十條","第二十二條之三"],
+            "resolved": ["4","9","11","13","19","20","22-3"],
+            "forward_refs": ["4","9","11","13","19","20","22-3"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "我的狗狗走失了，但我沒有在期限內去登記，會被罰款嗎？",
+            "讓我的狗自己跑到外面去，會不會被罰錢？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=31"
+        },
+        {
+          "article_num": "32",
+          "article_display": "第32條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，直轄市或縣（市）主管機關得逕行沒入飼主之動物：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "飼主違反第五條第二項規定，使其飼養之動物遭受惡意或無故之騷擾、虐待或傷害，情節重大且有致死之虞。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "違反第五條第三項規定經飼主棄養之動物。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "違反第七條規定，無故侵害他人之生命或身體，致造成他人生命或身體傷害之動物。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "違反第七條規定，飼主經勸導拒不改善，而其飼養之動物再次無故侵害他人之自由或財產。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "違反第八條規定，飼養、輸入、輸出經公告禁止飼養、輸入或輸出之動物。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反前項各款規定之飼主，直轄市、縣（市）主管機關得禁止其認養自直轄市、縣（市）主管機關管轄之動物收容處所之動物，及不許可其申請經營寵物繁殖、買賣或寄養業。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第七條","第八條"],
+            "resolved": ["5","7","8"],
+            "forward_refs": ["5","7","8"],
+            "backward_refs": ["33-1","33-2","36"]
+          },
+          "note": null,
+          "scenarios": [
+            "在什麼情況下，政府可以直接把我的寵物沒收？",
+            "如果飼主虐待動物，他的動物會被帶走嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=32"
+        },
+        {
+          "article_num": "33",
+          "article_display": "第33條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，除依本法處罰外，直轄市或縣（市）主管機關應令飼主限期改善；屆期未改善者，得逕行沒入其動物：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "違反第五條第二項規定，使動物遭受惡意或無故之騷擾、虐待或傷害。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "違反第十條規定，利用動物。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "違反第十一條第一項規定，未給與動物必要之醫療。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "違反第二十條第二項規定，使具攻擊性寵物無成年人伴同或未採取適當防護措施，出入於公共場所或公眾得出入之場所。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反前項各款規定之飼主，直轄市、縣（市）主管機關得禁止其認養自直轄市、縣（市）主管機關管轄之動物收容處之動物，及不許可其申請經營寵物繁殖、買賣或寄養。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第十條","第十一條","第二十條"],
+            "resolved": ["5","10","11","20"],
+            "forward_refs": ["5","10","11","20"],
+            "backward_refs": ["33-1","33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "如果我沒有好好照顧我的寵物，政府會先警告我還是直接沒收？",
+            "虐待動物的飼主，除了罰款之外，還會被禁止再養寵物嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=33"
+        },
+        {
+          "article_num": "33-1",
+          "article_display": "第33-1條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "有下列情事之一者，不得飼養依第十九條第一項應辦理登記之寵物及認養依第十四條第一項收容之動物：",
+              "subitems": [
+                {
+                  "subitem_num": "1",
+                  "subitem_display": "一",
+                  "content": "棄養動物。"
+                },
+                {
+                  "subitem_num": "2",
+                  "subitem_display": "二",
+                  "content": "將不擬繼續飼養之動物送交動物收容處所。"
+                },
+                {
+                  "subitem_num": "3",
+                  "subitem_display": "三",
+                  "content": "管領動物違反第五條第二項各款規定之一。"
+                },
+                {
+                  "subitem_num": "4",
+                  "subitem_display": "四",
+                  "content": "違反第六條規定，騷擾、虐待或傷害動物。"
+                },
+                {
+                  "subitem_num": "5",
+                  "subitem_display": "五",
+                  "content": "從事第十條各款之一所定行為。"
+                },
+                {
+                  "subitem_num": "6",
+                  "subitem_display": "六",
+                  "content": "違反第十一條第一項，對於受傷或罹病之動物，未給與必要之醫療。"
+                },
+                {
+                  "subitem_num": "7",
+                  "subitem_display": "七",
+                  "content": "違反第十二條第一項規定，任意宰殺動物，或違反第十二條第二項、第三項規定，宰殺犬、貓或經公告禁止宰殺之動物，或販賣、購買、食用或持有其屠體、內臟或含有其成分之食品。"
+                },
+                {
+                  "subitem_num": "8",
+                  "subitem_display": "八",
+                  "content": "經直轄市或縣（市）主管機關依第三十二條第一項或前條第一項規定沒入動物。"
+                }
+              ]
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "違反前項規定飼養寵物或認養動物者，處新臺幣三千元以上一萬五千元以下罰鍰；直轄市或縣（市）主管機關並應沒入其寵物或動物。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "有第一項各款情形之一，或依第二十五條至第三十一條經判決有罪、緩起訴或處罰鍰者，直轄市、縣（市）主管機關應令其接受部分課程於動物收容處所參與實作之動物保護講習；其方式、內容、時數、費用收取及其他應遵行事項之辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第五條","第六條","第十條","第十一條","第十二條","第十四條","第十九條","第二十五條至第三十一條","第三十二條","前條"],
+            "resolved": ["5","6","10","11","12","14","19","25","25-1","25-2","26","27","27-1","28","29","30","30-1","31","32","33"],
+            "forward_refs": ["5","6","10","11","12","14","19","25","25-1","25-2","26","27","27-1","28","29","30","30-1","31","32","33"],
+            "backward_refs": ["33-2"]
+          },
+          "note": null,
+          "scenarios": [
+            "曾經棄養過動物的人，以後還可以再領養動物嗎？",
+            "虐待動物的人，是不是要被罰去上課？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=33-1"
+        },
+        {
+          "article_num": "33-2",
+          "article_display": "第33-2條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "直轄市或縣（市）主管機關就違反第二十五條至前條規定者，應按季彙整並陳報中央主管機關。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "中央主管機關應匯總前項資料，按季提供各直轄市或縣（市）主管機關及動物收容處所，以作為拒絕或同意認養，或依前條第二項規定處罰之依據。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "因檢舉而查獲違反本法行為者，直轄市、縣（市）主管機關對於檢舉人身分及有關資料應予保密，並得酌予獎勵。",
+              "subitems": []
+            },
+            {
+              "item_num": "4",
+              "item_display": "四",
+              "content": "前項檢舉獎勵辦法，由中央主管機關定之。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第二十五條至前條"],
+            "resolved": ["25","25-1","26","27","27-1","28","29","30","30-1","31","32","33","33-1"],
+            "forward_refs": ["25","25-1","26","27","27-1","28","29","30","30-1","31","32","33","33-1"],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "如果我檢舉別人虐待動物，我的身分會被保密嗎？",
+            "檢舉違反動保法的行為，會有獎金嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=33-2"
+        },
+        {
+          "article_num": "34",
+          "article_display": "第34條",
+          "content": "本法所定之罰鍰，由直轄市或縣（市）主管機關處罰之。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "違反動物保護法的罰鍰是由哪個單位開出的？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=34"
+        },
+        {
+          "article_num": "35",
+          "article_display": "第35條",
+          "content": "依本法所處之罰鍰，經限期繳納，逾期仍不繳納者，移送法院強制執行。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "如果我被罰了虐待動物的罰鍰但是不繳，會發生什麼事？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=35"
+        }
+      ]
+    },
+    {
+      "chapter_num": "7",
+      "chapter_name": "附則",
+      "chapter_display": "第七章",
+      "articles": [
+        {
+          "article_num": "36",
+          "article_display": "第36條",
+          "content": "",
+          "items": [
+            {
+              "item_num": "1",
+              "item_display": "一",
+              "content": "於中央主管機關依第八條指定公告前已飼養禁止輸入、飼養之動物者，應於中央主管機關規定期限內，向直轄市或縣（市）主管機關備查；變更時，亦同。",
+              "subitems": []
+            },
+            {
+              "item_num": "2",
+              "item_display": "二",
+              "content": "依前項規定辦理登記者，始得繼續飼養；非經中央主管機關指定公告者，不得自行繁殖。",
+              "subitems": []
+            },
+            {
+              "item_num": "3",
+              "item_display": "三",
+              "content": "違反前二項規定者，依第二十六條及第三十二條第三款規定處理。",
+              "subitems": []
+            }
+          ],
+          "references": {
+            "raw_text": ["第八條","第二十六條","第三十二條"],
+            "resolved": ["8","26","32"],
+            "forward_refs": ["8","26","32"],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "如果我養的寵物後來被公告為禁止飼養，我該怎麼辦？",
+            "法律公告禁止飼養前就已經在養的動物，可以繼續養嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=36"
+        },
+        {
+          "article_num": "37",
+          "article_display": "第37條",
+          "content": "依第十九條第一項公告前已經營應辦理登記寵物之繁殖、買賣或寄養者，應自依第二十二條第二項所定管理辦法施行之日起二年內，向直轄市或縣（市）主管機關申請許可；屆期未申請者，依第二十五條規定處理。",
+          "items": [],
+          "references": {
+            "raw_text": ["第十九條","第二十二條","第二十五條"],
+            "resolved": ["19","22","25"],
+            "forward_refs": ["19","22","25"],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "法律修改後，本來就在營業的寵物店需要重新申請許可嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=37"
+        },
+        {
+          "article_num": "38",
+          "article_display": "第38條",
+          "content": "直轄市或縣（市）主管機關依第十九條第二項發給寵物身分標識、寵物之遺失認領及第二十二條第一項核發許可，應收取費用；其收費標準，由中央主管機關定之。",
+          "items": [],
+          "references": {
+            "raw_text": ["第十九條","第二十二條"],
+            "resolved": ["19","22"],
+            "forward_refs": ["19","22"],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "幫寵物植晶片、辦登記要錢嗎？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=38"
+        },
+        {
+          "article_num": "39",
+          "article_display": "第39條",
+          "content": "本法施行細則，由中央主管機關定之。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "動物保護法的詳細執行細節要去哪裡查？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=39"
+        },
+        {
+          "article_num": "40",
+          "article_display": "第40條",
+          "content": "本法自公布日施行。",
+          "items": [],
+          "references": {
+            "raw_text": [],
+            "resolved": [],
+            "forward_refs": [],
+            "backward_refs": []
+          },
+          "note": null,
+          "scenarios": [
+            "動物保護法是什麼時候開始生效的？"
+          ],
+          "article_url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=M0060027&flno=40"
+        }
+      ]
+    }
+  ]
+}

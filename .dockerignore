@@ -1,0 +1,86 @@
+# ============================================
+# Docker 建置時忽略的檔案和目錄
+# ============================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+ENV/
+env/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 環境變數 (不要打包到映像)
+.env
+.env.*
+!.env.production
+
+# 日誌
+*.log
+logs/
+
+# 測試
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.sonar/
+
+# Docker
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# 文件
+README.md
+CLAUDE.md
+*.md
+docs/
+
+# 部署腳本
+deploy/
+
+# 本地資料 (這些會透過 volume 掛載)
+uploaded_files/
+vector_stores/
+*.db
+*.sqlite
+
+# 前端建置產物 (會在 Docker 內重新建置)
+frontend/dist/
+frontend/.vite/
+
+# Alembic (保留遷移檔案,但不要快取)
+alembic/__pycache__/
+
+# 備份檔案
+*.bak
+*.backup
+*.old

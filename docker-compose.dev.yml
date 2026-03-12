@@ -1,0 +1,275 @@
+# ============================================
+# Docker Compose - 開發環境配置
+# 自動化部署：包含資料庫、Redis 與前後端應用
+# ============================================
+
+services:
+  # ==========================================
+  # 資料庫服務 (PostgreSQL + pgvector)
+  # ==========================================
+  db:
+    image: pgvector/pgvector:pg15
+    container_name: metora_db_dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-metora}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_DB: ${DB_NAME:-metora}
+      TZ: Asia/Taipei
+      LANG: C.UTF-8
+    command:
+      - "postgres"
+      - "-c"
+      - "timezone=Asia/Taipei"
+      - "-c"
+      - "log_timezone=Asia/Taipei"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-metora} -d ${DB_NAME:-metora}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # 快取服務 (Redis)
+  # ==========================================
+  redis:
+    image: redis:alpine
+    container_name: metora_redis_dev
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Taipei
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # vLLM 推論服務
+  # ==========================================
+  vllm:
+    profiles: ["local-llm"]
+    image: vllm/vllm-openai:latest
+    container_name: metora_vllm_dev
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Taipei
+    volumes:
+      - ${VLLM_MODELS_PATH:-C:/ai_models/huggingface/hub}:/models:ro
+    ports:
+      - "8001:8001"
+    ipc: host
+    command:
+      - "/models/Qwen3.5-9B-AWQ-4bit"
+      - "--served-model-name"
+      - "Qwen3.5-9B-AWQ-4bit"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8001"
+      - "--enable-auto-tool-choice"
+      - "--tool-call-parser"
+      - "qwen3_coder"
+      - "--reasoning-parser"
+      - "qwen3"
+      - "--max-model-len"
+      - "16384"
+      - "--gpu-memory-utilization"
+      - "0.75"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s
+
+  # ==========================================
+  # 後端 FastAPI 應用 (開發模式)
+  # ==========================================
+  backend-dev:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: metora_backend_dev
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # 使用自定義啟動腳本處理初始化和遷移
+    command: ["/bin/bash", "/app/scripts/docker_start_dev.sh"]
+    environment:
+      # 開發環境設定
+      ENVIRONMENT: development
+      TZ: Asia/Taipei
+
+      # 資料庫設定 (連接到 db 容器)
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-metora}
+      DB_PASSWORD: ${DB_PASSWORD:-changeme}
+      DB_NAME: ${DB_NAME:-metora}
+
+      # Redis 設定 (連接到 redis 容器)
+      REDIS_URL: redis://redis:6379/0
+
+      LLM_PROVIDER: ${LLM_PROVIDER:-vllm}
+
+      # Ollama (主機上的服務)
+      # Docker 環境必須使用 host.docker.internal
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-gpt-oss:20b}
+
+      # vLLM (連接到 vllm 容器)
+      VLLM_BASE_URL: ${VLLM_BASE_URL:-http://vllm:8001}
+      VLLM_MODEL: Qwen3.5-9B-AWQ-4bit
+      VLLM_MAX_TOKENS: ${VLLM_MAX_TOKENS:-8192}
+      VLLM_TEMPERATURE: ${VLLM_TEMPERATURE:-0.7}
+      VLLM_TIMEOUT: ${VLLM_TIMEOUT:-60.0}
+      VLLM_TOP_P: ${VLLM_TOP_P:-0.8}
+      VLLM_TOP_K: ${VLLM_TOP_K:-20}
+
+      # OpenAI
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      OPENAI_MAX_TOKENS: ${OPENAI_MAX_TOKENS:-4096}
+      OPENAI_TEMPERATURE: ${OPENAI_TEMPERATURE:-0.7}
+      OPENAI_TIMEOUT: ${OPENAI_TIMEOUT:-60.0}
+      OPENAI_TOP_P: ${OPENAI_TOP_P:-1.0}
+      OPENAI_ORGANIZATION: ${OPENAI_ORGANIZATION:-}
+
+      # Azure OpenAI
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+      AZURE_OPENAI_DEPLOYMENT_NAME: ${AZURE_OPENAI_DEPLOYMENT_NAME:-}
+      AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION:-2024-08-01-preview}
+      AZURE_OPENAI_MAX_TOKENS: ${AZURE_OPENAI_MAX_TOKENS:-4096}
+      AZURE_OPENAI_TEMPERATURE: ${AZURE_OPENAI_TEMPERATURE:-0.7}
+      AZURE_OPENAI_TIMEOUT: ${AZURE_OPENAI_TIMEOUT:-60.0}
+      AZURE_OPENAI_TOP_P: ${AZURE_OPENAI_TOP_P:-1.0}
+
+      # Google Gemini
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      GOOGLE_GEMINI_MODEL: ${GOOGLE_GEMINI_MODEL:-gemini-2.0-flash}
+      GOOGLE_GEMINI_MAX_TOKENS: ${GOOGLE_GEMINI_MAX_TOKENS:-4096}
+      GOOGLE_GEMINI_TEMPERATURE: ${GOOGLE_GEMINI_TEMPERATURE:-0.7}
+      GOOGLE_GEMINI_TIMEOUT: ${GOOGLE_GEMINI_TIMEOUT:-60.0}
+      GOOGLE_GEMINI_TOP_P: ${GOOGLE_GEMINI_TOP_P:-1.0}
+      GOOGLE_GEMINI_TOP_K: ${GOOGLE_GEMINI_TOP_K:-40}
+
+      # JWT
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-changeme}
+
+      # CORS (開發環境允許所有來源)
+      CORS_ALLOW_ORIGINS: ${CORS_ALLOW_ORIGINS:-http://localhost:5173,http://localhost:3000}
+
+      # Cookie 安全 (開發環境)
+      COOKIE_SECURE: false
+      COOKIE_SAMESITE: lax
+
+      # 日誌
+      LOG_LEVEL: ${LOG_LEVEL:-DEBUG}
+      SHOW_SQL: ${SHOW_SQL:-false}
+
+      # 速率限制 (開發環境可以放寬)
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-false}
+
+      # Sandbox 設定
+      SANDBOX_ENABLED: ${SANDBOX_ENABLED:-false}
+      SANDBOX_IMAGE: ${SANDBOX_IMAGE:-metora-sandbox:latest}
+      SANDBOX_TIMEOUT: ${SANDBOX_TIMEOUT:-60}
+      SANDBOX_MEMORY_LIMIT: ${SANDBOX_MEMORY_LIMIT:-512m}
+      SANDBOX_CPU_LIMIT: ${SANDBOX_CPU_LIMIT:-1.0}
+      SANDBOX_NETWORK_ENABLED: ${SANDBOX_NETWORK_ENABLED:-false}
+      SANDBOX_NETWORK_NAME: ${SANDBOX_NETWORK_NAME:-}
+      SANDBOX_MAX_OUTPUT_SIZE: ${SANDBOX_MAX_OUTPUT_SIZE:-1048576}
+      SANDBOX_MAX_ITERATIONS: ${SANDBOX_MAX_ITERATIONS:-8}
+
+      # Chat PDF 上傳設定
+      CHAT_PDF_ENABLED: ${CHAT_PDF_ENABLED:-True}
+      CHAT_PDF_MAX_SIZE: ${CHAT_PDF_MAX_SIZE:-52428800}
+      CHAT_PDF_MAX_PAGES: ${CHAT_PDF_MAX_PAGES:-10}
+      CHAT_PDF_RENDER_DPI: ${CHAT_PDF_RENDER_DPI:-300}
+
+      # 檔案路徑 (容器內路徑,對應到 volumes 掛載)
+      UPLOAD_FILES_ROOT: /uploaded_files/
+      CHAT_FILES_STORAGE_PATH: /uploaded_files/chat_files/
+      HUGGINGFACE_CACHE_DIR: /models/huggingface/hub
+      VECTOR_STORE_DIR: /vector_stores
+      VECTOR_STORE_PROVIDER: ${VECTOR_STORE_PROVIDER:-chroma}
+    volumes:
+      # 開發模式:掛載源碼以支援熱重載
+      - ./backend:/app
+      # 主機路徑掛載 (透過環境變數設定,預設為 Windows 路徑)
+      - ${HOST_UPLOAD_PATH:-C:/uploaded_files}:/uploaded_files
+      - ${HOST_VECTOR_STORE_PATH:-C:/ai_models/vector_stores}:/vector_stores
+      - ${HOST_HUGGINGFACE_PATH:-C:/ai_models/huggingface/hub}:/models/huggingface/hub
+      # Docker socket (Sandbox 功能需要)
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8002:8002"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # 使用 extra_hosts 連接主機服務
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # GPU 支援 (NVIDIA RTX 3090)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ==========================================
+  # 前端開發服務器 (Vite)
+  # ==========================================
+  frontend-dev:
+    image: node:20-alpine
+    container_name: metora_frontend_dev
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_BASE_URL: /api
+      API_PROXY_TARGET: http://backend-dev:8002
+    volumes:
+      # 掛載前端源碼
+      - ./frontend:/app
+      # 排除 node_modules (使用命名 volume)
+      - frontend_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"  # Vite 開發服務器
+    stdin_open: true
+    tty: true
+
+# ============================================
+# Volumes (開發環境)
+# ============================================
+volumes:
+  postgres_data_dev:
+    driver: local
+    name: metora_postgres_data_dev
+  frontend_node_modules:
+    driver: local
+    name: metora_frontend_node_modules_dev
