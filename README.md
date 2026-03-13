@@ -31,10 +31,7 @@
 
 ---
 
-> Most AI agent projects today are like meteors —
-> they shine brightly for a moment, but burn out before reaching the ground.
->
-> **Metora is different. It helps AI agents actually land inside real teams.**
+> **Metora helps AI agents actually land inside real teams.**
 
 Metora is an open-source, self-hosted platform for deploying and managing AI agents — designed for teams and small organizations, not just demos.
 
