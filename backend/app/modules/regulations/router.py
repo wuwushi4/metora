@@ -25,6 +25,7 @@ from app.modules.regulations.schemas import (
     RegulationListParams,
     RegulationContent,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse, success_response, paginated_response
 
 router = APIRouter(prefix="/regulations", tags=["法規管理"])
@@ -171,7 +172,7 @@ async def create_regulation(
 
     return success_response(
         data=regulation_response,
-        message="法規上傳成功"
+        message=t('regulations.uploadSuccess')
     )
 
 
@@ -218,7 +219,7 @@ async def update_regulation(
 
     return success_response(
         data=regulation_response,
-        message="法規更新成功"
+        message=t('regulations.updateSuccess')
     )
 
 
@@ -256,8 +257,8 @@ async def delete_regulation(
     )
 
     return success_response(
-        data=MessageResponse(message="法規刪除成功"),
-        message="法規刪除成功"
+        data=MessageResponse(message=t('regulations.deleteSuccess')),
+        message=t('regulations.deleteSuccess')
     )
 
 

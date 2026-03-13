@@ -22,6 +22,11 @@ async def lifespan(app: FastAPI):
     # ========================================
     logger.info("🎬 FastAPI 應用啟動中...")
 
+    # 載入 i18n 翻譯
+    from app.i18n import load_translations
+    load_translations()
+    logger.info("🌐 i18n 翻譯已載入")
+
     # 初始化全局資源
     resource_manager = get_resource_manager()
     await resource_manager.initialize()

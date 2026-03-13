@@ -7,7 +7,6 @@ import { useRouter } from 'vue-router'
 import { getUserDashboardInfo } from '@/api/dashboard'
 import { useAuthStore } from '@/stores/auth'
 import StatCard from './StatCard.vue'
-
 const router = useRouter()
 const authStore = useAuthStore()
 const loading = ref(false)
@@ -77,45 +76,43 @@ onBeforeUnmount(() => {
             {{ dashboardInfo.welcome_message }}
           </h1>
           <p class="welcome-subtitle">
-            這是您的個人儀表板
+            {{ $t('dashboard.user.subtitle') }}
           </p>
         </div>
 
         <!-- 快速操作 -->
-        <NCard title="快速操作" :bordered="false" class="dashboard-card">
+        <NCard :title="$t('dashboard.user.quickActions')" :bordered="false" class="dashboard-card">
           <div class="quick-actions">
             <NButton type="primary" size="large" @click="navigateTo('/chat')">
               <template #icon>
                 <NIcon><ChatIcon /></NIcon>
               </template>
-              開始新對話
+              {{ $t('dashboard.user.startChat') }}
             </NButton>
             <NButton size="large" @click="navigateTo('/collections')">
               <template #icon>
                 <NIcon><FolderIcon /></NIcon>
               </template>
-              我的知識庫
+              {{ $t('dashboard.user.myCollections') }}
             </NButton>
           </div>
         </NCard>
 
         <!-- 基本統計 -->
-        <NCard title="我的統計" :bordered="false" class="dashboard-card" style="margin-top: 20px;">
+        <NCard :title="$t('dashboard.user.myStats')" :bordered="false" class="dashboard-card" style="margin-top: 20px;">
           <NGrid cols="1 s:2" responsive="screen" :x-gap="20" :y-gap="20">
             <NGridItem>
               <StatCard
-                label="我的對話數"
+                :label="$t('dashboard.user.mySessions')"
                 :value="dashboardInfo.basic_stats.total_sessions"
-                suffix="個"
                 :icon="ChatIcon"
                 color="linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="我的訊息數"
+                :label="$t('dashboard.user.myMessages')"
                 :value="dashboardInfo.basic_stats.total_messages"
-                suffix="則"
                 :icon="ChatIcon"
                 color="linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)"
               />

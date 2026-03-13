@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { RegulationListParams } from '@/types/regulation'
 import { NButton, NInput, NSelect, NSpace } from 'naive-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
   search: [params: RegulationListParams]
@@ -16,23 +19,23 @@ const filters = ref({
 })
 
 // 法規類別選項
-const categoryOptions = [
-  { label: '全部', value: '' },
-  { label: '憲法', value: '憲法' },
-  { label: '法律', value: '法律' },
-  { label: '命令', value: '命令' },
-  { label: '行政規則', value: '行政規則' },
-  { label: '自治法規', value: '自治法規' },
-]
+const categoryOptions = computed(() => [
+  { label: t('regulations.filters.all'), value: '' },
+  { label: t('regulations.filters.categories.constitution'), value: '憲法' },
+  { label: t('regulations.filters.categories.law'), value: '法律' },
+  { label: t('regulations.filters.categories.order'), value: '命令' },
+  { label: t('regulations.filters.categories.adminRule'), value: '行政規則' },
+  { label: t('regulations.filters.categories.localRegulation'), value: '自治法規' },
+])
 
 // 法規狀態選項
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '現行', value: '現行' },
-  { label: '廢止', value: '廢止' },
-  { label: '停止適用', value: '停止適用' },
-  { label: '尚未生效', value: '尚未生效' },
-]
+const statusOptions = computed(() => [
+  { label: t('regulations.filters.all'), value: '' },
+  { label: t('regulations.filters.statuses.active'), value: '現行' },
+  { label: t('regulations.filters.statuses.abolished'), value: '廢止' },
+  { label: t('regulations.filters.statuses.suspended'), value: '停止適用' },
+  { label: t('regulations.filters.statuses.notEffective'), value: '尚未生效' },
+])
 
 // 處理搜尋
 function handleSearch() {
@@ -65,32 +68,32 @@ function handleReset() {
       <!-- 第一行：法規名稱 -->
       <NSpace :size="16" align="center">
         <div class="filter-item">
-          <label class="filter-label">法規名稱</label>
+          <label class="filter-label">{{ $t('regulations.filters.nameLabel') }}</label>
           <NInput
             v-model:value="filters.law_name"
-            placeholder="搜尋法規名稱"
+            :placeholder="$t('regulations.filters.searchPlaceholder')"
             clearable
             @keyup.enter="handleSearch"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">法規類別</label>
+          <label class="filter-label">{{ $t('regulations.filters.categoryLabel') }}</label>
           <NSelect
             v-model:value="filters.category"
             :options="categoryOptions"
-            placeholder="選擇法規類別"
+            :placeholder="$t('regulations.filters.categoryPlaceholder')"
             clearable
             style="width: 180px"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">法規狀態</label>
+          <label class="filter-label">{{ $t('regulations.filters.statusLabel') }}</label>
           <NSelect
             v-model:value="filters.status"
             :options="statusOptions"
-            placeholder="選擇法規狀態"
+            :placeholder="$t('regulations.filters.statusPlaceholder')"
             clearable
             style="width: 150px"
           />
@@ -99,10 +102,10 @@ function handleReset() {
         <div class="filter-actions">
           <NSpace :size="12">
             <NButton type="primary" @click="handleSearch">
-              搜尋
+              {{ $t('common.actions.search') }}
             </NButton>
             <NButton @click="handleReset">
-              重置
+              {{ $t('common.actions.reset') }}
             </NButton>
           </NSpace>
         </div>

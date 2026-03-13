@@ -12,6 +12,7 @@ import {
   NTag,
 } from 'naive-ui'
 import { h } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
 import { formatDateTime } from '@/utils/date'
 import { message } from '@/utils/message'
@@ -32,6 +33,7 @@ const emit = defineEmits<{
   'assignRoles': [user: UserResponse]
 }>()
 
+const { t } = useI18n()
 const authStore = useAuthStore()
 
 // 檢查是否為當前使用者
@@ -59,10 +61,10 @@ function handleEdit(user: UserResponse) {
 function handleDelete(user: UserResponse) {
   if (!canDeleteUser(user)) {
     if (isCurrentUser(user.id)) {
-      message.warning('不能刪除自己的帳號')
+      message.warning(t('users.table.cannotDeleteSelf'))
     }
     else if (user.is_superuser) {
-      message.warning('不能刪除超級管理員')
+      message.warning(t('users.table.cannotDeleteSuperAdmin'))
     }
     return
   }
@@ -83,7 +85,7 @@ const columns: DataTableColumns<UserResponse> = [
     align: 'center',
   },
   {
-    title: '使用者名稱',
+    title: t('users.table.username'),
     key: 'username',
     minWidth: 120,
     ellipsis: {
@@ -91,7 +93,7 @@ const columns: DataTableColumns<UserResponse> = [
     },
   },
   {
-    title: '電子郵件',
+    title: t('users.table.email'),
     key: 'email',
     minWidth: 200,
     ellipsis: {
@@ -99,7 +101,7 @@ const columns: DataTableColumns<UserResponse> = [
     },
   },
   {
-    title: '真實姓名',
+    title: t('users.table.fullName'),
     key: 'full_name',
     minWidth: 120,
     ellipsis: {
@@ -110,12 +112,12 @@ const columns: DataTableColumns<UserResponse> = [
     },
   },
   {
-    title: '角色',
+    title: t('common.fields.role'),
     key: 'roles',
     minWidth: 150,
     render: (row) => {
       if (!row.roles || row.roles.length === 0) {
-        return h(NTag, { size: 'small', type: 'default' }, { default: () => '無' })
+        return h(NTag, { size: 'small', type: 'default' }, { default: () => t('common.fields.none') })
       }
       return h(
         NSpace,
@@ -137,7 +139,7 @@ const columns: DataTableColumns<UserResponse> = [
     },
   },
   {
-    title: '狀態',
+    title: t('common.fields.status'),
     key: 'is_active',
     width: 100,
     align: 'center',
@@ -149,13 +151,13 @@ const columns: DataTableColumns<UserResponse> = [
           type: row.is_active ? 'success' : 'default',
         },
         {
-          default: () => (row.is_active ? '啟用' : '停用'),
+          default: () => (row.is_active ? t('common.status.enabled') : t('common.status.disabled')),
         },
       )
     },
   },
   {
-    title: '建立時間',
+    title: t('common.fields.createdAt'),
     key: 'created_at',
     width: 180,
     render: (row) => {
@@ -163,7 +165,7 @@ const columns: DataTableColumns<UserResponse> = [
     },
   },
   {
-    title: '操作',
+    title: t('common.fields.actions'),
     key: 'actions',
     width: 220,
     fixed: 'right' as const,
@@ -181,7 +183,7 @@ const columns: DataTableColumns<UserResponse> = [
                 quaternary: true,
                 onClick: () => handleEdit(row),
               },
-              { default: () => '編輯' },
+              { default: () => t('common.actions.edit') },
             ),
             h(
               NButton,
@@ -191,7 +193,7 @@ const columns: DataTableColumns<UserResponse> = [
                 quaternary: true,
                 onClick: () => handleAssignRoles(row),
               },
-              { default: () => '角色' },
+              { default: () => t('users.table.assignRoles') },
             ),
             h(
               NPopconfirm,
@@ -208,9 +210,9 @@ const columns: DataTableColumns<UserResponse> = [
                       quaternary: true,
                       disabled: !canDeleteUser(row),
                     },
-                    { default: () => '刪除' },
+                    { default: () => t('common.actions.delete') },
                   ),
-                default: () => '確定要刪除這個使用者嗎？此操作將停用該帳號。',
+                default: () => t('users.table.deleteConfirm'),
               },
             ),
           ],
@@ -257,7 +259,7 @@ function handlePageSizeChange(pageSize: number) {
         @update:page-size="handlePageSizeChange"
       >
         <template #prefix="{ itemCount }">
-          共 {{ itemCount }} 筆
+          {{ $t('users.table.totalItems', { count: itemCount }) }}
         </template>
       </NPagination>
     </div>

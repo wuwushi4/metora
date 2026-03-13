@@ -4,6 +4,7 @@ import type { PaginationMeta } from '@/types/api'
 import type { FeedbackListItem } from '@/types/feedback'
 import { NButton, NDataTable, NPagination, NSpace, NTag } from 'naive-ui'
 import { h } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { formatDateTime } from '@/utils/date'
 
@@ -20,6 +21,7 @@ const emit = defineEmits<{
   'update:pageSize': [pageSize: number]
 }>()
 
+const { t } = useI18n()
 const router = useRouter()
 
 // 處理查看詳情
@@ -30,7 +32,7 @@ function handleView(feedback: FeedbackListItem) {
 // 表格欄位定義
 const columns: DataTableColumns<FeedbackListItem> = [
   {
-    title: '使用者',
+    title: t('feedbacks.table.user'),
     key: 'user',
     width: 150,
     render: (row) => {
@@ -38,7 +40,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: '訊息預覽',
+    title: t('feedbacks.table.messagePreview'),
     key: 'message_preview',
     minWidth: 250,
     ellipsis: {
@@ -59,7 +61,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
                     type: 'warning',
                     bordered: false,
                   },
-                  { default: () => '中斷' },
+                  { default: () => t('feedbacks.table.interrupted') },
                 )
               : null,
           ].filter(Boolean),
@@ -68,15 +70,15 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: 'Agent 類型',
+    title: t('feedbacks.table.agentType'),
     key: 'graph_type',
     width: 120,
     align: 'center',
     render: (row) => {
       const graphTypeLabels: Record<string, string> = {
-        base_graph: '基礎對話',
-        rag_graph: 'RAG 對話',
-        regulation_graph: '法規查詢',
+        base_graph: t('feedbacks.filters.graphTypes.base_graph'),
+        rag_graph: t('feedbacks.filters.graphTypes.rag_graph'),
+        regulation_graph: t('feedbacks.filters.graphTypes.regulation_graph'),
       }
       const label = graphTypeLabels[row.graph_type] || row.graph_type
       return h(
@@ -92,7 +94,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: '知識庫',
+    title: t('feedbacks.table.collection'),
     key: 'collection_names',
     width: 200,
     render: (row) => {
@@ -112,7 +114,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: '反饋類型',
+    title: t('feedbacks.table.feedbackType'),
     key: 'feedback_type',
     width: 120,
     align: 'center',
@@ -124,13 +126,13 @@ const columns: DataTableColumns<FeedbackListItem> = [
           type: row.feedback_type === 'thumbs_up' ? 'success' : 'error',
         },
         {
-          default: () => (row.feedback_type === 'thumbs_up' ? '喜歡' : '不喜歡'),
+          default: () => (row.feedback_type === 'thumbs_up' ? t('feedbacks.filters.like') : t('feedbacks.filters.dislike')),
         },
       )
     },
   },
   {
-    title: '問題標籤',
+    title: t('feedbacks.table.issueLabels'),
     key: 'issue_tags',
     width: 200,
     render: (row) => {
@@ -150,7 +152,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: '審查狀態',
+    title: t('feedbacks.table.reviewStatus'),
     key: 'is_reviewed',
     width: 120,
     align: 'center',
@@ -162,13 +164,13 @@ const columns: DataTableColumns<FeedbackListItem> = [
           type: row.is_reviewed ? 'info' : 'default',
         },
         {
-          default: () => (row.is_reviewed ? '已審查' : '未審查'),
+          default: () => (row.is_reviewed ? t('feedbacks.filters.reviewed') : t('feedbacks.filters.notReviewed')),
         },
       )
     },
   },
   {
-    title: '建立時間',
+    title: t('common.fields.createdAt'),
     key: 'created_at',
     width: 180,
     render: (row) => {
@@ -176,7 +178,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
     },
   },
   {
-    title: '操作',
+    title: t('common.fields.actions'),
     key: 'actions',
     width: 100,
     fixed: 'right',
@@ -190,7 +192,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
           text: true,
           onClick: () => handleView(row),
         },
-        { default: () => '查看詳情' },
+        { default: () => t('common.actions.viewDetail') },
       )
     },
   },
@@ -223,7 +225,7 @@ const columns: DataTableColumns<FeedbackListItem> = [
         @update:page-size="emit('update:pageSize', $event)"
       >
         <template #prefix="{ itemCount }">
-          共 {{ itemCount }} 筆
+          {{ $t('feedbacks.table.totalItems', { count: itemCount }) }}
         </template>
       </NPagination>
     </div>

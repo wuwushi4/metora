@@ -8,6 +8,9 @@ import ChatSettings from '@/components/settings/ChatSettings.vue'
 import RagSettings from '@/components/settings/RagSettings.vue'
 import UploadSettings from '@/components/settings/UploadSettings.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 狀態
 const loading = ref(false)
@@ -28,7 +31,7 @@ async function loadSettings() {
   }
   catch (error: any) {
     console.error('載入設定失敗:', error)
-    message.error(error.message || '載入設定失敗')
+    message.error(error.message || t('settings.loadFailed'))
   }
   finally {
     loading.value = false
@@ -52,10 +55,10 @@ onMounted(() => {
     <div class="page-header">
       <div class="header-content">
         <h1 class="page-title">
-          系統設定
+          {{ t('settings.title') }}
         </h1>
         <p class="page-description">
-          管理系統的各項配置參數
+          {{ t('settings.description') }}
         </p>
       </div>
     </div>
@@ -64,28 +67,28 @@ onMounted(() => {
     <div class="settings-content">
       <NSpin :show="loading">
         <NTabs v-model:value="activeTab" type="line" animated>
-          <NTabPane name="auth" tab="🔐 認證與安全">
+          <NTabPane name="auth" :tab="`🔐 ${t('settings.tabs.auth')}`">
             <AuthSettings
               :settings="settings.auth"
               @updated="handleSettingUpdated"
             />
           </NTabPane>
 
-          <NTabPane name="rag" tab="🤖 RAG 系統">
+          <NTabPane name="rag" :tab="`🤖 ${t('settings.tabs.rag')}`">
             <RagSettings
               :settings="settings.rag"
               @updated="handleSettingUpdated"
             />
           </NTabPane>
 
-          <NTabPane name="chat" tab="💬 Agent 對話">
+          <NTabPane name="chat" :tab="`💬 ${t('settings.tabs.agent')}`">
             <ChatSettings
               :settings="settings.chat"
               @updated="handleSettingUpdated"
             />
           </NTabPane>
 
-          <NTabPane name="upload" tab="📁 檔案上傳">
+          <NTabPane name="upload" :tab="`📁 ${t('settings.tabs.upload')}`">
             <UploadSettings
               :settings="settings.upload"
               @updated="handleSettingUpdated"

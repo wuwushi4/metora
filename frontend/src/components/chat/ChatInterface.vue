@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useChatMessage } from '@/composables/useChatMessage'
 import { useChatStore } from '@/stores/chat'
 import { message as messageApi } from '@/utils/message'
+
+const { t } = useI18n()
 import EmptyChat from './EmptyChat.vue'
 import MessageInput from './MessageInput.vue'
 import MessageList from './MessageList.vue'
@@ -45,7 +48,7 @@ watch(
 // 處理發送訊息（支援檔案上傳）
 async function handleSendMessage(content: string, files: File[] = []) {
   if (!currentSession.value) {
-    messageApi.warning('請先選擇或建立一個對話')
+    messageApi.warning(t('chat.selectOrCreate'))
     return
   }
 

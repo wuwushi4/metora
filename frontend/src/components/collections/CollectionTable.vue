@@ -10,7 +10,8 @@ import {
   NSpace,
   NTag,
 } from 'naive-ui'
-import { h } from 'vue'
+import { computed, h } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { formatDateTime } from '@/utils/date'
 
@@ -29,6 +30,7 @@ const emit = defineEmits<{
   'delete': [collectionId: number]
 }>()
 
+const { t } = useI18n()
 const router = useRouter()
 
 // 處理查看詳情
@@ -46,16 +48,8 @@ function handleDelete(collection: Collection) {
   emit('delete', collection.id)
 }
 
-// 分塊策略顯示名稱映射
-const chunkingStrategyMap: Record<string, { label: string, type: 'info' | 'success' | 'warning' }> = {
-  qa_multi_representation: { label: 'QA 多重表徵', type: 'info' },
-  regulation_hierarchical: { label: '法規-階層式', type: 'success' },
-  // regulation_context_enriched: { label: '法規情境增強', type: 'warning' },
-  regulation_manual_scenario: { label: '法規-情境描述', type: 'success' },
-}
-
 // 表格欄位定義
-const columns: DataTableColumns<Collection> = [
+const columns = computed<DataTableColumns<Collection>>(() => [
   {
     title: 'ID',
     key: 'id',
@@ -63,7 +57,7 @@ const columns: DataTableColumns<Collection> = [
     align: 'center',
   },
   {
-    title: 'Collection 名稱',
+    title: t('collections.table.collectionName'),
     key: 'name',
     minWidth: 150,
     ellipsis: {
@@ -71,7 +65,7 @@ const columns: DataTableColumns<Collection> = [
     },
   },
   {
-    title: '描述',
+    title: t('common.fields.description'),
     key: 'description',
     minWidth: 200,
     ellipsis: {
@@ -82,12 +76,17 @@ const columns: DataTableColumns<Collection> = [
     },
   },
   {
-    title: '分塊策略',
+    title: t('collections.table.chunkingStrategy'),
     key: 'chunking_strategy',
     width: 140,
     align: 'center',
     render: (row) => {
-      const strategy = chunkingStrategyMap[row.chunking_strategy] || {
+      const strategyMap: Record<string, { label: string, type: 'info' | 'success' | 'warning' }> = {
+        qa_multi_representation: { label: t('collections.filters.strategyOptions.qa_multi_representation'), type: 'info' },
+        regulation_hierarchical: { label: t('collections.filters.strategyOptions.regulation_hierarchical'), type: 'success' },
+        regulation_manual_scenario: { label: t('collections.filters.strategyOptions.regulation_manual_scenario'), type: 'success' },
+      }
+      const strategy = strategyMap[row.chunking_strategy] || {
         label: row.chunking_strategy,
         type: 'info' as const,
       }
@@ -102,7 +101,7 @@ const columns: DataTableColumns<Collection> = [
     },
   },
   {
-    title: 'Dataset 數量',
+    title: t('collections.table.datasetCount'),
     key: 'dataset_count',
     width: 120,
     align: 'center',
@@ -111,7 +110,7 @@ const columns: DataTableColumns<Collection> = [
     },
   },
   {
-    title: '建立時間',
+    title: t('common.fields.createdAt'),
     key: 'created_at',
     width: 180,
     render: (row) => {
@@ -119,7 +118,7 @@ const columns: DataTableColumns<Collection> = [
     },
   },
   {
-    title: '操作',
+    title: t('common.fields.actions'),
     key: 'actions',
     width: 240,
     fixed: 'right' as const,
@@ -137,7 +136,7 @@ const columns: DataTableColumns<Collection> = [
                 quaternary: true,
                 onClick: () => handleView(row),
               },
-              { default: () => '查看' },
+              { default: () => t('common.actions.view') },
             ),
             h(
               NButton,
@@ -147,7 +146,7 @@ const columns: DataTableColumns<Collection> = [
                 quaternary: true,
                 onClick: () => handleEdit(row),
               },
-              { default: () => '編輯' },
+              { default: () => t('common.actions.edit') },
             ),
             h(
               NPopconfirm,
@@ -163,9 +162,9 @@ const columns: DataTableColumns<Collection> = [
                       type: 'error',
                       quaternary: true,
                     },
-                    { default: () => '刪除' },
+                    { default: () => t('common.actions.delete') },
                   ),
-                default: () => '確定要刪除這個 Collection 嗎？此操作將同時刪除所有關聯的 Dataset。',
+                default: () => t('collections.table.deleteConfirm'),
               },
             ),
           ],
@@ -173,7 +172,7 @@ const columns: DataTableColumns<Collection> = [
       )
     },
   },
-]
+])
 
 // 處理頁碼變更
 function handlePageChange(page: number) {
@@ -212,7 +211,7 @@ function handlePageSizeChange(pageSize: number) {
         @update:page-size="handlePageSizeChange"
       >
         <template #prefix="{ itemCount }">
-          共 {{ itemCount }} 筆
+          {{ $t('collections.table.totalItems', { count: itemCount }) }}
         </template>
       </NPagination>
     </div>

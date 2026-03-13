@@ -3,8 +3,11 @@ import type { SelectOption } from 'naive-ui'
 import type { Collection } from '@/types/collection'
 import { NSelect, NSpin, NTag, NText } from 'naive-ui'
 import { computed, h, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getCollectionList } from '@/api/collections'
 import { message } from '@/utils/message'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: number[]
@@ -14,7 +17,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
-  placeholder: '請選擇知識庫...',
+  placeholder: undefined,
 })
 
 const emit = defineEmits<{
@@ -50,7 +53,7 @@ async function loadCollections() {
   }
   catch (error) {
     console.error('載入知識庫列表失敗:', error)
-    message.error('載入知識庫列表失敗')
+    message.error(t('chat.collectionSelector.loadFailed'))
   }
   finally {
     loading.value = false
@@ -100,7 +103,7 @@ function renderTag({ option, handleClose }: { option: SelectOption, handleClose:
         h(
           NText,
           { depth: 3, style: { marginLeft: '8px', fontSize: '0.75rem' } },
-          { default: () => `(${collection.dataset_count} 個文檔)` },
+          { default: () => `(${t('chat.collectionSelector.documents', { count: collection.dataset_count })})` },
         ),
       ],
     },
@@ -122,7 +125,7 @@ defineExpose({
       v-model:value="selectedValue"
       multiple
       :options="options"
-      :placeholder="placeholder"
+      :placeholder="placeholder || t('chat.collectionSelector.placeholder')"
       :disabled="disabled || loading"
       :loading="loading"
       :render-label="renderLabel"
@@ -134,7 +137,7 @@ defineExpose({
       <template #empty>
         <div class="select-empty">
           <NText :depth="3">
-            尚無可用的知識庫
+            {{ t('chat.collectionSelector.empty') }}
           </NText>
         </div>
       </template>
@@ -144,14 +147,14 @@ defineExpose({
     <div v-if="loading" class="loading-hint">
       <NSpin size="small" />
       <NText :depth="3" style="font-size: 0.75rem">
-        載入中...
+        {{ t('common.status.loading') }}
       </NText>
     </div>
 
     <!-- 已選擇提示 -->
     <div v-if="selectedValue.length > 0 && !loading" class="selection-hint">
       <NText :depth="3" style="font-size: 0.75rem">
-        已選擇 {{ selectedValue.length }} 個知識庫
+        {{ t('chat.collectionSelector.selected', { count: selectedValue.length }) }}
       </NText>
     </div>
   </div>

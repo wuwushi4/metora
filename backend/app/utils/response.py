@@ -7,6 +7,8 @@ from typing import Generic, TypeVar, Optional, Any, List
 from pydantic import BaseModel, Field, ConfigDict
 from math import ceil
 
+from app.i18n import t
+
 T = TypeVar('T')
 
 
@@ -54,7 +56,7 @@ class ApiResponse(BaseModel, Generic[T]):
 # 輔助函數：建立成功響應
 def success_response(
     data: Any = None,
-    message: str = "操作成功",
+    message: str = None,
     code: str = "SUCCESS"
 ) -> ApiResponse:
     """
@@ -79,7 +81,7 @@ def success_response(
     return ApiResponse(
         success=True,
         data=data,
-        message=message,
+        message=message if message is not None else t('common.fetchSuccess'),
         code=code
     )
 
@@ -124,7 +126,7 @@ def paginated_response(
     total: int,
     page: int,
     page_size: int,
-    message: str = "獲取成功"
+    message: str = None
 ) -> ApiResponse[PaginatedResponse]:
     """
     建立分頁響應
@@ -156,6 +158,6 @@ def paginated_response(
     return ApiResponse(
         success=True,
         data=paginated_data,
-        message=message,
+        message=message if message is not None else t('common.fetchSuccess'),
         code="SUCCESS"
     )

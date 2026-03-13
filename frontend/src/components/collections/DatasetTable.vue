@@ -12,6 +12,7 @@ import {
   NTooltip,
 } from 'naive-ui'
 import { h } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   data: Dataset[]
@@ -26,6 +27,8 @@ const emit = defineEmits<{
   'update:pageSize': [pageSize: number]
   'delete': [datasetId: number]
 }>()
+
+const { t } = useI18n()
 
 // 處理刪除
 function handleDelete(dataset: Dataset) {
@@ -51,7 +54,7 @@ const columns: DataTableColumns<Dataset> = [
     align: 'center',
   },
   {
-    title: '原始檔名',
+    title: t('collections.dataset.originalFilename'),
     key: 'original_filename',
     minWidth: 200,
     ellipsis: {
@@ -59,13 +62,13 @@ const columns: DataTableColumns<Dataset> = [
     },
   },
   {
-    title: '檔案類型',
+    title: t('collections.dataset.fileType'),
     key: 'file_type',
     width: 120,
     align: 'center',
   },
   {
-    title: '檔案大小',
+    title: t('collections.dataset.fileSize'),
     key: 'file_size',
     width: 120,
     align: 'center',
@@ -74,7 +77,7 @@ const columns: DataTableColumns<Dataset> = [
     },
   },
   {
-    title: '分塊數量',
+    title: t('collections.dataset.chunkCount'),
     key: 'chunk_count',
     width: 100,
     align: 'center',
@@ -83,7 +86,7 @@ const columns: DataTableColumns<Dataset> = [
     },
   },
   {
-    title: '向量化狀態',
+    title: t('collections.dataset.vectorStatus'),
     key: 'vectorized',
     width: 140,
     align: 'center',
@@ -97,7 +100,7 @@ const columns: DataTableColumns<Dataset> = [
             trigger: () => h(
               NBadge,
               { dot: true, type: 'error' },
-              { default: () => '失敗' },
+              { default: () => t('collections.dataset.statusFailed') },
             ),
             default: () => row.vectorization_error,
           },
@@ -108,7 +111,7 @@ const columns: DataTableColumns<Dataset> = [
         return h(
           NBadge,
           { dot: true, type: 'success' },
-          { default: () => '已完成' },
+          { default: () => t('collections.dataset.statusCompleted') },
         )
       }
       // 情況 3: 處理中
@@ -116,13 +119,13 @@ const columns: DataTableColumns<Dataset> = [
         return h(
           NBadge,
           { dot: true, type: 'warning', processing: true },
-          { default: () => '處理中' },
+          { default: () => t('collections.dataset.statusProcessing') },
         )
       }
     },
   },
   {
-    title: '建立時間',
+    title: t('common.fields.createdAt'),
     key: 'created_at',
     width: 180,
     render: (row) => {
@@ -130,7 +133,7 @@ const columns: DataTableColumns<Dataset> = [
     },
   },
   {
-    title: '操作',
+    title: t('common.fields.actions'),
     key: 'actions',
     width: 120,
     fixed: 'right' as const,
@@ -154,9 +157,9 @@ const columns: DataTableColumns<Dataset> = [
                       type: 'error',
                       quaternary: true,
                     },
-                    { default: () => '刪除' },
+                    { default: () => t('common.actions.delete') },
                   ),
-                default: () => '確定要刪除這個 Dataset 嗎？此操作將同時刪除所有關聯的向量資料。',
+                default: () => t('collections.dataset.uploadModal.deleteConfirm'),
               },
             ),
           ],
@@ -203,7 +206,7 @@ function handlePageSizeChange(pageSize: number) {
         @update:page-size="handlePageSizeChange"
       >
         <template #prefix="{ itemCount }">
-          共 {{ itemCount }} 筆
+          {{ $t('collections.table.totalItems', { count: itemCount }) }}
         </template>
       </NPagination>
     </div>

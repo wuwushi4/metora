@@ -2,6 +2,9 @@
 import type { GraphInfo } from '@/types/chat'
 import { NCard, NSpace, NSpin, NText } from 'naive-ui'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: 'base_graph' | 'rag_graph' | 'regulation_graph' | 'agent_graph' | null
@@ -35,48 +38,48 @@ function getGraphInfo(graphType: string): GraphInfo | undefined {
 }
 
 // Agent 選項資訊（只顯示後端已註冊的 Graph）
-const allGraphOptions = [
+const allGraphOptions = computed(() => [
     {
       value: 'base_graph' as const,
-      label: '通用助理',
-      description: '我可以協助您處理各種日常問題,基於豐富的通用知識為您提供解答',
+      label: t('chat.graphs.base_graph'),
+      description: t('chat.graphs.base_graphDesc'),
       icon: '🤖',
-      role: '通用對話專家',
+      role: t('chat.graphs.base_graphRole'),
       info: getGraphInfo('base_graph'),
     },
     {
       value: 'rag_graph' as const,
-      label: '知識專家',
-      description: '我專精於您的知識庫內容,能夠精準檢索並回答基於文檔的專業問題',
+      label: t('chat.graphs.rag_graph'),
+      description: t('chat.graphs.rag_graphDesc'),
       icon: '🎓',
-      role: '知識檢索專家',
+      role: t('chat.graphs.rag_graphRole'),
       info: getGraphInfo('rag_graph'),
     },
     {
       value: 'regulation_graph' as const,
-      label: '法規顧問',
-      description: '我專注於法規分析與解讀,能夠協助您查詢條文、追蹤引用關係並提供專業建議',
+      label: t('chat.graphs.regulation_graph'),
+      description: t('chat.graphs.regulation_graphDesc'),
       icon: '⚖️',
-      role: '法規查詢專家',
+      role: t('chat.graphs.regulation_graphRole'),
       info: getGraphInfo('regulation_graph'),
     },
     {
       value: 'agent_graph' as const,
-      label: '工具 Agent',
-      description: '我可以撰寫並執行 Python 程式碼來解決複雜問題,包括資料分析、圖表生成和 API 呼叫',
+      label: t('chat.graphs.agent_graph'),
+      description: t('chat.graphs.agent_graphDesc'),
       icon: '🛠️',
-      role: '程式碼執行專家',
+      role: t('chat.graphs.agent_graphRole'),
       info: getGraphInfo('agent_graph'),
     },
-  ]
+  ])
 
 const graphOptions = computed(() => {
   // 根據後端返回的 graphs 列表過濾選項
   if (props.graphs.length === 0) {
-    return allGraphOptions
+    return allGraphOptions.value
   }
   const availableTypes = new Set(props.graphs.map(g => g.graph_type))
-  return allGraphOptions.filter(opt => availableTypes.has(opt.value))
+  return allGraphOptions.value.filter(opt => availableTypes.has(opt.value))
 })
 </script>
 
@@ -84,7 +87,7 @@ const graphOptions = computed(() => {
   <div class="graph-selector">
     <div class="selector-header">
       <NText :depth="3" style="font-size: 0.875rem">
-        選擇要聊天的 AI 助理，不同的助理擁有各自的專長領域
+        {{ $t('chat.graphs.selectorHeader') }}
       </NText>
     </div>
 
@@ -92,7 +95,7 @@ const graphOptions = computed(() => {
     <div v-if="loading" class="loading-container">
       <NSpin size="small" />
       <NText :depth="3">
-        載入中...
+        {{ $t('common.status.loading') }}
       </NText>
     </div>
 
@@ -162,7 +165,7 @@ const graphOptions = computed(() => {
     <!-- 提示 -->
     <div v-if="!loading" class="selector-hint">
       <NText :depth="3" style="font-size: 0.8125rem">
-        💡 提示: 知識專家和法規顧問需要先選擇知識庫；工具 Agent 可執行程式碼解決複雜問題
+        💡 {{ $t('chat.graphs.selectorHint') }}
       </NText>
     </div>
   </div>

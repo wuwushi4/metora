@@ -3,6 +3,7 @@ import type { FormInst, FormRules } from 'naive-ui'
 import type { ExpertReviewRequest } from '@/types/feedback'
 import { NButton, NCard, NForm, NFormItem, NInput } from 'naive-ui'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { submitExpertReview } from '@/api/feedback'
 import { message } from '@/utils/message'
 
@@ -14,6 +15,8 @@ const emit = defineEmits<{
   submit: []
 }>()
 
+const { t } = useI18n()
+
 const formRef = ref<FormInst | null>(null)
 const loading = ref(false)
 
@@ -24,8 +27,8 @@ const formData = ref<ExpertReviewRequest>({
 
 const rules: FormRules = {
   expert_opinion: [
-    { required: true, message: '請輸入專家意見', trigger: 'blur' },
-    { min: 10, message: '專家意見至少需要 10 個字元', trigger: 'blur' },
+    { required: true, message: t('feedbacks.expertReview.opinionRequired'), trigger: 'blur' },
+    { min: 10, message: t('feedbacks.expertReview.opinionMinLength'), trigger: 'blur' },
   ],
 }
 
@@ -35,14 +38,14 @@ async function handleSubmit() {
     await formRef.value?.validate()
   }
   catch {
-    message.warning('請檢查表單填寫是否正確')
+    message.warning(t('feedbacks.expertReview.validationFailed'))
     return
   }
 
   loading.value = true
   try {
     await submitExpertReview(props.feedbackId, formData.value)
-    message.success('專家審查提交成功')
+    message.success(t('feedbacks.expertReview.success'))
     emit('submit')
 
     // 清空表單
@@ -53,7 +56,7 @@ async function handleSubmit() {
   }
   catch (error: any) {
     console.error('提交專家審查失敗:', error)
-    message.error(error.message || '提交專家審查失敗')
+    message.error(error.message || t('feedbacks.expertReview.failed'))
   }
   finally {
     loading.value = false
@@ -62,7 +65,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <NCard title="專家審查">
+  <NCard :title="$t('feedbacks.expertReview.title')">
     <NForm
       ref="formRef"
       :model="formData"
@@ -71,23 +74,23 @@ async function handleSubmit() {
       label-width="auto"
       require-mark-placement="right-hanging"
     >
-      <NFormItem label="專家意見" path="expert_opinion">
+      <NFormItem :label="$t('feedbacks.expertReview.opinionLabel')" path="expert_opinion">
         <NInput
           v-model:value="formData.expert_opinion"
           type="textarea"
           :rows="5"
-          placeholder="請輸入您的專業意見,包括問題分析、原因判斷等 (至少 10 個字元)"
+          :placeholder="$t('feedbacks.expertReview.opinionPlaceholder')"
           :maxlength="1000"
           show-count
         />
       </NFormItem>
 
-      <NFormItem label="建議回覆內容 (選填)" path="suggested_response">
+      <NFormItem :label="$t('feedbacks.expertReview.suggestedResponseLabel')" path="suggested_response">
         <NInput
           v-model:value="formData.suggested_response"
           type="textarea"
           :rows="8"
-          placeholder="如果認為 AI 回覆不當,請提供建議的回覆內容(用於 DPO 微調)"
+          :placeholder="$t('feedbacks.expertReview.suggestedResponsePlaceholder')"
           :maxlength="2000"
           show-count
         />
@@ -100,7 +103,7 @@ async function handleSubmit() {
           :disabled="loading"
           @click="handleSubmit"
         >
-          提交審查
+          {{ $t('feedbacks.expertReview.submitReview') }}
         </NButton>
       </NFormItem>
     </NForm>

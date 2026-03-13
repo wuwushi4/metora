@@ -18,6 +18,7 @@ from app.modules.data_engineering.schemas import (
     LawProcessResponse,
 )
 from app.modules.data_engineering.exceptions import ScrapingError, ConversionError
+from app.i18n import t
 from app.utils.response import ApiResponse, success_response
 from loguru import logger
 
@@ -99,5 +100,5 @@ async def process_law(
 
     return success_response(
         data=response,
-        message="法規處理成功" if not result["from_cache"] else "法規處理成功（來自快取）"
+        message=t('dataEngineering.processSuccess') if not result["from_cache"] else t('dataEngineering.processSuccessCached')
     )

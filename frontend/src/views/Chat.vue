@@ -10,7 +10,9 @@ import PromptPanel from '@/components/chat/PromptPanel.vue'
 import SessionList from '@/components/chat/SessionList.vue'
 import { useChatStore } from '@/stores/chat'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const chatStore = useChatStore()
 
 // 配置彈窗
@@ -105,7 +107,7 @@ onMounted(async () => {
   }
   catch (error) {
     console.error('初始化失敗:', error)
-    message.error('載入聊天資料失敗')
+    message.error(t('chat.loadFailed'))
   }
 })
 </script>
@@ -178,12 +180,12 @@ onMounted(async () => {
       >
         <!-- 行動端關閉列 -->
         <div v-if="isMobile" class="mobile-panel-topbar">
-          <span class="mobile-panel-topbar-title">提示詞面板</span>
+          <span class="mobile-panel-topbar-title">{{ $t('chat.promptPanel') }}</span>
           <NButton size="tiny" quaternary @click="rightCollapsed = true">
             <template #icon>
               <NIcon :component="CloseIcon" />
             </template>
-            關閉
+            {{ $t('common.actions.close') }}
           </NButton>
         </div>
         <PromptPanel />

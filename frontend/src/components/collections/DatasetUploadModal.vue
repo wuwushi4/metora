@@ -13,6 +13,7 @@ import {
   NUploadDragger,
 } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getChunkingDefaults } from '@/api/datasets'
 import { message } from '@/utils/message'
 
@@ -31,6 +32,8 @@ const emit = defineEmits<{
   'update:show': [value: boolean]
   'upload': [files: File[], chunkingOptions?: { chunkSize: number, chunkOverlap: number }]
 }>()
+
+const { t } = useI18n()
 
 const fileList = ref<UploadFileInfo[]>([])
 
@@ -96,7 +99,7 @@ function handleFileChange(options: { fileList: UploadFileInfo[] }) {
 // 處理上傳（將檔案傳遞給父組件）
 function handleUpload() {
   if (fileList.value.length === 0) {
-    message.warning('請先選擇要上傳的檔案')
+    message.warning(t('collections.dataset.uploadModal.noFiles'))
     return
   }
 
@@ -106,7 +109,7 @@ function handleUpload() {
     .map(file => file.file!)
 
   if (files.length === 0) {
-    message.warning('沒有有效的檔案可上傳')
+    message.warning(t('collections.dataset.uploadModal.noValidFiles'))
     return
   }
 
@@ -133,7 +136,7 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
     :show="show"
     :mask-closable="false"
     preset="card"
-    title="上傳 Dataset"
+    :title="$t('collections.dataset.uploadModal.title')"
     style="width: 600px"
     @update:show="handleClose"
   >
@@ -156,65 +159,65 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
               </NIcon>
             </div>
             <NText class="upload-text">
-              點擊或拖曳檔案到此區域上傳
+              {{ $t('collections.dataset.uploadModal.dragText') }}
             </NText>
             <NText class="upload-hint" depth="3">
-              支援的檔案類型：{{ acceptedFileTypes.join(', ') }}
+              {{ $t('collections.dataset.uploadModal.supportedTypes', { types: acceptedFileTypes.join(', ') }) }}
             </NText>
             <NText class="upload-hint" depth="3">
-              最多可一次上傳 10 個檔案
+              {{ $t('collections.dataset.uploadModal.maxFiles') }}
             </NText>
           </div>
         </NUploadDragger>
       </NUpload>
 
       <!-- 遞迴分塊參數設定（僅 recursive_text 策略顯示） -->
-      <NCard v-if="isRecursiveText" title="分塊參數設定" size="small" class="chunking-config">
+      <NCard v-if="isRecursiveText" :title="$t('collections.dataset.uploadModal.chunkParams')" size="small" class="chunking-config">
         <div class="config-fields">
           <div class="config-field">
-            <label class="config-label">分塊大小（字元數）</label>
+            <label class="config-label">{{ $t('collections.dataset.uploadModal.chunkSizeLabel') }}</label>
             <NInputNumber
               v-model:value="chunkSize"
               :min="50"
               :max="10000"
               :step="100"
               :loading="loadingDefaults"
-              placeholder="預設 1000"
+              :placeholder="$t('collections.dataset.uploadModal.chunkSizePlaceholder')"
               style="width: 100%"
             />
-            <span class="config-hint">每個分塊的最大字元數</span>
+            <span class="config-hint">{{ $t('collections.dataset.uploadModal.chunkSizeHint') }}</span>
           </div>
           <div class="config-field">
-            <label class="config-label">重疊大小（字元數）</label>
+            <label class="config-label">{{ $t('collections.dataset.uploadModal.overlapLabel') }}</label>
             <NInputNumber
               v-model:value="chunkOverlap"
               :min="0"
               :max="5000"
               :step="50"
               :loading="loadingDefaults"
-              placeholder="預設 200"
+              :placeholder="$t('collections.dataset.uploadModal.overlapPlaceholder')"
               style="width: 100%"
             />
-            <span class="config-hint">相鄰分塊之間重疊的字元數，用於保持上下文連續性</span>
+            <span class="config-hint">{{ $t('collections.dataset.uploadModal.overlapHint') }}</span>
           </div>
         </div>
         <div class="config-tip">
-          以上參數已帶入系統預設值，您可依需求自行調整
+          {{ $t('collections.dataset.uploadModal.defaultParamsHint') }}
         </div>
       </NCard>
 
       <div class="upload-tips">
         <div class="tip-item">
           <span class="tip-icon">💡</span>
-          <span class="tip-text">上傳後的檔案將自動進行分塊處理和向量化</span>
+          <span class="tip-text">{{ $t('collections.dataset.uploadModal.tipAutoProcess') }}</span>
         </div>
         <div class="tip-item">
           <span class="tip-icon">⚠️</span>
-          <span class="tip-text">大型檔案的向量化處理可能需要較長時間，請耐心等待</span>
+          <span class="tip-text">{{ $t('collections.dataset.uploadModal.tipLargeFile') }}</span>
         </div>
         <div class="tip-item">
           <span class="tip-icon">🔄</span>
-          <span class="tip-text">您可以在列表頁面手動重新整理查看向量化狀態</span>
+          <span class="tip-text">{{ $t('collections.dataset.uploadModal.tipRefresh') }}</span>
         </div>
       </div>
     </div>
@@ -222,14 +225,14 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
     <template #footer>
       <NSpace justify="end">
         <NButton @click="handleClose">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton
           type="primary"
           :disabled="fileList.length === 0"
           @click="handleUpload"
         >
-          開始上傳
+          {{ $t('collections.dataset.uploadModal.startUpload') }}
         </NButton>
       </NSpace>
     </template>

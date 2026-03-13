@@ -10,6 +10,7 @@ import {
   NText,
 } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   show: boolean
@@ -26,16 +27,18 @@ const emit = defineEmits<{
   'submit': [data: AssignRolesRequest]
 }>()
 
+const { t } = useI18n()
+
 const loading = ref(false)
 const selectedRoles = ref<string[]>([])
 
 // 所有可用角色選項
-const roleOptions = [
-  { label: '管理員', value: 'admin' },
-  { label: '一般使用者', value: 'user' },
-  { label: '編輯者', value: 'editor' },
-  { label: '檢視者', value: 'viewer' },
-]
+const roleOptions = computed(() => [
+  { label: t('users.form.roleOptions.admin'), value: 'admin' },
+  { label: t('users.form.roleOptions.user'), value: 'user' },
+  { label: t('users.form.roleOptions.editor'), value: 'editor' },
+  { label: t('users.form.roleOptions.viewer'), value: 'viewer' },
+])
 
 // 角色顏色映射
 const roleColors: Record<string, 'error' | 'success' | 'warning' | 'info' | 'default'> = {
@@ -48,7 +51,7 @@ const roleColors: Record<string, 'error' | 'success' | 'warning' | 'info' | 'def
 // 計算當前角色標籤
 const currentRoleTags = computed(() => {
   if (!props.user || !props.user.roles || props.user.roles.length === 0) {
-    return [{ label: '無角色', type: 'default' as const }]
+    return [{ label: t('users.roleAssign.noRole'), type: 'default' as const }]
   }
   return props.user.roles.map(role => ({
     label: role,
@@ -105,7 +108,7 @@ const hasChanges = computed(() => {
     :show="show"
     :mask-closable="false"
     preset="card"
-    title="角色分配"
+    :title="$t('users.roleAssign.title')"
     style="width: 520px"
     @update:show="handleClose"
   >
@@ -113,17 +116,17 @@ const hasChanges = computed(() => {
       <!-- 使用者資訊 -->
       <div class="user-info">
         <div class="info-row">
-          <span class="label">使用者名稱：</span>
+          <span class="label">{{ $t('users.roleAssign.usernameLabel') }}</span>
           <span class="value">{{ user.username }}</span>
         </div>
         <div class="info-row">
-          <span class="label">電子郵件：</span>
+          <span class="label">{{ $t('users.roleAssign.emailLabel') }}</span>
           <span class="value">{{ user.email }}</span>
         </div>
         <div class="info-row">
-          <span class="label">狀態：</span>
+          <span class="label">{{ $t('users.roleAssign.statusLabel') }}</span>
           <NTag :type="user.is_active ? 'success' : 'default'" size="small">
-            {{ user.is_active ? '啟用' : '停用' }}
+            {{ user.is_active ? $t('common.status.enabled') : $t('common.status.disabled') }}
           </NTag>
         </div>
       </div>
@@ -133,7 +136,7 @@ const hasChanges = computed(() => {
       <!-- 當前角色 -->
       <div class="current-roles">
         <NText strong class="section-title">
-          當前角色
+          {{ $t('users.roleAssign.currentRoles') }}
         </NText>
         <NSpace :size="8" class="role-tags">
           <NTag
@@ -152,22 +155,22 @@ const hasChanges = computed(() => {
       <!-- 角色選擇 -->
       <div class="role-selector">
         <NText strong class="section-title">
-          分配角色
+          {{ $t('users.roleAssign.assignRoles') }}
         </NText>
         <NSelect
           v-model:value="selectedRoles"
           :options="roleOptions"
           multiple
-          placeholder="請選擇角色"
+          :placeholder="$t('users.roleAssign.selectRolePlaceholder')"
           clearable
           size="medium"
         />
         <div class="role-tips">
           <p class="tip-item">
-            💡 每個使用者至少需要一個角色
+            💡 {{ $t('users.roleAssign.tipMinRole') }}
           </p>
           <p class="tip-item">
-            🔒 超級管理員擁有所有權限,無需分配角色
+            🔒 {{ $t('users.roleAssign.tipSuperAdmin') }}
           </p>
         </div>
       </div>
@@ -176,7 +179,7 @@ const hasChanges = computed(() => {
     <template #footer>
       <NSpace justify="end">
         <NButton @click="handleClose">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton
           type="primary"
@@ -184,7 +187,7 @@ const hasChanges = computed(() => {
           :disabled="!hasChanges || selectedRoles.length === 0"
           @click="handleSubmit"
         >
-          儲存
+          {{ $t('common.actions.save') }}
         </NButton>
       </NSpace>
     </template>

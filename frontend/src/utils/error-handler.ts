@@ -5,6 +5,9 @@
 
 import type { AxiosError } from 'axios'
 import type { ApiError } from '@/types/api'
+import i18n from '@/i18n'
+
+const { t } = i18n.global
 
 /**
  * 錯誤處理選項
@@ -21,24 +24,28 @@ interface ErrorHandlerOptions {
 }
 
 /**
- * 錯誤訊息映射表
+ * 錯誤訊息映射表（動態取得 i18n 翻譯）
  */
-const ERROR_MESSAGES: Record<number, string> = {
-  400: '請求參數錯誤',
-  401: '登入已過期,請重新登入',
-  403: '無權限訪問此資源',
-  404: '請求的資源不存在',
-  408: '請求超時,請稍後再試',
-  500: '伺服器內部錯誤',
-  502: '網關錯誤',
-  503: '服務暫時不可用',
-  504: '網關超時',
+function getErrorMessages(): Record<number, string> {
+  return {
+    400: t('errors.http.400'),
+    401: t('errors.http.401'),
+    403: t('errors.http.403'),
+    404: t('errors.http.404'),
+    408: t('errors.http.408'),
+    500: t('errors.http.500'),
+    502: t('errors.http.502'),
+    503: t('errors.http.503'),
+    504: t('errors.http.504'),
+  }
 }
 
 /**
  * 解析 API 錯誤
  */
 function parseApiError(error: AxiosError): { status: number, message: string, details?: ApiError } {
+  const ERROR_MESSAGES = getErrorMessages()
+
   if (error.response) {
     // 伺服器返回錯誤響應
     const status = error.response.status
@@ -46,7 +53,7 @@ function parseApiError(error: AxiosError): { status: number, message: string, de
 
     const message = data?.message
       || ERROR_MESSAGES[status]
-      || `請求失敗 (狀態碼: ${status})`
+      || t('errors.requestFailed', { status })
 
     return {
       status,
@@ -59,19 +66,19 @@ function parseApiError(error: AxiosError): { status: number, message: string, de
     if (error.code === 'ECONNABORTED') {
       return {
         status: 408,
-        message: '請求超時,請檢查網路連線',
+        message: t('errors.timeout'),
       }
     }
     return {
       status: 0,
-      message: '網路錯誤,請檢查您的網路連線',
+      message: t('errors.network'),
     }
   }
   else {
     // 請求配置出錯
     return {
       status: -1,
-      message: error.message || '請求配置錯誤',
+      message: error.message || t('errors.configError'),
     }
   }
 }
@@ -178,5 +185,5 @@ export function getErrorMessage(error: any): string {
     return error.message
   }
 
-  return '發生未知錯誤'
+  return t('errors.unknown')
 }

@@ -14,6 +14,7 @@ from app.modules.dashboard.schemas import (
     UserDashboardInfo,
     TimeRange,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, success_response
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
@@ -38,7 +39,7 @@ async def get_admin_dashboard_stats(
     """取得 Admin 儀表板統計"""
     service = DashboardService(db)
     stats = await service.get_admin_stats(time_range=time_range)
-    return success_response(data=stats, message="統計資料獲取成功")
+    return success_response(data=stats, message=t('dashboard.statsSuccess'))
 
 
 # ==========================================
@@ -62,4 +63,4 @@ async def get_user_dashboard_info(
         user_id=current_user.id,
         username=current_user.username
     )
-    return success_response(data=info, message="使用者資訊獲取成功")
+    return success_response(data=info, message=t('dashboard.userInfoSuccess'))

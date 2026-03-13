@@ -12,6 +12,7 @@ import {
   NSwitch,
 } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { message } from '@/utils/message'
 
 interface Props {
@@ -30,6 +31,8 @@ const emit = defineEmits<{
   'update:show': [value: boolean]
   'submit': [data: UserCreateRequest | UserUpdateRequest]
 }>()
+
+const { t } = useI18n()
 
 const formRef = ref<FormInst | null>(null)
 const loading = ref(false)
@@ -52,16 +55,16 @@ const editFormData = ref<UserUpdateRequest>({
 })
 
 // 角色選項
-const roleOptions = [
-  { label: '管理員', value: 'admin' },
-  { label: '一般使用者', value: 'user' },
-  { label: '編輯者', value: 'editor' },
-  { label: '檢視者', value: 'viewer' },
-]
+const roleOptions = computed(() => [
+  { label: t('users.form.roleOptions.admin'), value: 'admin' },
+  { label: t('users.form.roleOptions.user'), value: 'user' },
+  { label: t('users.form.roleOptions.editor'), value: 'editor' },
+  { label: t('users.form.roleOptions.viewer'), value: 'viewer' },
+])
 
 // 表單標題
 const title = computed(() => {
-  return props.mode === 'create' ? '新增使用者' : '編輯使用者'
+  return props.mode === 'create' ? t('users.form.createTitle') : t('users.form.editTitle')
 })
 
 // 自訂密碼驗證
@@ -69,10 +72,10 @@ function validatePassword(_rule: FormItemRule, value: string): boolean | Error {
   if (props.mode === 'edit')
     return true
   if (!value) {
-    return new Error('請輸入密碼')
+    return new Error(t('users.form.passwordRequired'))
   }
   if (value.length < 6) {
-    return new Error('密碼長度至少 6 個字元')
+    return new Error(t('users.form.passwordMinLength'))
   }
   return true
 }
@@ -82,23 +85,23 @@ function validateConfirmPassword(_rule: FormItemRule, value: string): boolean | 
   if (props.mode === 'edit')
     return true
   if (!value) {
-    return new Error('請確認密碼')
+    return new Error(t('users.form.confirmPasswordRequired'))
   }
   if (value !== formData.value.password) {
-    return new Error('兩次輸入的密碼不一致')
+    return new Error(t('users.form.confirmPasswordMismatch'))
   }
   return true
 }
 
 // 驗證規則 - 新增模式
-const createRules: FormRules = {
+const createRules = computed<FormRules>(() => ({
   username: [
-    { required: true, message: '請輸入使用者名稱', trigger: 'blur' },
-    { min: 3, max: 50, message: '長度在 3 到 50 個字元', trigger: 'blur' },
+    { required: true, message: t('users.form.usernameRequired'), trigger: 'blur' },
+    { min: 3, max: 50, message: t('users.form.usernameLength'), trigger: 'blur' },
   ],
   email: [
-    { required: true, message: '請輸入電子郵件', trigger: 'blur' },
-    { type: 'email', message: '請輸入有效的電子郵件', trigger: 'blur' },
+    { required: true, message: t('users.form.emailRequired'), trigger: 'blur' },
+    { type: 'email', message: t('users.form.emailInvalid'), trigger: 'blur' },
   ],
   password: [
     { required: true, validator: validatePassword, trigger: 'blur' },
@@ -107,21 +110,21 @@ const createRules: FormRules = {
     { required: true, validator: validateConfirmPassword, trigger: ['blur', 'password-input'] },
   ],
   roles: [
-    { type: 'array', required: true, message: '請選擇至少一個角色', trigger: 'change' },
+    { type: 'array', required: true, message: t('users.form.rolesRequired'), trigger: 'change' },
   ],
-}
+}))
 
 // 驗證規則 - 編輯模式
-const editRules: FormRules = {
+const editRules = computed<FormRules>(() => ({
   email: [
-    { required: true, message: '請輸入電子郵件', trigger: 'blur' },
-    { type: 'email', message: '請輸入有效的電子郵件', trigger: 'blur' },
+    { required: true, message: t('users.form.emailRequired'), trigger: 'blur' },
+    { type: 'email', message: t('users.form.emailInvalid'), trigger: 'blur' },
   ],
-}
+}))
 
 // 當前驗證規則
 const rules = computed(() => {
-  return props.mode === 'create' ? createRules : editRules
+  return props.mode === 'create' ? createRules.value : editRules.value
 })
 
 // 監聽 user prop 變化,更新表單資料
@@ -182,7 +185,7 @@ async function handleSubmit() {
   }
   catch (error: any) {
     console.error('表單驗證失敗:', error)
-    message.error('請檢查表單欄位')
+    message.error(t('users.form.validationFailed'))
   }
   finally {
     loading.value = false
@@ -209,96 +212,96 @@ async function handleSubmit() {
     >
       <!-- 新增模式 -->
       <template v-if="mode === 'create'">
-        <NFormItem path="username" label="使用者名稱">
+        <NFormItem path="username" :label="$t('users.form.usernameLabel')">
           <NInput
             v-model:value="formData.username"
-            placeholder="請輸入使用者名稱"
+            :placeholder="$t('users.form.usernamePlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="email" label="電子郵件">
+        <NFormItem path="email" :label="$t('users.form.emailLabel')">
           <NInput
             v-model:value="formData.email"
-            placeholder="請輸入電子郵件"
+            :placeholder="$t('users.form.emailPlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="password" label="密碼">
+        <NFormItem path="password" :label="$t('users.form.passwordLabel')">
           <NInput
             v-model:value="formData.password"
             type="password"
-            placeholder="請輸入密碼（至少 6 個字元）"
+            :placeholder="$t('users.form.passwordPlaceholder')"
             show-password-on="click"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="confirmPassword" label="確認密碼">
+        <NFormItem path="confirmPassword" :label="$t('users.form.confirmPasswordLabel')">
           <NInput
             v-model:value="formData.confirmPassword"
             type="password"
-            placeholder="請再次輸入密碼"
+            :placeholder="$t('users.form.confirmPasswordPlaceholder')"
             show-password-on="click"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="full_name" label="真實姓名">
+        <NFormItem path="full_name" :label="$t('users.form.fullNameLabel')">
           <NInput
             v-model:value="formData.full_name"
-            placeholder="請輸入真實姓名（可選）"
+            :placeholder="$t('users.form.fullNamePlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="roles" label="角色">
+        <NFormItem path="roles" :label="$t('users.form.rolesLabel')">
           <NSelect
             v-model:value="formData.roles"
             :options="roleOptions"
             multiple
-            placeholder="請選擇角色"
+            :placeholder="$t('users.form.rolesPlaceholder')"
           />
         </NFormItem>
       </template>
 
       <!-- 編輯模式 -->
       <template v-else>
-        <NFormItem label="使用者名稱">
+        <NFormItem :label="$t('users.form.usernameLabel')">
           <NInput :value="user?.username" disabled />
         </NFormItem>
 
-        <NFormItem path="email" label="電子郵件">
+        <NFormItem path="email" :label="$t('users.form.emailLabel')">
           <NInput
             v-model:value="editFormData.email"
-            placeholder="請輸入電子郵件"
+            :placeholder="$t('users.form.emailPlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="full_name" label="真實姓名">
+        <NFormItem path="full_name" :label="$t('users.form.fullNameLabel')">
           <NInput
             v-model:value="editFormData.full_name"
-            placeholder="請輸入真實姓名（可選）"
+            :placeholder="$t('users.form.fullNamePlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="is_active" label="狀態">
+        <NFormItem path="is_active" :label="$t('users.form.statusLabel')">
           <NSwitch v-model:value="editFormData.is_active">
             <template #checked>
-              啟用
+              {{ $t('common.status.enabled') }}
             </template>
             <template #unchecked>
-              停用
+              {{ $t('common.status.disabled') }}
             </template>
           </NSwitch>
         </NFormItem>
 
         <div class="form-tip">
           <p class="tip-text">
-            💡 提示：使用者名稱不可修改。如需修改密碼,請使用密碼重置功能。
+            💡 {{ $t('users.form.tipEdit') }}
           </p>
         </div>
       </template>
@@ -307,10 +310,10 @@ async function handleSubmit() {
     <template #footer>
       <NSpace justify="end">
         <NButton @click="handleClose">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton type="primary" :loading="loading" @click="handleSubmit">
-          {{ mode === 'create' ? '建立' : '儲存' }}
+          {{ mode === 'create' ? $t('common.actions.create') : $t('common.actions.save') }}
         </NButton>
       </NSpace>
     </template>

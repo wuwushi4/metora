@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { IssueTagCount } from '@/types/dashboard'
 import { NEmpty, NTag } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   tags: IssueTagCount[]
 }
 
 defineProps<Props>()
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -22,11 +25,11 @@ defineProps<Props>()
           </NTag>
         </div>
         <div class="tag-count">
-          {{ item.count }} 次
+          {{ item.count }} {{ t('dashboard.issueTagList.times') }}
         </div>
       </div>
     </div>
-    <NEmpty v-else description="暫無問題標籤" size="small" />
+    <NEmpty v-else :description="t('dashboard.issueTagList.empty')" size="small" />
   </div>
 </template>
 

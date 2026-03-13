@@ -10,6 +10,9 @@ import {
   NSwitch,
 } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Props {
   show: boolean
@@ -41,7 +44,7 @@ const formData = ref({
 const isEditMode = computed(() => !!props.template)
 
 // Modal 標題
-const modalTitle = computed(() => isEditMode.value ? '編輯提示詞模板' : '建立提示詞模板')
+const modalTitle = computed(() => isEditMode.value ? t('chat.prompts.editor.editTitle') : t('chat.prompts.editor.createTitle'))
 
 // 監聽 template 變化，更新表單資料
 watch(() => props.template, (newTemplate) => {
@@ -112,13 +115,13 @@ function handleConfirm() {
       require-mark-placement="right-hanging"
     >
       <NFormItem
-        label="模板名稱"
+        :label="$t('chat.prompts.editor.nameLabel')"
         path="name"
         :show-feedback="false"
       >
         <NInput
           v-model:value="formData.name"
-          placeholder="請輸入模板名稱（最多 100 字）"
+          :placeholder="$t('chat.prompts.editor.namePlaceholder')"
           maxlength="100"
           show-count
           :disabled="loading"
@@ -126,14 +129,14 @@ function handleConfirm() {
       </NFormItem>
 
       <NFormItem
-        label="提示詞內容"
+        :label="$t('chat.prompts.editor.contentLabel')"
         path="content"
         :show-feedback="false"
       >
         <NInput
           v-model:value="formData.content"
           type="textarea"
-          placeholder="請輸入提示詞內容（最多 5000 字）&#10;&#10;範例：&#10;你是一個專業的助手。請用繁體中文回答使用者的問題。"
+          :placeholder="$t('chat.prompts.editor.contentPlaceholder')"
           :rows="12"
           maxlength="5000"
           show-count
@@ -142,21 +145,21 @@ function handleConfirm() {
       </NFormItem>
 
       <NFormItem
-        label="描述（選填）"
+        :label="$t('chat.prompts.editor.descLabel')"
         path="description"
         :show-feedback="false"
       >
         <NInput
           v-model:value="formData.description"
           type="textarea"
-          placeholder="請輸入提示詞描述，說明此模板的用途"
+          :placeholder="$t('chat.prompts.editor.descPlaceholder')"
           :rows="3"
           :disabled="loading"
         />
       </NFormItem>
 
       <NFormItem
-        label="收藏此提示詞"
+        :label="$t('chat.prompts.editor.favoriteLabel')"
         path="is_favorite"
         :show-feedback="false"
       >
@@ -165,7 +168,7 @@ function handleConfirm() {
           :disabled="loading"
         />
         <span class="ml-2 text-sm text-gray-500">
-          開啟後，此提示詞將顯示收藏標記
+          {{ $t('chat.prompts.editor.favoriteHint') }}
         </span>
       </NFormItem>
     </NForm>
@@ -176,7 +179,7 @@ function handleConfirm() {
           :disabled="loading"
           @click="handleClose"
         >
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton
           type="primary"
@@ -184,7 +187,7 @@ function handleConfirm() {
           :disabled="!formData.name.trim() || !formData.content.trim()"
           @click="handleConfirm"
         >
-          {{ isEditMode ? '更新' : '建立' }}
+          {{ isEditMode ? $t('common.actions.update') : $t('common.actions.create') }}
         </NButton>
       </NSpace>
     </template>

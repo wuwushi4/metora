@@ -12,7 +12,9 @@ import { deleteDataset, getDatasetList, uploadDataset } from '@/api/datasets'
 import DatasetTable from '@/components/collections/DatasetTable.vue'
 import DatasetUploadModal from '@/components/collections/DatasetUploadModal.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
@@ -38,12 +40,22 @@ const collectionId = computed(() => {
 })
 
 // 分塊策略顯示名稱映射
-const chunkingStrategyMap: Record<string, { label: string, type: 'info' | 'success' | 'warning' }> = {
-  qa_multi_representation: { label: 'QA 多重表徵', type: 'info' },
-  regulation_hierarchical: { label: '法規-階層式', type: 'success' },
-  regulation_context_enriched: { label: '法規-情境增強', type: 'success' },
-  regulation_manual_scenario: { label: '法規-情境描述', type: 'success' },
-  recursive_text: { label: '遞迴文字分塊', type: 'warning' },
+const chunkingStrategyTypes: Record<string, 'info' | 'success' | 'warning'> = {
+  qa_multi_representation: 'info',
+  regulation_hierarchical: 'success',
+  regulation_context_enriched: 'success',
+  regulation_manual_scenario: 'success',
+  recursive_text: 'warning',
+}
+
+function getStrategyLabel(strategy: string): string {
+  const key = `collections.detail.strategies.${strategy}`
+  const translated = t(key)
+  return translated !== key ? translated : strategy
+}
+
+function getStrategyType(strategy: string): 'info' | 'success' | 'warning' {
+  return chunkingStrategyTypes[strategy] || 'info'
 }
 
 // 載入 Collection 資訊
@@ -54,7 +66,7 @@ async function loadCollection() {
   }
   catch (error: any) {
     console.error('載入 Collection 失敗:', error)
-    message.error(error.message || '載入 Collection 失敗')
+    message.error(error.message || t('collections.detail.loadFailed'))
     // 載入失敗返回列表頁
     router.push('/collections')
   }
@@ -80,7 +92,7 @@ async function loadDatasets() {
   }
   catch (error: any) {
     console.error('載入 Dataset 列表失敗:', error)
-    message.error(error.message || '載入 Dataset 列表失敗')
+    message.error(error.message || t('collections.detail.loadDatasetsFailed'))
   }
   finally {
     datasetsLoading.value = false
@@ -120,7 +132,7 @@ async function handleUpload(files: File[], chunkingOptions?: { chunkSize: number
         : undefined)
     }
 
-    message.success(`成功上傳 ${files.length} 個檔案，正在處理向量化...`)
+    message.success(t('collections.detail.uploadSuccess', { count: files.length }))
     uploadModalVisible.value = false
 
     // 重新載入列表
@@ -129,7 +141,7 @@ async function handleUpload(files: File[], chunkingOptions?: { chunkSize: number
   }
   catch (error: any) {
     console.error('上傳檔案失敗:', error)
-    message.error(error.message || '上傳檔案失敗')
+    message.error(error.message || t('collections.detail.uploadFailed'))
   }
 }
 
@@ -137,7 +149,7 @@ async function handleUpload(files: File[], chunkingOptions?: { chunkSize: number
 async function handleDeleteDataset(datasetId: number) {
   try {
     await deleteDataset(datasetId)
-    message.success('Dataset 刪除成功')
+    message.success(t('collections.detail.deleteDatasetSuccess'))
 
     // 重新載入
     await loadCollection()
@@ -145,14 +157,14 @@ async function handleDeleteDataset(datasetId: number) {
   }
   catch (error: any) {
     console.error('刪除 Dataset 失敗:', error)
-    message.error(error.message || '刪除 Dataset 失敗')
+    message.error(error.message || t('collections.detail.deleteDatasetFailed'))
   }
 }
 
 // 手動重新整理
 async function handleRefresh() {
   await Promise.all([loadCollection(), loadDatasets()])
-  message.success('重新整理成功')
+  message.success(t('collections.detail.refreshSuccess'))
 }
 
 // 頁面載入時獲取資料
@@ -171,14 +183,14 @@ onMounted(async () => {
           <template #icon>
             <NIcon :component="BackIcon" />
           </template>
-          返回列表
+          {{ t('common.actions.backToList') }}
         </NButton>
         <div class="header-content">
           <h1 class="page-title">
             {{ collection?.name || 'Loading...' }}
           </h1>
           <p class="page-description">
-            Collection 詳細資訊與 Dataset 管理
+            {{ t('collections.detail.description') }}
           </p>
         </div>
       </div>
@@ -189,7 +201,7 @@ onMounted(async () => {
               <RefreshIcon />
             </NIcon>
           </template>
-          重新整理
+          {{ t('common.actions.refresh') }}
         </NButton>
         <NButton type="primary" @click="handleOpenUpload">
           <template #icon>
@@ -197,42 +209,42 @@ onMounted(async () => {
               <UploadIcon />
             </NIcon>
           </template>
-          上傳檔案
+          {{ t('collections.detail.uploadFiles') }}
         </NButton>
       </div>
     </div>
 
     <!-- Collection 資訊卡片 -->
     <NSpin :show="loading">
-      <NCard v-if="collection" title="Collection 資訊" class="info-card">
+      <NCard v-if="collection" :title="t('collections.detail.info')" class="info-card">
         <NDescriptions :column="descriptionColumn" label-placement="left">
-          <NDescriptionsItem label="ID">
+          <NDescriptionsItem :label="t('common.fields.id')">
             {{ collection.id }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="名稱">
+          <NDescriptionsItem :label="t('common.fields.name')">
             {{ collection.name }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="描述">
+          <NDescriptionsItem :label="t('common.fields.description')">
             {{ collection.description || '-' }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="分塊策略">
+          <NDescriptionsItem :label="t('collections.table.chunkingStrategy')">
             <NTag
-              :type="chunkingStrategyMap[collection.chunking_strategy]?.type || 'info'"
+              :type="getStrategyType(collection.chunking_strategy)"
               size="small"
             >
-              {{ chunkingStrategyMap[collection.chunking_strategy]?.label || collection.chunking_strategy }}
+              {{ getStrategyLabel(collection.chunking_strategy) }}
             </NTag>
           </NDescriptionsItem>
-          <NDescriptionsItem label="Dataset 數量">
+          <NDescriptionsItem :label="t('collections.table.datasetCount')">
             {{ collection.dataset_count }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="所有者">
-            {{ collection.owner?.full_name || collection.owner?.username || `使用者 #${collection.user_id}` }}
+          <NDescriptionsItem :label="t('common.fields.owner')">
+            {{ collection.owner?.full_name || collection.owner?.username || t('collections.detail.defaultOwner', { id: collection.user_id }) }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="建立時間">
+          <NDescriptionsItem :label="t('common.fields.createdAt')">
             {{ new Date(collection.created_at).toLocaleString('zh-TW') }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="更新時間">
+          <NDescriptionsItem :label="t('common.fields.updatedAt')">
             {{ new Date(collection.updated_at).toLocaleString('zh-TW') }}
           </NDescriptionsItem>
         </NDescriptions>
@@ -243,7 +255,7 @@ onMounted(async () => {
     <div class="datasets-section">
       <div class="section-header">
         <h2 class="section-title">
-          Dataset 列表
+          {{ t('collections.detail.datasetList') }}
         </h2>
       </div>
       <DatasetTable

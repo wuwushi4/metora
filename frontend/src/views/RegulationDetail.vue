@@ -27,7 +27,9 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { exportRegulation, getRegulationById, updateRegulation } from '@/api/regulations'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
@@ -52,11 +54,23 @@ const regulationId = computed(() => {
 })
 
 // 法規狀態映射
-const statusMap: Record<string, { label: string, type: 'success' | 'warning' | 'error' | 'info' }> = {
-  現行: { label: '現行', type: 'success' },
-  廢止: { label: '廢止', type: 'error' },
-  停止適用: { label: '停止適用', type: 'warning' },
-  尚未生效: { label: '尚未生效', type: 'info' },
+function getStatusInfo(status: string): { label: string, type: 'success' | 'warning' | 'error' | 'info' } {
+  const typeMap: Record<string, 'success' | 'warning' | 'error' | 'info'> = {
+    現行: 'success',
+    廢止: 'error',
+    停止適用: 'warning',
+    尚未生效: 'info',
+  }
+  const i18nMap: Record<string, string> = {
+    現行: 'regulations.filters.statuses.active',
+    廢止: 'regulations.filters.statuses.abolished',
+    停止適用: 'regulations.filters.statuses.suspended',
+    尚未生效: 'regulations.filters.statuses.notEffective',
+  }
+  return {
+    label: i18nMap[status] ? t(i18nMap[status]) : status,
+    type: typeMap[status] || 'info',
+  }
 }
 
 // 遞歸格式化 item 及其 subitems
@@ -103,7 +117,7 @@ async function loadRegulation() {
   }
   catch (error: any) {
     console.error('載入法規失敗:', error)
-    message.error(error.message || '載入法規失敗')
+    message.error(error.message || t('regulations.detail.loadFailed'))
     // 載入失敗返回列表頁
     router.push('/regulations')
   }
@@ -120,7 +134,7 @@ function handleBack() {
 // 手動重新整理
 async function handleRefresh() {
   await loadRegulation()
-  message.success('重新整理成功')
+  message.success(t('regulations.detail.refreshSuccess'))
 }
 
 // 進入編輯模式
@@ -177,7 +191,7 @@ async function handleSave() {
       content: editingRegulation.value.content,
     })
 
-    message.success('法規更新成功')
+    message.success(t('regulations.detail.updateSuccess'))
     isEditing.value = false
     editingRegulation.value = null
     // 重新載入資料
@@ -185,7 +199,7 @@ async function handleSave() {
   }
   catch (error: any) {
     console.error('更新法規失敗:', error)
-    message.error(error.message || '更新法規失敗')
+    message.error(error.message || t('regulations.detail.updateFailed'))
   }
   finally {
     saving.value = false
@@ -210,7 +224,7 @@ async function handleExport() {
   if (!regulation.value)
     return
 
-  const loadingMessage = message.loading('正在導出法規...', { duration: 0 })
+  const loadingMessage = message.loading(t('regulations.exportLoading'), { duration: 0 })
 
   try {
     const blob = await exportRegulation(regulation.value.id)
@@ -230,12 +244,12 @@ async function handleExport() {
     URL.revokeObjectURL(url)
 
     loadingMessage.destroy()
-    message.success('法規導出成功')
+    message.success(t('regulations.detail.exportSuccess'))
   }
   catch (error: any) {
     loadingMessage.destroy()
     console.error('導出法規失敗:', error)
-    message.error(error.message || '導出法規失敗')
+    message.error(error.message || t('regulations.detail.exportFailed'))
   }
 }
 
@@ -254,14 +268,14 @@ onMounted(async () => {
           <template #icon>
             <NIcon :component="BackIcon" />
           </template>
-          返回列表
+          {{ t('common.actions.backToList') }}
         </NButton>
         <div class="header-content">
           <h1 class="page-title">
             {{ regulation?.law_name || 'Loading...' }}
           </h1>
           <p class="page-description">
-            法規詳細資訊與章節條文
+            {{ t('regulations.detail.description') }}
           </p>
         </div>
       </div>
@@ -273,7 +287,7 @@ onMounted(async () => {
                 <RefreshIcon />
               </NIcon>
             </template>
-            重新整理
+            {{ t('common.actions.refresh') }}
           </NButton>
           <NButton @click="handleExport">
             <template #icon>
@@ -281,7 +295,7 @@ onMounted(async () => {
                 <DownloadIcon />
               </NIcon>
             </template>
-            導出
+            {{ t('common.actions.export') }}
           </NButton>
           <NButton type="primary" @click="handleEdit">
             <template #icon>
@@ -289,15 +303,15 @@ onMounted(async () => {
                 <EditIcon />
               </NIcon>
             </template>
-            編輯情境
+            {{ t('regulations.detail.editScenario') }}
           </NButton>
         </template>
         <template v-else>
           <NButton @click="handleCancelEdit">
-            取消
+            {{ t('common.actions.cancel') }}
           </NButton>
           <NButton type="primary" :loading="saving" @click="handleSave">
-            保存
+            {{ t('common.actions.save') }}
           </NButton>
         </template>
       </div>
@@ -306,54 +320,54 @@ onMounted(async () => {
     <!-- 可滾動的內容區域 -->
     <div class="regulation-content-scroll">
       <NSpin :show="loading">
-        <NCard v-if="regulation" title="法規基本資訊" class="info-card">
+        <NCard v-if="regulation" :title="t('regulations.detail.basicInfo')" class="info-card">
           <NDescriptions :column="descriptionColumn" label-placement="left">
-            <NDescriptionsItem label="ID">
+            <NDescriptionsItem :label="t('common.fields.id')">
               {{ regulation.id }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="法規代碼">
+            <NDescriptionsItem :label="t('regulations.detail.code')">
               {{ regulation.law_code }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="法規名稱">
+            <NDescriptionsItem :label="t('regulations.detail.name')">
               {{ regulation.law_name }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="法規類別">
+            <NDescriptionsItem :label="t('regulations.detail.category')">
               {{ regulation.category }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="法規狀態">
+            <NDescriptionsItem :label="t('regulations.detail.status')">
               <NTag
-                :type="statusMap[regulation.status]?.type || 'info'"
+                :type="getStatusInfo(regulation.status).type"
                 size="small"
               >
-                {{ statusMap[regulation.status]?.label || regulation.status }}
+                {{ getStatusInfo(regulation.status).label }}
               </NTag>
             </NDescriptionsItem>
-            <NDescriptionsItem label="最後更新">
+            <NDescriptionsItem :label="t('regulations.detail.lastUpdated')">
               {{ regulation.last_updated || '-' }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="章節總數">
+            <NDescriptionsItem :label="t('regulations.detail.chapterCount')">
               {{ regulation.total_chapters }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="條文總數">
+            <NDescriptionsItem :label="t('regulations.detail.articleCount')">
               {{ regulation.total_articles }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="情境總數">
+            <NDescriptionsItem :label="t('regulations.detail.scenarioCount')">
               {{ regulation.total_scenarios }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="所有者">
-              {{ regulation.owner?.full_name || regulation.owner?.username || `使用者 #${regulation.user_id}` }}
+            <NDescriptionsItem :label="t('common.fields.owner')">
+              {{ regulation.owner?.full_name || regulation.owner?.username || `${t('collections.detail.defaultOwner', { id: regulation.user_id })}` }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="建立時間">
+            <NDescriptionsItem :label="t('common.fields.createdAt')">
               {{ new Date(regulation.created_at).toLocaleString('zh-TW') }}
             </NDescriptionsItem>
-            <NDescriptionsItem label="更新時間">
+            <NDescriptionsItem :label="t('common.fields.updatedAt')">
               {{ new Date(regulation.updated_at).toLocaleString('zh-TW') }}
             </NDescriptionsItem>
           </NDescriptions>
         </NCard>
 
         <!-- 章節與條文內容 -->
-        <NCard v-if="regulation && regulation.content" title="章節與條文" class="content-card">
+        <NCard v-if="regulation && regulation.content" :title="t('regulations.detail.chaptersAndArticles')" class="content-card">
           <NCollapse v-if="regulation.content.chapters && regulation.content.chapters.length > 0">
             <NCollapseItem
               v-for="(chapter, chapterIndex) in regulation.content.chapters"
@@ -365,7 +379,7 @@ onMounted(async () => {
                   <span class="chapter-display">{{ chapter.chapter_display }}</span>
                   <span class="chapter-name">{{ chapter.chapter_name }}</span>
                   <NTag size="small" :bordered="false">
-                    {{ chapter.articles?.length || 0 }} 條
+                    {{ chapter.articles?.length || 0 }} {{ t('regulations.detail.articleTag') }}
                   </NTag>
                 </div>
               </template>
@@ -392,7 +406,7 @@ onMounted(async () => {
                   <template v-if="!isEditing">
                     <div v-if="article.scenarios && article.scenarios.length > 0" class="scenarios-section">
                       <div class="scenarios-label">
-                        應用情境：
+                        {{ t('regulations.detail.scenarios') }}
                       </div>
                       <NSpace vertical :size="8">
                         <NTag
@@ -409,10 +423,10 @@ onMounted(async () => {
 
                     <div v-else class="scenarios-section">
                       <div class="scenarios-label">
-                        應用情境：
+                        {{ t('regulations.detail.scenarios') }}
                       </div>
                       <NTag type="default" size="small">
-                        無
+                        {{ t('common.fields.none') }}
                       </NTag>
                     </div>
                   </template>
@@ -421,7 +435,7 @@ onMounted(async () => {
                   <template v-else>
                     <div class="scenarios-section">
                       <div class="scenarios-label">
-                        應用情境：
+                        {{ t('regulations.detail.scenarios') }}
                       </div>
                       <div class="custom-scenarios-editor">
                         <!-- 現有標籤列表（垂直排列） -->
@@ -447,7 +461,7 @@ onMounted(async () => {
                         <NInput
                           v-model:value="newScenarioInputs[getScenarioInputKey(chapterIndex, articleIndex)]"
                           type="textarea"
-                          placeholder="輸入情境描述（支援多行），點擊「新增情境」按鈕加入"
+                          :placeholder="t('regulations.detail.scenarioPlaceholder')"
                           size="small"
                           :autosize="{
                             minRows: 2,
@@ -461,7 +475,7 @@ onMounted(async () => {
                           style="align-self: flex-start;"
                           @click="handleAddScenario(chapterIndex, articleIndex)"
                         >
-                          新增情境
+                          {{ t('regulations.detail.addScenario') }}
                         </NButton>
                       </div>
                     </div>
@@ -469,11 +483,11 @@ onMounted(async () => {
                 </div>
               </div>
 
-              <NEmpty v-else description="此章節無條文" />
+              <NEmpty v-else :description="t('regulations.detail.noArticles')" />
             </NCollapseItem>
           </NCollapse>
 
-          <NEmpty v-else description="此法規無章節內容" />
+          <NEmpty v-else :description="t('regulations.detail.noChapters')" />
         </NCard>
       </NSpin>
     </div>

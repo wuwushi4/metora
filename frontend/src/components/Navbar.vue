@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  GlobeOutline as GlobeIcon,
   KeyOutline as KeyIcon,
   LogOutOutline as LogoutIcon,
   MenuOutline as MenuIcon,
@@ -17,8 +18,10 @@ import {
   NSpace,
 } from 'naive-ui'
 import { computed, h, markRaw, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import ChangePasswordModal from '@/components/ChangePasswordModal.vue'
+import { useLocale } from '@/composables/useLocale'
 import { useAuthStore } from '@/stores/auth'
 import { message, notification } from '@/utils/message'
 
@@ -32,6 +35,8 @@ const emit = defineEmits<{
 
 const router = useRouter()
 const authStore = useAuthStore()
+const { t } = useI18n()
+const { setLocale } = useLocale()
 
 const isLoggingOut = ref(false)
 const unreadNotifications = ref(0) // 模擬未讀通知數
@@ -43,22 +48,33 @@ const icons = {
   settings: markRaw(SettingsIcon),
   key: markRaw(KeyIcon),
   logout: markRaw(LogoutIcon),
+  globe: markRaw(GlobeIcon),
+}
+
+// 語言選項
+const languageOptions = computed(() => [
+  { label: '繁體中文', key: 'zh-TW' },
+  { label: 'English', key: 'en' },
+])
+
+function handleLanguageSelect(key: string) {
+  setLocale(key)
 }
 
 // 使用者選單選項
 const userOptions = computed(() => [
   {
-    label: '個人資料',
+    label: t('navbar.profile'),
     key: 'profile',
     icon: () => h(NIcon, null, { default: () => h(icons.user) }),
   },
   {
-    label: '修改密碼',
+    label: t('navbar.changePassword'),
     key: 'change-password',
     icon: () => h(NIcon, null, { default: () => h(icons.key) }),
   },
   {
-    label: '系統設定',
+    label: t('navbar.settings'),
     key: 'settings',
     icon: () => h(NIcon, null, { default: () => h(icons.settings) }),
   },
@@ -67,7 +83,7 @@ const userOptions = computed(() => [
     key: 'd1',
   },
   {
-    label: '登出',
+    label: t('navbar.logout'),
     key: 'logout',
     icon: () => h(NIcon, null, { default: () => h(icons.logout) }),
   },
@@ -79,13 +95,13 @@ async function handleSelect(key: string) {
     await handleLogout()
   }
   else if (key === 'profile') {
-    message.info('個人資料功能開發中...')
+    message.info(t('navbar.profileWip'))
   }
   else if (key === 'change-password') {
     showChangePasswordModal.value = true
   }
   else if (key === 'settings') {
-    message.info('系統設定功能開發中...')
+    message.info(t('navbar.settingsWip'))
   }
 }
 
@@ -94,11 +110,11 @@ async function handleLogout() {
   try {
     isLoggingOut.value = true
     await authStore.logout()
-    message.success('已登出')
+    message.success(t('auth.logout.success'))
     router.push('/login')
   }
   catch (error: any) {
-    message.error(error.message || '登出失敗')
+    message.error(error.message || t('auth.logout.failed'))
   }
   finally {
     isLoggingOut.value = false
@@ -113,8 +129,8 @@ function toggleCollapsed() {
 // 處理通知點擊
 function handleNotifications() {
   notification.info({
-    title: '系統通知',
-    content: '您有 0 則未讀通知',
+    title: t('navbar.notifications.title'),
+    content: t('navbar.notifications.empty'),
     duration: 3000,
   })
   // TODO: 實作通知中心
@@ -150,8 +166,23 @@ function handleNotifications() {
       </div>
     </div>
 
-    <!-- 右側：通知 & 使用者資訊 -->
+    <!-- 右側：語言切換 & 通知 & 使用者資訊 -->
     <NSpace align="center" :size="16">
+      <!-- 語言切換 -->
+      <NDropdown
+        trigger="click"
+        :options="languageOptions"
+        @select="handleLanguageSelect"
+      >
+        <NButton quaternary circle>
+          <template #icon>
+            <NIcon size="20">
+              <GlobeIcon />
+            </NIcon>
+          </template>
+        </NButton>
+      </NDropdown>
+
       <!-- 通知鈴鐺 -->
       <NBadge :value="unreadNotifications" :max="99">
         <NButton

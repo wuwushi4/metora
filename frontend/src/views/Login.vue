@@ -2,6 +2,7 @@
 import { LockClosedOutline, PersonOutline } from '@vicons/ionicons5'
 import { NButton, NCard, NForm, NFormItem, NIcon, NInput } from 'naive-ui'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { message } from '@/utils/message'
@@ -9,6 +10,7 @@ import { message } from '@/utils/message'
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const { t } = useI18n()
 
 // 表單資料
 const formRef = ref()
@@ -25,12 +27,12 @@ const passwordFocused = ref(false)
 const rules = {
   username: {
     required: true,
-    message: '請輸入帳號',
+    message: () => t('auth.login.usernameRequired'),
     trigger: 'blur',
   },
   password: {
     required: true,
-    message: '請輸入密碼',
+    message: () => t('auth.login.passwordRequired'),
     trigger: 'blur',
   },
 }
@@ -42,14 +44,14 @@ async function handleLogin() {
 
     await authStore.login(formData.value.username, formData.value.password)
 
-    message.success('登入成功!')
+    message.success(t('auth.login.success'))
 
     // 重導向到原來要去的頁面,或預設到首頁
     const redirect = (route.query.redirect as string) || '/'
     router.push(redirect)
   }
   catch (error: any) {
-    message.error(error.message || '登入失敗,請稍後再試')
+    message.error(error.message || t('auth.login.failed'))
   }
 }
 
@@ -128,7 +130,7 @@ function handleKeyup(e: KeyboardEvent) {
               </div>
               <NInput
                 v-model:value="formData.username"
-                placeholder="請輸入帳號"
+                :placeholder="t('auth.login.usernamePlaceholder')"
                 class="custom-input"
                 @focus="usernameFocused = true"
                 @blur="usernameFocused = false"
@@ -153,7 +155,7 @@ function handleKeyup(e: KeyboardEvent) {
               <NInput
                 v-model:value="formData.password"
                 type="password"
-                placeholder="請輸入密碼"
+                :placeholder="t('auth.login.passwordPlaceholder')"
                 class="custom-input"
                 show-password-on="click"
                 @focus="passwordFocused = true"
@@ -172,8 +174,8 @@ function handleKeyup(e: KeyboardEvent) {
               :loading="authStore.isLoading"
               @click="handleLogin"
             >
-              <span v-if="!authStore.isLoading">登入系統</span>
-              <span v-else>驗證中...</span>
+              <span v-if="!authStore.isLoading">{{ t('auth.login.loginButton') }}</span>
+              <span v-else>{{ t('auth.login.loggingIn') }}</span>
             </NButton>
           </div>
         </NForm>

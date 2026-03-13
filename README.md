@@ -93,7 +93,7 @@ docker build -t metora-sandbox:latest .
 ## Architecture
 
 <p align="center">
-  <img src="docs/images/architecture-overview.png" alt="Architecture Overview" width="800">
+  <img src="docs/images/en-US/architecture-overview.png" alt="Architecture Overview" width="800">
 </p>
 
 ### Tech Stack

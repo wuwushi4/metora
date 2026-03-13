@@ -11,6 +11,9 @@ import FileDownloadCard from '@/components/dataEngineering/FileDownloadCard.vue'
 import LawInputForm from '@/components/dataEngineering/LawInputForm.vue'
 import ProcessStatus from '@/components/dataEngineering/ProcessStatus.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 處理狀態
 const processingStatus = ref<ProcessingStatus>('idle')
@@ -32,12 +35,12 @@ async function handleSubmit(requestData: LawProcessRequest) {
     processingStatus.value = 'success'
     result.value = response
 
-    message.success('法規處理完成')
+    message.success(t('dataEngineering.processSuccess'))
   }
   catch (error: any) {
     // 更新錯誤狀態
     processingStatus.value = 'error'
-    errorMessage.value = error.response?.data?.detail || error.message || '處理失敗，請稍後再試'
+    errorMessage.value = error.response?.data?.detail || error.message || t('errors.unknownError')
 
     // Naive UI 的訊息已由 error-handler 統一處理，這裡不需要再顯示
     console.error('法規處理失敗:', error)
@@ -50,15 +53,15 @@ async function handleSubmit(requestData: LawProcessRequest) {
     <!-- 頁面標題 -->
     <div class="page-header">
       <h1 class="page-title">
-        法規爬蟲作業
+        {{ t('dataEngineering.title') }}
       </h1>
       <p class="page-subtitle">
-        輸入法規編號，自動爬取法規內容並轉換為 Markdown 和 JSON 格式 (目標網站：<a href="https://law.moj.gov.tw/Index.aspx" target="_blank">https://law.moj.gov.tw/Index.aspx</a>)。
+        {{ t('dataEngineering.subtitle') }}
       </p>
     </div>
 
     <!-- 輸入表單 -->
-    <NCard title="輸入法規資訊" :bordered="false" class="form-card">
+    <NCard :title="t('dataEngineering.inputTitle')" :bordered="false" class="form-card">
       <LawInputForm
         ref="formRef"
         :loading="processingStatus === 'processing'"

@@ -11,6 +11,7 @@ import {
   NTag,
 } from 'naive-ui'
 import { h } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { formatDateTime } from '@/utils/date'
 
@@ -29,6 +30,7 @@ const emit = defineEmits<{
   'export': [regulation: Regulation]
 }>()
 
+const { t } = useI18n()
 const router = useRouter()
 
 // 處理查看詳情
@@ -48,10 +50,10 @@ function handleExport(regulation: Regulation) {
 
 // 法規狀態映射
 const statusMap: Record<string, { label: string, type: 'success' | 'warning' | 'error' | 'info' }> = {
-  現行: { label: '現行', type: 'success' },
-  廢止: { label: '廢止', type: 'error' },
-  停止適用: { label: '停止適用', type: 'warning' },
-  尚未生效: { label: '尚未生效', type: 'info' },
+  現行: { label: t('regulations.filters.statuses.active'), type: 'success' },
+  廢止: { label: t('regulations.filters.statuses.abolished'), type: 'error' },
+  停止適用: { label: t('regulations.filters.statuses.suspended'), type: 'warning' },
+  尚未生效: { label: t('regulations.filters.statuses.notEffective'), type: 'info' },
 }
 
 // 表格欄位定義
@@ -63,7 +65,7 @@ const columns: DataTableColumns<Regulation> = [
     align: 'center',
   },
   {
-    title: '法規代碼',
+    title: t('regulations.table.lawCode'),
     key: 'law_code',
     width: 120,
     ellipsis: {
@@ -71,7 +73,7 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '法規名稱',
+    title: t('regulations.table.lawName'),
     key: 'law_name',
     minWidth: 200,
     ellipsis: {
@@ -79,7 +81,7 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '類別',
+    title: t('regulations.table.category'),
     key: 'category',
     width: 120,
     ellipsis: {
@@ -87,7 +89,7 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '狀態',
+    title: t('common.fields.status'),
     key: 'status',
     width: 100,
     align: 'center',
@@ -107,25 +109,25 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '章節數',
+    title: t('regulations.table.chapterCount'),
     key: 'total_chapters',
     width: 90,
     align: 'center',
   },
   {
-    title: '條文數',
+    title: t('regulations.table.articleCount'),
     key: 'total_articles',
     width: 90,
     align: 'center',
   },
   {
-    title: '情境數',
+    title: t('regulations.table.scenarioCount'),
     key: 'total_scenarios',
     width: 90,
     align: 'center',
   },
   {
-    title: '最後更新',
+    title: t('regulations.table.lastUpdated'),
     key: 'last_updated',
     width: 120,
     render: (row) => {
@@ -133,7 +135,7 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '建立時間',
+    title: t('common.fields.createdAt'),
     key: 'created_at',
     width: 180,
     render: (row) => {
@@ -141,7 +143,7 @@ const columns: DataTableColumns<Regulation> = [
     },
   },
   {
-    title: '操作',
+    title: t('common.fields.actions'),
     key: 'actions',
     width: 280,
     fixed: 'right' as const,
@@ -159,7 +161,7 @@ const columns: DataTableColumns<Regulation> = [
                 quaternary: true,
                 onClick: () => handleView(row),
               },
-              { default: () => '查看' },
+              { default: () => t('common.actions.view') },
             ),
             h(
               NButton,
@@ -169,7 +171,7 @@ const columns: DataTableColumns<Regulation> = [
                 quaternary: true,
                 onClick: () => handleExport(row),
               },
-              { default: () => '導出' },
+              { default: () => t('common.actions.export') },
             ),
             h(
               NPopconfirm,
@@ -185,9 +187,9 @@ const columns: DataTableColumns<Regulation> = [
                       type: 'error',
                       quaternary: true,
                     },
-                    { default: () => '刪除' },
+                    { default: () => t('common.actions.delete') },
                   ),
-                default: () => '確定要刪除這個法規嗎？此操作無法復原。',
+                default: () => t('regulations.table.deleteConfirm'),
               },
             ),
           ],
@@ -234,7 +236,7 @@ function handlePageSizeChange(pageSize: number) {
         @update:page-size="handlePageSizeChange"
       >
         <template #prefix="{ itemCount }">
-          共 {{ itemCount }} 筆
+          {{ $t('regulations.table.totalItems', { count: itemCount }) }}
         </template>
       </NPagination>
     </div>

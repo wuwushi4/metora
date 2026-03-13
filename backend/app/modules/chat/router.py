@@ -29,6 +29,7 @@ from app.modules.chat.file_processors import (
     FileProcessingError,
 )
 from app.core.config import get_settings, RateLimitLevel
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse
 from app.utils.exceptions import AppException
 from app.utils.rate_limit import rate_limit
@@ -84,7 +85,7 @@ def _handle_sse_error(
             },
             exc_info=True
         )
-        error_message = "伺服器錯誤,請稍後再試"
+        error_message = t('chat.serverError')
 
     error_chunk = MessageChunk(type="error", content=error_message)
     return f"data: {error_chunk.model_dump_json(exclude_none=True)}\n\n"
@@ -322,17 +323,17 @@ async def send_message(
         except ValueError:
             raise HTTPException(
                 status_code=400,
-                detail="提示詞模板 ID 格式錯誤"
+                detail=t('chat.promptIdInvalid')
             )
 
     # 2. 驗證檔案數量
     if files and not settings.CHAT_FILE_UPLOAD_ENABLED:
-        raise HTTPException(status_code=400, detail="檔案上傳功能未啟用")
+        raise HTTPException(status_code=400, detail=t('chat.fileFormatDisabled'))
 
     if files and len(files) > settings.CHAT_MAX_FILES_PER_MESSAGE:
         raise HTTPException(
             status_code=400,
-            detail=f"最多上傳 {settings.CHAT_MAX_FILES_PER_MESSAGE} 個檔案"
+            detail=t('chat.tooManyFiles', max=settings.CHAT_MAX_FILES_PER_MESSAGE)
         )
 
     # 3. 處理檔案
@@ -424,7 +425,7 @@ async def send_message(
     async def event_generator():
         # 優先檢查檔案錯誤
         if file_errors:
-            error_msg = "檔案處理失敗：\n" + "\n".join(file_errors)
+            error_msg = t('chat.fileProcessFailed', errors="\n".join(file_errors))
             error_chunk = MessageChunk(type="error", content=error_msg)
             yield f"data: {error_chunk.model_dump_json(exclude_none=True)}\n\n"
             return
@@ -522,7 +523,7 @@ async def get_attachment(
                 "attachment_id": str(attachment_id),
             }
         )
-        raise HTTPException(status_code=404, detail="附件檔案不存在")
+        raise HTTPException(status_code=404, detail=t('chat.attachmentNotFound'))
 
     # 返回檔案
     return FileResponse(

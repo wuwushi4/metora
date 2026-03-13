@@ -8,6 +8,9 @@ import { getFeedbackList } from '@/api/feedback'
 import FeedbackFilters from '@/components/feedbacks/FeedbackFilters.vue'
 import FeedbackTable from '@/components/feedbacks/FeedbackTable.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 狀態
 const loading = ref(false)
@@ -39,7 +42,7 @@ async function loadFeedbacks() {
   }
   catch (error: any) {
     console.error('載入反饋列表失敗:', error)
-    message.error(error.message || '載入反饋列表失敗')
+    message.error(error.message || t('feedbacks.loadFailed'))
   }
   finally {
     loading.value = false
@@ -76,7 +79,7 @@ function handlePageSizeChange(pageSize: number) {
 // 手動重新整理
 async function handleRefresh() {
   await loadFeedbacks()
-  message.success('重新整理成功')
+  message.success(t('feedbacks.refreshSuccess'))
 }
 
 onMounted(() => {
@@ -90,10 +93,10 @@ onMounted(() => {
     <div class="page-header">
       <div class="header-content">
         <h1 class="page-title">
-          反饋記錄管理
+          {{ t('feedbacks.title') }}
         </h1>
         <p class="page-description">
-          查看和管理用戶反饋記錄
+          {{ t('feedbacks.description') }}
         </p>
       </div>
       <div class="header-actions">
@@ -101,7 +104,7 @@ onMounted(() => {
           <template #icon>
             <NIcon :component="RefreshIcon" />
           </template>
-          重新整理
+          {{ t('common.actions.refresh') }}
         </NButton>
       </div>
     </div>

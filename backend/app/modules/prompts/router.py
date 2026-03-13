@@ -16,6 +16,7 @@ from app.modules.prompts.schemas import (
     PromptTemplateUpdateRequest,
     PromptTemplateResponse
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse, success_response, paginated_response
 from app.utils.exceptions import ResourceNotFoundError
 
@@ -63,7 +64,7 @@ async def get_prompt_templates(
         total=total,
         page=page,
         page_size=page_size,
-        message="獲取提示詞列表成功"
+        message=t('prompts.listSuccess')
     )
 
 
@@ -102,7 +103,7 @@ async def create_prompt_template(
 
     return success_response(
         data=PromptTemplateResponse.model_validate(template),
-        message="建立提示詞成功"
+        message=t('prompts.createSuccess')
     )
 
 
@@ -137,11 +138,11 @@ async def get_prompt_template(
     )
 
     if not template:
-        raise ResourceNotFoundError("提示詞模板", str(template_id))
+        raise ResourceNotFoundError(t('resources.promptTemplate'), str(template_id))
 
     return success_response(
         data=PromptTemplateResponse.model_validate(template),
-        message="獲取提示詞成功"
+        message=t('prompts.getSuccess')
     )
 
 
@@ -183,11 +184,11 @@ async def update_prompt_template(
     )
 
     if not template:
-        raise ResourceNotFoundError("提示詞模板", str(template_id))
+        raise ResourceNotFoundError(t('resources.promptTemplate'), str(template_id))
 
     return success_response(
         data=PromptTemplateResponse.model_validate(template),
-        message="更新提示詞成功"
+        message=t('prompts.updateSuccess')
     )
 
 
@@ -222,11 +223,11 @@ async def delete_prompt_template(
     )
 
     if not success:
-        raise ResourceNotFoundError("提示詞模板", str(template_id))
+        raise ResourceNotFoundError(t('resources.promptTemplate'), str(template_id))
 
     return success_response(
-        data=MessageResponse(message="刪除成功"),
-        message="刪除提示詞成功"
+        data=MessageResponse(message=t('prompts.deleteMessage')),
+        message=t('prompts.deleteSuccess')
     )
 
 
@@ -266,10 +267,10 @@ async def toggle_favorite_prompt_template(
     )
 
     if not template:
-        raise ResourceNotFoundError("提示詞模板", str(template_id))
+        raise ResourceNotFoundError(t('resources.promptTemplate'), str(template_id))
 
-    action = "收藏" if template.is_favorite else "取消收藏"
+    action = t('prompts.favorite') if template.is_favorite else t('prompts.unfavorite')
     return success_response(
         data=PromptTemplateResponse.model_validate(template),
-        message=f"{action}提示詞成功"
+        message=t('prompts.favoriteSuccess', action=action)
     )

@@ -2,6 +2,7 @@
 import type { SettingResponse } from '@/types/settings'
 import { NCard, NForm, NSpin } from 'naive-ui'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { updateSetting } from '@/api/settings'
 import { message } from '@/utils/message'
 import SettingItem from './SettingItem.vue'
@@ -16,6 +17,8 @@ const emit = defineEmits<{
   updated: []
 }>()
 
+const { t } = useI18n()
+
 // 狀態
 const loading = ref(false)
 
@@ -24,12 +27,12 @@ async function handleUpdate(key: string, value: any) {
   loading.value = true
   try {
     await updateSetting(key, { value })
-    message.success('設定更新成功')
+    message.success(t('settings.updateSuccess'))
     emit('updated')
   }
   catch (error: any) {
     console.error('更新設定失敗:', error)
-    message.error(error.message || '更新設定失敗')
+    message.error(error.message || t('settings.updateFailed'))
   }
   finally {
     loading.value = false
@@ -47,11 +50,11 @@ const hasRestartRequired = computed(() => {
     <NSpin :show="loading">
       <NCard v-if="hasRestartRequired" class="mb-4" size="small">
         <div class="text-orange-600 text-sm">
-          ⚠️ 部分設定需要重啟應用才能生效
+          ⚠️ {{ $t('settings.restartWarning') }}
         </div>
       </NCard>
 
-      <NCard title="RAG 檢索系統設定">
+      <NCard :title="$t('settings.ragTitle')">
         <NForm label-placement="left" label-width="200" class="max-w-3xl">
           <SettingItem
             v-for="setting in settings"

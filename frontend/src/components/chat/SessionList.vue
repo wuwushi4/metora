@@ -19,11 +19,14 @@ import {
   NThing,
 } from 'naive-ui'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { searchSessions } from '@/api/chat'
 import { useSearchHistory } from '@/composables/useSearchHistory'
 import { isSessionSearchResult } from '@/types/chat'
 import { message } from '@/utils/message'
 import { highlightKeyword } from '@/utils/searchHighlight'
+
+const { t } = useI18n()
 
 const props = withDefaults(defineProps<Props>(), {
   currentSessionId: null,
@@ -65,16 +68,9 @@ function isCurrentSession(sessionId: string): boolean {
 
 // 格式化 Agent 類型標籤
 function getGraphTypeLabel(graphType: string): string {
-  switch (graphType) {
-    case 'base_graph':
-      return '通用助理'
-    case 'rag_graph':
-      return '知識專家'
-    case 'regulation_graph':
-      return '法規顧問'
-    default:
-      return graphType
-  }
+  const key = `chat.graphs.${graphType}`
+  const translated = t(key)
+  return translated !== key ? translated : graphType
 }
 
 // 取得 Agent 類型標籤顏色
@@ -99,29 +95,29 @@ function formatTime(isoString: string): string {
 
   // 小於 1 分鐘
   if (diff < 60 * 1000) {
-    return '剛剛'
+    return t('common.time.justNow')
   }
 
   // 小於 1 小時
   if (diff < 60 * 60 * 1000) {
     const minutes = Math.floor(diff / (60 * 1000))
-    return `${minutes} 分鐘前`
+    return `${minutes} ${t('common.time.minutesAgo')}`
   }
 
   // 小於 24 小時
   if (diff < 24 * 60 * 60 * 1000) {
     const hours = Math.floor(diff / (60 * 60 * 1000))
-    return `${hours} 小時前`
+    return `${hours} ${t('common.time.hoursAgo')}`
   }
 
   // 小於 7 天
   if (diff < 7 * 24 * 60 * 60 * 1000) {
     const days = Math.floor(diff / (24 * 60 * 60 * 1000))
-    return `${days} 天前`
+    return `${days} ${t('common.time.daysAgo')}`
   }
 
   // 超過 7 天,顯示完整日期
-  return date.toLocaleDateString('zh-TW', {
+  return date.toLocaleDateString(undefined, {
     month: 'short',
     day: 'numeric',
   })
@@ -139,7 +135,7 @@ const handleSearchInput = useDebounceFn(async (value: string) => {
 
   // 關鍵字長度驗證
   if (trimmed.length < 2) {
-    message.warning('搜尋關鍵字至少需要 2 個字元')
+    message.warning(t('chat.sessions.searchMinChars'))
     return
   }
 
@@ -158,13 +154,13 @@ const handleSearchInput = useDebounceFn(async (value: string) => {
   catch (error: any) {
     console.error('搜尋失敗:', error)
     if (error.response?.status === 429) {
-      message.error('搜尋請求過於頻繁，請稍後再試')
+      message.error(t('chat.sessions.searchRateLimit'))
     }
     else if (error.response?.status === 400) {
-      message.error('搜尋關鍵字無效，請重新輸入')
+      message.error(t('chat.sessions.searchInvalid'))
     }
     else {
-      message.error('搜尋失敗，請稍後再試')
+      message.error(t('chat.sessions.searchFailed'))
     }
     searchResults.value = []
   }
@@ -218,7 +214,7 @@ function confirmRename() {
 
   const title = newTitle.value.trim()
   if (!title) {
-    message.warning('標題不能為空')
+    message.warning(t('chat.sessions.titleRequired'))
     return
   }
 
@@ -243,7 +239,7 @@ function handleDelete(session: ChatSession, event: Event) {
     <!-- 頭部 -->
     <div class="list-header">
       <h3 class="header-title">
-        對話列表
+        {{ $t('chat.sessions.title') }}
       </h3>
       <NButton
         type="primary"
@@ -251,7 +247,7 @@ function handleDelete(session: ChatSession, event: Event) {
         :disabled="loading"
         @click="handleCreate"
       >
-        新建對話
+        {{ $t('chat.sessions.new') }}
       </NButton>
     </div>
 
@@ -260,7 +256,7 @@ function handleDelete(session: ChatSession, event: Event) {
       <NAutoComplete
         v-model:value="searchQuery"
         :options="historyOptions"
-        placeholder="搜尋對話標題或內容..."
+        :placeholder="$t('chat.sessions.searchPlaceholder')"
         size="small"
         clearable
         :loading="isSearching"
@@ -274,9 +270,9 @@ function handleDelete(session: ChatSession, event: Event) {
 
       <!-- 搜尋結果計數 -->
       <div v-if="searchQuery.trim()" class="search-result-info">
-        找到 {{ searchResults.length }} 個相關對話
+        {{ $t('chat.sessions.searchResults', { count: searchResults.length }) }}
         <NButton text size="tiny" @click="handleClearSearch">
-          清除搜尋
+          {{ $t('chat.sessions.clearSearch') }}
         </NButton>
       </div>
     </div>
@@ -284,7 +280,7 @@ function handleDelete(session: ChatSession, event: Event) {
     <!-- 搜尋中提示 -->
     <div v-if="isSearching" class="searching-indicator">
       <NSpin size="small" />
-      <span>搜尋中...</span>
+      <span>{{ $t('chat.sessions.searching') }}</span>
     </div>
 
     <!-- 載入中 -->
@@ -333,7 +329,7 @@ function handleDelete(session: ChatSession, event: Event) {
                 v-html="highlightKeyword(snippet, searchQuery)"
               />
               <div v-if="session.match_count && session.match_count > 2" class="more-matches">
-                還有 {{ session.match_count - 2 }} 條相關訊息
+                {{ $t('chat.sessions.moreMatches', { count: session.match_count - 2 }) }}
               </div>
             </div>
 
@@ -343,10 +339,10 @@ function handleDelete(session: ChatSession, event: Event) {
                 {{ formatTime(session.updated_at) }}
               </NText>
               <span v-if="session.message_count" class="message-count">
-                {{ session.message_count }} 則訊息
+                {{ session.message_count }} {{ $t('common.unit.messages') }}
               </span>
               <span v-if="isSessionSearchResult(session) && session.match_count" class="match-count">
-                匹配 {{ session.match_count }} 條
+                {{ $t('common.unit.matches') }} {{ session.match_count }} {{ $t('common.unit.items') }}
               </span>
             </NSpace>
           </template>
@@ -359,7 +355,7 @@ function handleDelete(session: ChatSession, event: Event) {
                 type="info"
                 @click="(e: Event) => openRenameModal(session, e)"
               >
-                重新命名
+                {{ $t('common.actions.rename') }}
               </NButton>
               <NPopconfirm
                 @positive-click="(e: Event) => handleDelete(session, e)"
@@ -371,10 +367,10 @@ function handleDelete(session: ChatSession, event: Event) {
                     type="error"
                     @click.stop
                   >
-                    刪除
+                    {{ $t('common.actions.delete') }}
                   </NButton>
                 </template>
-                確定要刪除這個對話嗎?
+                {{ $t('chat.sessions.deleteConfirm') }}
               </NPopconfirm>
             </NSpace>
           </template>
@@ -384,13 +380,13 @@ function handleDelete(session: ChatSession, event: Event) {
 
     <!-- 空狀態 -->
     <div v-else class="empty-container">
-      <NEmpty :description="searchQuery.trim() ? '沒有找到相關對話' : '尚無對話記錄'">
+      <NEmpty :description="searchQuery.trim() ? $t('chat.sessions.noResults') : $t('chat.sessions.empty')">
         <template #extra>
           <NButton v-if="searchQuery.trim()" type="primary" size="small" @click="handleClearSearch">
-            查看全部對話
+            {{ $t('chat.sessions.viewAll') }}
           </NButton>
           <NButton v-else type="primary" size="small" @click="handleCreate">
-            建立第一個對話
+            {{ $t('chat.sessions.createFirst') }}
           </NButton>
         </template>
       </NEmpty>
@@ -400,15 +396,15 @@ function handleDelete(session: ChatSession, event: Event) {
     <NModal
       v-model:show="showRenameModal"
       preset="dialog"
-      title="重命名對話"
-      positive-text="確認"
-      negative-text="取消"
+      :title="$t('chat.sessions.renameTitle')"
+      :positive-text="$t('common.actions.confirm')"
+      :negative-text="$t('common.actions.cancel')"
       @positive-click="confirmRename"
     >
       <div style="padding: 12px 0">
         <NInput
           v-model:value="newTitle"
-          placeholder="請輸入新的標題"
+          :placeholder="$t('chat.sessions.renamePlaceholder')"
           :maxlength="100"
           show-count
           clearable

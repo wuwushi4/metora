@@ -12,6 +12,7 @@ import {
   NUploadDragger,
 } from 'naive-ui'
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { message } from '@/utils/message'
 
 interface Props {
@@ -26,6 +27,8 @@ const emit = defineEmits<{
   'update:show': [value: boolean]
   'upload': [content: RegulationContent]
 }>()
+
+const { t } = useI18n()
 
 const fileList = ref<UploadFileInfo[]>([])
 const uploading = ref(false)
@@ -67,7 +70,7 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
 
     // 驗證必要欄位
     if (!json.law_metadata || !json.chapters) {
-      message.error('JSON 格式錯誤：缺少必要欄位 law_metadata 或 chapters')
+      message.error(t('regulations.uploadModal.jsonMetadataError'))
       return null
     }
 
@@ -83,7 +86,7 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
       || !lawCode
       || !metadata.source_url
     ) {
-      message.error('JSON 格式錯誤：law_metadata 缺少必要欄位（name, category, status, code, source_url）')
+      message.error(t('regulations.uploadModal.jsonFieldError'))
       return null
     }
 
@@ -97,19 +100,19 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
       metadata.source_url = metadata.source_url.trim()
     }
     if (!metadata.source_url) {
-      message.error('JSON 格式錯誤：source_url 不可為空')
+      message.error(t('regulations.uploadModal.jsonSourceUrlEmpty'))
       return null
     }
 
     // 驗證 chapters 結構
     if (!Array.isArray(json.chapters)) {
-      message.error('JSON 格式錯誤：chapters 必須是陣列')
+      message.error(t('regulations.uploadModal.jsonChaptersArray'))
       return null
     }
 
     for (const chapter of json.chapters) {
       if (!chapter.chapter_num || !chapter.chapter_display || !chapter.articles) {
-        message.error('JSON 格式錯誤：章節結構不正確')
+        message.error(t('regulations.uploadModal.jsonChapterStructure'))
         return null
       }
 
@@ -119,13 +122,13 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
       }
 
       if (!Array.isArray(chapter.articles)) {
-        message.error('JSON 格式錯誤：articles 必須是陣列')
+        message.error(t('regulations.uploadModal.jsonArticlesArray'))
         return null
       }
 
       for (const article of chapter.articles) {
         if (!article.article_num || !article.article_display) {
-          message.error('JSON 格式錯誤：條文結構不正確')
+          message.error(t('regulations.uploadModal.jsonArticleStructure'))
           return null
         }
 
@@ -139,7 +142,7 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
           article.scenarios = []
         }
         else if (!Array.isArray(article.scenarios)) {
-          message.error('JSON 格式錯誤：scenarios 必須是陣列')
+          message.error(t('regulations.uploadModal.jsonScenariosArray'))
           return null
         }
 
@@ -151,10 +154,10 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
   }
   catch (error) {
     if (error instanceof SyntaxError) {
-      message.error('JSON 格式錯誤：無效的 JSON 語法')
+      message.error(t('regulations.uploadModal.jsonSyntaxError'))
     }
     else {
-      message.error('讀取檔案失敗')
+      message.error(t('regulations.uploadModal.readFailed'))
     }
     return null
   }
@@ -163,13 +166,13 @@ async function validateJsonFile(file: File): Promise<RegulationContent | null> {
 // 處理上傳
 async function handleUpload() {
   if (fileList.value.length === 0) {
-    message.warning('請先選擇要上傳的 JSON 檔案')
+    message.warning(t('regulations.uploadModal.selectFile'))
     return
   }
 
   const fileInfo = fileList.value[0]
   if (!fileInfo || !fileInfo.file) {
-    message.warning('沒有有效的檔案可上傳')
+    message.warning(t('regulations.uploadModal.noValidFiles'))
     return
   }
 
@@ -199,7 +202,7 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
     :show="show"
     :mask-closable="!uploading"
     preset="card"
-    title="上傳法規 JSON 文件"
+    :title="$t('regulations.uploadModal.title')"
     style="width: 600px"
     @update:show="handleClose"
   >
@@ -220,13 +223,13 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
               </NIcon>
             </div>
             <NText class="upload-text">
-              點擊或拖曳 JSON 檔案到此區域上傳
+              {{ $t('regulations.uploadModal.dragText') }}
             </NText>
             <NText class="upload-hint" depth="3">
-              僅支援 .json 格式的法規文件
+              {{ $t('regulations.uploadModal.onlyJson') }}
             </NText>
             <NText class="upload-hint" depth="3">
-              一次只能上傳一個法規檔案
+              {{ $t('regulations.uploadModal.singleFile') }}
             </NText>
           </div>
         </NUploadDragger>
@@ -235,15 +238,15 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
       <div class="upload-tips">
         <div class="tip-item">
           <span class="tip-icon">📋</span>
-          <span class="tip-text">JSON 文件必須包含 law_metadata 和 chapters 欄位</span>
+          <span class="tip-text">{{ $t('regulations.uploadModal.tipRequired') }}</span>
         </div>
         <div class="tip-item">
           <span class="tip-icon">✅</span>
-          <span class="tip-text">系統會自動驗證 JSON 格式的正確性</span>
+          <span class="tip-text">{{ $t('regulations.uploadModal.tipValidate') }}</span>
         </div>
         <div class="tip-item">
           <span class="tip-icon">💡</span>
-          <span class="tip-text">如果法規代碼已存在，上傳將會失敗</span>
+          <span class="tip-text">{{ $t('regulations.uploadModal.tipDuplicate') }}</span>
         </div>
       </div>
     </div>
@@ -251,7 +254,7 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
     <template #footer>
       <NSpace justify="end">
         <NButton :disabled="uploading" @click="handleClose">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton
           type="primary"
@@ -259,7 +262,7 @@ function handleRemove(options: { file: UploadFileInfo, fileList: UploadFileInfo[
           :loading="uploading"
           @click="handleUpload"
         >
-          上傳
+          {{ $t('common.actions.upload') }}
         </NButton>
       </NSpace>
     </template>

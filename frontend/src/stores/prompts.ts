@@ -10,7 +10,10 @@ import type {
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import * as promptsApi from '@/api/prompts'
+import i18n from '@/i18n'
 import { message } from '@/utils/message'
+
+const { t } = i18n.global
 
 export const usePromptsStore = defineStore('prompts', () => {
   // ==================== State ====================
@@ -64,7 +67,7 @@ export const usePromptsStore = defineStore('prompts', () => {
     }
     catch (error) {
       console.error('載入提示詞模板失敗:', error)
-      message.error('載入提示詞模板失敗')
+      message.error(t('chat.promptsStore.loadFailed'))
       throw error
     }
     finally {
@@ -81,12 +84,12 @@ export const usePromptsStore = defineStore('prompts', () => {
       const newTemplate = await promptsApi.createPromptTemplate(data)
       templates.value.unshift(newTemplate)
 
-      message.success('建立提示詞模板成功')
+      message.success(t('chat.promptsStore.createSuccess'))
       return newTemplate
     }
     catch (error) {
       console.error('建立提示詞模板失敗:', error)
-      message.error('建立提示詞模板失敗')
+      message.error(t('chat.promptsStore.createFailed'))
       throw error
     }
     finally {
@@ -108,12 +111,12 @@ export const usePromptsStore = defineStore('prompts', () => {
         templates.value[index] = updatedTemplate
       }
 
-      message.success('更新提示詞模板成功')
+      message.success(t('chat.promptsStore.updateSuccess'))
       return updatedTemplate
     }
     catch (error) {
       console.error('更新提示詞模板失敗:', error)
-      message.error('更新提示詞模板失敗')
+      message.error(t('chat.promptsStore.updateFailed'))
       throw error
     }
     finally {
@@ -132,11 +135,11 @@ export const usePromptsStore = defineStore('prompts', () => {
       // 從列表中移除
       templates.value = templates.value.filter(t => t.id !== id)
 
-      message.success('刪除提示詞模板成功')
+      message.success(t('chat.promptsStore.deleteSuccess'))
     }
     catch (error) {
       console.error('刪除提示詞模板失敗:', error)
-      message.error('刪除提示詞模板失敗')
+      message.error(t('chat.promptsStore.deleteFailed'))
       throw error
     }
     finally {
@@ -158,13 +161,13 @@ export const usePromptsStore = defineStore('prompts', () => {
         templates.value[index] = updatedTemplate
       }
 
-      const action = updatedTemplate.is_favorite ? '收藏' : '取消收藏'
-      message.success(`${action}提示詞成功`)
+      const msgKey = updatedTemplate.is_favorite ? 'chat.promptsStore.favoriteSuccess' : 'chat.promptsStore.unfavoriteSuccess'
+      message.success(t(msgKey))
       return updatedTemplate
     }
     catch (error) {
       console.error('切換收藏狀態失敗:', error)
-      message.error('操作失敗')
+      message.error(t('chat.promptsStore.toggleFailed'))
       throw error
     }
     finally {

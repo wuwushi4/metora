@@ -21,6 +21,7 @@ from app.modules.feedback.schemas import (
     ExpertReviewResponse,
     FeedbackListParams,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse
 from app.core.config import get_settings
 from app.db.models.message_feedback import FeedbackType
@@ -141,7 +142,7 @@ async def get_feedbacks_list(
         total=total,
         page=page,
         page_size=page_size,
-        message="查詢成功"
+        message=t('feedback.querySuccess')
     )
 
 
@@ -162,7 +163,7 @@ async def get_feedback_detail(
     detail = await service.get_feedback_detail(feedback_id)
 
     from app.utils.response import success_response
-    return success_response(data=detail, message="查詢成功")
+    return success_response(data=detail, message=t('feedback.querySuccess'))
 
 
 @router.post(
@@ -187,4 +188,4 @@ async def submit_expert_review(
     )
 
     from app.utils.response import success_response
-    return success_response(data=review, message="審查提交成功")
+    return success_response(data=review, message=t('feedback.reviewSuccess'))

@@ -1,6 +1,7 @@
 import type { User } from '@/types/user'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import i18n from '@/i18n'
 
 export const useAuthStore = defineStore('auth', () => {
   // State
@@ -70,7 +71,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
     catch (error: any) {
       console.error('Init auth failed:', error)
-      initError.value = error.message || '初始化失敗'
+      initError.value = error.message || i18n.global.t('auth.initFailed')
       user.value = null
     }
     finally {

@@ -7,8 +7,11 @@ import {
 } from '@vicons/ionicons5'
 import { NButton, NCheckbox, NCheckboxGroup, NIcon, NInput, NModal, NSpace } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getIssueTags, submitFeedback } from '@/api/feedback'
 import { message } from '@/utils/message'
+
+const { t } = useI18n()
 
 /**
  * Props
@@ -61,11 +64,11 @@ onMounted(async () => {
   catch (error) {
     console.error('載入問題標籤失敗:', error)
     availableTags.value = [
-      '回答不準確',
-      '內容太簡短',
-      '格式錯誤',
-      '檢索結果不相關',
-      '語氣不恰當',
+      t('chat.feedback.issues.inaccurate'),
+      t('chat.feedback.issues.tooShort'),
+      t('chat.feedback.issues.formatError'),
+      t('chat.feedback.issues.irrelevant'),
+      t('chat.feedback.issues.inappropriateTone'),
     ]
   }
 })
@@ -136,11 +139,11 @@ async function submitFeedbackData(
     }
 
     // 顯示成功訊息
-    message.success('感謝你的回饋!', { duration: 2000 })
+    message.success(t('chat.feedback.thankYou'), { duration: 2000 })
   }
   catch (error: any) {
     console.error('提交反饋失敗:', error)
-    message.error(error.response?.data?.message || '提交反饋失敗')
+    message.error(error.response?.data?.message || t('chat.feedback.submitFailed'))
   }
   finally {
     isSubmitting.value = false
@@ -162,11 +165,11 @@ function handleCloseModal() {
 async function handleCopy() {
   try {
     await navigator.clipboard.writeText(props.messageContent)
-    message.success('已複製到剪貼簿', { duration: 2000 })
+    message.success(t('chat.feedback.copied'), { duration: 2000 })
   }
   catch (error) {
     console.error('複製失敗:', error)
-    message.error('複製失敗，請手動複製')
+    message.error(t('chat.feedback.copyFailed'))
   }
 }
 </script>
@@ -178,7 +181,7 @@ async function handleCopy() {
       <!-- 複製按鈕 -->
       <button
         class="feedback-btn feedback-btn-copy"
-        title="複製"
+        :title="t('chat.feedback.copy')"
         @click="handleCopy"
       >
         <NIcon :size="18" :component="CopyIcon" />
@@ -188,7 +191,7 @@ async function handleCopy() {
       <button
         class="feedback-btn feedback-btn-like" :class="[{ 'is-active': isLiked }]"
         :disabled="isSubmitting"
-        title="有幫助"
+        :title="t('chat.feedback.helpful')"
         @click="handleLike"
       >
         <NIcon :size="18" :component="ThumbsUpIcon" />
@@ -198,7 +201,7 @@ async function handleCopy() {
       <button
         class="feedback-btn feedback-btn-dislike" :class="[{ 'is-active': isDisliked }]"
         :disabled="isSubmitting"
-        title="沒有幫助"
+        :title="t('chat.feedback.notHelpful')"
         @click="handleDislike"
       >
         <NIcon :size="18" :component="ThumbsDownIcon" />
@@ -209,7 +212,7 @@ async function handleCopy() {
     <NModal
       v-model:show="showNegativeModal"
       preset="card"
-      title="告訴我們更多想法"
+      :title="$t('chat.feedback.moreThoughts')"
       :style="{ maxWidth: '500px' }"
       :closable="true"
       :mask-closable="true"
@@ -219,7 +222,7 @@ async function handleCopy() {
         <!-- 問題標籤 -->
         <div>
           <div class="form-label">
-            問題類型（可多選）
+            {{ $t('chat.feedback.issueType') }}
           </div>
           <NCheckboxGroup v-model:value="selectedIssueTags">
             <NSpace vertical :size="8">
@@ -236,12 +239,12 @@ async function handleCopy() {
         <!-- 評論輸入框 -->
         <div>
           <div class="form-label">
-            補充說明（選填）
+            {{ $t('chat.feedback.additionalComment') }}
           </div>
           <NInput
             v-model:value="comment"
             type="textarea"
-            placeholder="請描述具體問題或建議..."
+            :placeholder="$t('chat.feedback.commentPlaceholder')"
             :rows="4"
             :maxlength="500"
             show-count
@@ -252,7 +255,7 @@ async function handleCopy() {
       <template #footer>
         <div class="modal-footer">
           <NButton @click="handleCloseModal">
-            取消
+            {{ $t('common.actions.cancel') }}
           </NButton>
           <NButton
             type="primary"
@@ -260,7 +263,7 @@ async function handleCopy() {
             :disabled="isSubmitting"
             @click="handleSubmitNegativeFeedback"
           >
-            送出
+            {{ $t('common.actions.submit') }}
           </NButton>
         </div>
       </template>

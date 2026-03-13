@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { CollectionListParams } from '@/types/collection'
 import { NButton, NInput, NSelect, NSpace } from 'naive-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
   search: [params: CollectionListParams]
@@ -15,13 +18,12 @@ const filters = ref({
 })
 
 // 分塊策略選項
-const chunkingStrategyOptions = [
-  { label: '全部', value: '' },
-  { label: 'QA 多重表徵', value: 'qa_multi_representation' },
-  { label: '法規階層式', value: 'regulation_hierarchical' },
-  // { label: '法規情境增強', value: 'regulation_context_enriched' },
-  { label: '法規手動情境', value: 'regulation_manual_scenario' },
-]
+const chunkingStrategyOptions = computed(() => [
+  { label: t('collections.filters.all'), value: '' },
+  { label: t('collections.filters.strategyOptions.qa_multi_representation'), value: 'qa_multi_representation' },
+  { label: t('collections.filters.strategyOptions.regulation_hierarchical'), value: 'regulation_hierarchical' },
+  { label: t('collections.filters.strategyOptions.regulation_manual_scenario'), value: 'regulation_manual_scenario' },
+])
 
 // 處理搜尋
 function handleSearch() {
@@ -51,21 +53,21 @@ function handleReset() {
       <!-- 第一行：Collection 名稱和分塊策略 -->
       <NSpace :size="16" align="center">
         <div class="filter-item">
-          <label class="filter-label">Collection 名稱</label>
+          <label class="filter-label">{{ $t('collections.filters.nameLabel') }}</label>
           <NInput
             v-model:value="filters.name"
-            placeholder="搜尋 Collection 名稱"
+            :placeholder="$t('collections.filters.namePlaceholder')"
             clearable
             @keyup.enter="handleSearch"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">分塊策略</label>
+          <label class="filter-label">{{ $t('collections.filters.strategyLabel') }}</label>
           <NSelect
             v-model:value="filters.chunking_strategy"
             :options="chunkingStrategyOptions"
-            placeholder="選擇分塊策略"
+            :placeholder="$t('collections.filters.strategyPlaceholder')"
             clearable
             style="width: 200px"
           />
@@ -74,10 +76,10 @@ function handleReset() {
         <div class="filter-actions">
           <NSpace :size="12">
             <NButton type="primary" @click="handleSearch">
-              搜尋
+              {{ $t('common.actions.search') }}
             </NButton>
             <NButton @click="handleReset">
-              重置
+              {{ $t('common.actions.reset') }}
             </NButton>
           </NSpace>
         </div>

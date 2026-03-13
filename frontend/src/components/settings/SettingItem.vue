@@ -20,6 +20,7 @@ const emit = defineEmits<{
   update: [key: string, value: any]
 }>()
 
+
 // 本地值
 const localValue = ref(props.setting.value)
 
@@ -53,7 +54,7 @@ function handleReset() {
       <div class="flex items-center gap-2">
         <span>{{ setting.display_name }}</span>
         <NTag v-if="setting.requires_restart" type="warning" size="small">
-          需要重啟
+          {{ $t('settings.requiresRestart') }}
         </NTag>
       </div>
     </template>
@@ -86,10 +87,10 @@ function handleReset() {
       <!-- 操作按鈕 -->
       <div v-if="hasChanges" class="flex gap-2 flex-shrink-0">
         <NButton type="primary" size="small" @click="handleSave">
-          儲存
+          {{ $t('common.actions.save') }}
         </NButton>
         <NButton size="small" @click="handleReset">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
       </div>
     </div>

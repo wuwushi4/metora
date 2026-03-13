@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { FeedbackListParams, FeedbackType } from '@/types/feedback'
 import { NButton, NDatePicker, NSelect, NSpace } from 'naive-ui'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getCollectionList } from '@/api/collections'
 
 const emit = defineEmits<{
   search: [params: FeedbackListParams]
   reset: []
 }>()
+
+const { t } = useI18n()
 
 // 內部表單狀態(與 UI 綁定)
 const filters = ref({
@@ -18,24 +21,24 @@ const filters = ref({
   collection_id: null as number | null,
 })
 
-const feedbackTypeOptions = [
-  { label: '全部', value: '' },
-  { label: '喜歡', value: 'thumbs_up' as FeedbackType },
-  { label: '不喜歡', value: 'thumbs_down' as FeedbackType },
-]
+const feedbackTypeOptions = computed(() => [
+  { label: t('feedbacks.filters.all'), value: '' },
+  { label: t('feedbacks.filters.like'), value: 'thumbs_up' as FeedbackType },
+  { label: t('feedbacks.filters.dislike'), value: 'thumbs_down' as FeedbackType },
+])
 
-const reviewStatusOptions = [
-  { label: '全部', value: '' },
-  { label: '已審查', value: 'true' },
-  { label: '未審查', value: 'false' },
-]
+const reviewStatusOptions = computed(() => [
+  { label: t('feedbacks.filters.all'), value: '' },
+  { label: t('feedbacks.filters.reviewed'), value: 'true' },
+  { label: t('feedbacks.filters.notReviewed'), value: 'false' },
+])
 
-const graphTypeOptions = [
-  { label: '全部', value: '' },
-  { label: '基礎對話', value: 'base_graph' },
-  { label: 'RAG 對話', value: 'rag_graph' },
-  { label: '法規查詢', value: 'regulation_graph' },
-]
+const graphTypeOptions = computed(() => [
+  { label: t('feedbacks.filters.all'), value: '' },
+  { label: t('feedbacks.filters.graphTypes.base_graph'), value: 'base_graph' },
+  { label: t('feedbacks.filters.graphTypes.rag_graph'), value: 'rag_graph' },
+  { label: t('feedbacks.filters.graphTypes.regulation_graph'), value: 'regulation_graph' },
+])
 
 const collectionOptions = ref<Array<{ label: string, value: number }>>([])
 
@@ -104,44 +107,44 @@ function handleReset() {
     <NSpace vertical :size="16">
       <NSpace :size="16" align="center">
         <div class="filter-item">
-          <label class="filter-label">反饋類型</label>
+          <label class="filter-label">{{ $t('feedbacks.filters.feedbackTypeLabel') }}</label>
           <NSelect
             v-model:value="filters.feedback_type"
             :options="feedbackTypeOptions"
-            placeholder="選擇反饋類型"
+            :placeholder="$t('feedbacks.filters.feedbackTypePlaceholder')"
             clearable
             style="width: 160px"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">審查狀態</label>
+          <label class="filter-label">{{ $t('feedbacks.filters.reviewStatusLabel') }}</label>
           <NSelect
             v-model:value="filters.is_reviewed"
             :options="reviewStatusOptions"
-            placeholder="選擇審查狀態"
+            :placeholder="$t('feedbacks.filters.reviewStatusPlaceholder')"
             clearable
             style="width: 160px"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">Agent 類型</label>
+          <label class="filter-label">{{ $t('feedbacks.filters.agentTypeLabel') }}</label>
           <NSelect
             v-model:value="filters.graph_type"
             :options="graphTypeOptions"
-            placeholder="選擇 Agent 類型"
+            :placeholder="$t('feedbacks.filters.agentTypePlaceholder')"
             clearable
             style="width: 160px"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">知識庫</label>
+          <label class="filter-label">{{ $t('feedbacks.filters.collectionLabel') }}</label>
           <NSelect
             v-model:value="filters.collection_id"
             :options="collectionOptions"
-            placeholder="選擇知識庫"
+            :placeholder="$t('feedbacks.filters.collectionPlaceholder')"
             clearable
             filterable
             style="width: 200px"
@@ -149,7 +152,7 @@ function handleReset() {
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">建立時間</label>
+          <label class="filter-label">{{ $t('feedbacks.filters.dateLabel') }}</label>
           <NDatePicker
             v-model:value="filters.dateRange"
             type="daterange"
@@ -161,10 +164,10 @@ function handleReset() {
         <div class="filter-actions">
           <NSpace :size="12">
             <NButton type="primary" @click="handleSearch">
-              搜尋
+              {{ $t('common.actions.search') }}
             </NButton>
             <NButton @click="handleReset">
-              重置
+              {{ $t('common.actions.reset') }}
             </NButton>
           </NSpace>
         </div>

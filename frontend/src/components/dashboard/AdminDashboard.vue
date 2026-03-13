@@ -9,12 +9,14 @@ import {
   ThumbsUpOutline as ThumbsUpIcon,
 } from '@vicons/ionicons5'
 import { NButton, NCard, NGrid, NGridItem, NIcon, NSelect, NSpin } from 'naive-ui'
-import { markRaw, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, markRaw, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getAdminDashboardStats } from '@/api/dashboard'
 import { useAuthStore } from '@/stores/auth'
 import IssueTagList from './IssueTagList.vue'
 import StatCard from './StatCard.vue'
 
+const { t } = useI18n()
 const authStore = useAuthStore()
 const loading = ref(false)
 const stats = ref<AdminDashboardStats | null>(null)
@@ -23,14 +25,14 @@ const selectedTimeRange = ref<TimeRange>('all')
 // 用於取消 API 請求的 AbortController
 const abortController = ref<AbortController | null>(null)
 
-const timeRangeOptions = [
-  { label: '今日', value: 'today' },
-  { label: '本週', value: 'this_week' },
-  { label: '本月', value: 'this_month' },
-  { label: '最近 7 天', value: 'last_7_days' },
-  { label: '最近 30 天', value: 'last_30_days' },
-  { label: '全部', value: 'all' },
-]
+const timeRangeOptions = computed(() => [
+  { label: t('dashboard.admin.timeRange.today'), value: 'today' },
+  { label: t('dashboard.admin.timeRange.thisWeek'), value: 'this_week' },
+  { label: t('dashboard.admin.timeRange.thisMonth'), value: 'this_month' },
+  { label: t('dashboard.admin.timeRange.last7Days'), value: 'last_7_days' },
+  { label: t('dashboard.admin.timeRange.last30Days'), value: 'last_30_days' },
+  { label: t('dashboard.admin.timeRange.all'), value: 'all' },
+])
 
 async function fetchStats() {
   // ⭐ 方案 B: 檢查是否正在登出或未登入
@@ -93,10 +95,10 @@ onBeforeUnmount(() => {
     <div class="dashboard-header">
       <div>
         <h1 class="dashboard-title">
-          系統管理員儀表板
+          {{ $t('dashboard.admin.title') }}
         </h1>
         <p class="dashboard-subtitle">
-          系統運營監控與 AI 品質分析
+          {{ $t('dashboard.admin.subtitle') }}
         </p>
       </div>
       <div class="header-actions">
@@ -110,7 +112,7 @@ onBeforeUnmount(() => {
           <template #icon>
             <NIcon><RefreshIcon /></NIcon>
           </template>
-          刷新
+          {{ $t('dashboard.admin.refresh') }}
         </NButton>
       </div>
     </div>
@@ -120,32 +122,32 @@ onBeforeUnmount(() => {
         <!-- 聊天互動指標 -->
         <div class="section">
           <h2 class="section-title">
-            聊天互動指標
+            {{ $t('dashboard.admin.chatMetrics') }}
           </h2>
           <NGrid cols="1 s:2 m:3" responsive="screen" :x-gap="20" :y-gap="20">
             <NGridItem>
               <StatCard
-                label="總對話數"
+                :label="$t('dashboard.admin.totalSessions')"
                 :value="stats.chat_stats.total_sessions"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ChatIcon)"
                 color="linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="總訊息數"
+                :label="$t('dashboard.admin.totalMessages')"
                 :value="stats.chat_stats.total_messages"
-                suffix="則"
+                :suffix="$t('dashboard.admin.unitMessages')"
                 :icon="markRaw(ChatIcon)"
                 color="linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="日均訊息量"
+                :label="$t('dashboard.admin.dailyAvgMessages')"
                 :value="stats.chat_stats.daily_avg_messages"
-                suffix="則/天"
+                :suffix="$t('dashboard.admin.unitMessagesPerDay')"
                 :icon="markRaw(ChartIcon)"
                 color="linear-gradient(135deg, #10b981 0%, #34d399 100%)"
               />
@@ -165,32 +167,32 @@ onBeforeUnmount(() => {
         <!-- Graph 類型分布 -->
         <div class="section">
           <h2 class="section-title">
-            Agent 類型分布
+            {{ $t('dashboard.admin.agentDistribution') }}
           </h2>
           <NGrid cols="1 s:2 m:3" responsive="screen" :x-gap="20" :y-gap="20">
             <NGridItem>
               <StatCard
-                label="基礎對話"
+                :label="$t('dashboard.admin.baseGraph')"
                 :value="stats.chat_stats.graph_type_distribution.base_graph || 0"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ChatIcon)"
                 color="linear-gradient(135deg, #64748b 0%, #94a3b8 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="RAG 對話"
+                :label="$t('dashboard.admin.ragGraph')"
                 :value="stats.chat_stats.graph_type_distribution.rag_graph || 0"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ChatIcon)"
                 color="linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="法規查詢"
+                :label="$t('dashboard.admin.regulationGraph')"
                 :value="stats.chat_stats.graph_type_distribution.regulation_graph || 0"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ChatIcon)"
                 color="linear-gradient(135deg, #ec4899 0%, #f472b6 100%)"
               />
@@ -201,30 +203,30 @@ onBeforeUnmount(() => {
         <!-- AI 品質反饋指標 -->
         <div class="section">
           <h2 class="section-title">
-            AI 品質反饋指標
+            {{ $t('dashboard.admin.feedbackMetrics') }}
           </h2>
           <NGrid cols="1 s:2 m:5" responsive="screen" :x-gap="20" :y-gap="20">
             <NGridItem>
               <StatCard
-                label="讚數 👍"
+                :label="`${$t('dashboard.admin.thumbsUp')} 👍`"
                 :value="stats.feedback_stats.thumbs_up_count"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ThumbsUpIcon)"
                 color="linear-gradient(135deg, #10b981 0%, #34d399 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="踩數 👎"
+                :label="`${$t('dashboard.admin.thumbsDown')} 👎`"
                 :value="stats.feedback_stats.thumbs_down_count"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(ThumbsDownIcon)"
                 color="linear-gradient(135deg, #ef4444 0%, #f87171 100%)"
               />
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="讚比例"
+                :label="$t('dashboard.admin.thumbsUpRate')"
                 :value="`${stats.feedback_stats.thumbs_up_rate}%`"
                 :icon="markRaw(ChartIcon)"
                 color="linear-gradient(135deg, #14b8a6 0%, #5eead4 100%)"
@@ -232,7 +234,7 @@ onBeforeUnmount(() => {
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="反饋率"
+                :label="$t('dashboard.admin.feedbackRate')"
                 :value="`${stats.feedback_stats.feedback_rate}%`"
                 :icon="markRaw(ChartIcon)"
                 color="linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)"
@@ -240,9 +242,9 @@ onBeforeUnmount(() => {
             </NGridItem>
             <NGridItem>
               <StatCard
-                label="待審查 🔔"
+                :label="`${$t('dashboard.admin.pendingReview')} 🔔`"
                 :value="stats.feedback_stats.pending_review_count"
-                suffix="個"
+                :suffix="$t('dashboard.admin.unitSessions')"
                 :icon="markRaw(BellIcon)"
                 color="linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)"
                 :highlight="true"
@@ -253,7 +255,7 @@ onBeforeUnmount(() => {
 
         <!-- 常見問題標籤 -->
         <div class="section">
-          <NCard title="常見問題標籤 Top 10" :bordered="false" class="dashboard-card">
+          <NCard :title="$t('dashboard.admin.topIssueTags')" :bordered="false" class="dashboard-card">
             <IssueTagList :tags="stats.feedback_stats.top_issue_tags" />
           </NCard>
         </div>

@@ -10,6 +10,9 @@ import { ref } from 'vue'
 import { savePartialMessage as savePartialMessageAPI } from '@/api/chat'
 import { ChatErrorType } from '@/types/error'
 import { createMessageFormData } from '@/utils/fileUtils'
+import i18n from '@/i18n'
+
+const { t } = i18n.global
 
 /**
  * 分類錯誤
@@ -19,8 +22,8 @@ function classifyError(error: unknown, statusCode?: number): ClassifiedError {
   if (error instanceof TypeError && error.message.includes('fetch')) {
     return {
       type: ChatErrorType.NETWORK_ERROR,
-      message: '網路連線失敗',
-      userMessage: '無法連接到伺服器，請檢查網路連線',
+      message: t('chat.sse.networkError'),
+      userMessage: t('errors.connectionFailed'),
       originalError: error,
     }
   }
@@ -31,8 +34,8 @@ function classifyError(error: unknown, statusCode?: number): ClassifiedError {
     if (statusCode === 401 || statusCode === 403) {
       return {
         type: ChatErrorType.AUTHENTICATION_ERROR,
-        message: `認證失敗 (${statusCode})`,
-        userMessage: '登入已過期，請重新登入',
+        message: `${t('chat.sse.authError')} (${statusCode})`,
+        userMessage: t('errors.http.401'),
         originalError: error,
       }
     }
@@ -67,8 +70,8 @@ function classifyError(error: unknown, statusCode?: number): ClassifiedError {
     if (statusCode >= 500) {
       return {
         type: ChatErrorType.SERVER_ERROR,
-        message: `伺服器錯誤 (${statusCode})`,
-        userMessage: '伺服器發生錯誤，請稍後再試',
+        message: `${t('chat.sse.serverError')} (${statusCode})`,
+        userMessage: t('errors.serverError'),
         originalError: error,
       }
     }
@@ -89,7 +92,7 @@ function classifyError(error: unknown, statusCode?: number): ClassifiedError {
   return {
     type: ChatErrorType.UNKNOWN_ERROR,
     message: errorMsg,
-    userMessage: '發生未知錯誤，請稍後再試',
+    userMessage: t('errors.unknownError'),
     originalError: error,
   }
 }

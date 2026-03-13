@@ -24,6 +24,7 @@ from app.modules.auth.schemas import (
     MessageResponse,
 )
 from app.modules.auth.dependencies import get_current_active_user
+from app.i18n import t
 from app.utils.response import ApiResponse, success_response
 from app.utils.exceptions import ValidationError
 from app.core.config import settings
@@ -57,7 +58,7 @@ async def register(
     # 檢查是否允許公開註冊
     if not settings.ALLOW_PUBLIC_REGISTRATION:
         raise ValidationError(
-            "本系統不開放公開註冊。請聯繫管理員建立帳號。"
+            t("auth.publicRegDisabled")
         )
 
     auth_service = AuthService(db)
@@ -66,7 +67,7 @@ async def register(
 
     return success_response(
         data=user_data,
-        message="註冊成功"
+        message=t("auth.registerSuccess")
     )
 
 
@@ -128,7 +129,7 @@ async def login(
 
     return success_response(
         data=login_data,
-        message="登入成功"
+        message=t("auth.loginSuccess")
     )
 
 
@@ -153,7 +154,7 @@ async def refresh_token(
     refresh_token_value = request.cookies.get("refresh_token")
     if not refresh_token_value:
         from app.utils.exceptions import AuthenticationError
-        raise AuthenticationError("未找到 Refresh Token")
+        raise AuthenticationError(t("auth.refreshTokenNotFound"))
     
     auth_service = AuthService(db)
     token_response = await auth_service.refresh_access_token(refresh_token_value)
@@ -178,8 +179,8 @@ async def refresh_token(
     )
 
     return success_response(
-        data=MessageResponse(message="Token 刷新成功"),
-        message="Token 刷新成功"
+        data=MessageResponse(message=t("auth.tokenRefreshSuccess")),
+        message=t("auth.tokenRefreshSuccess")
     )
 
 
@@ -210,8 +211,8 @@ async def logout(
     response.delete_cookie(key="refresh_token")
 
     return success_response(
-        data=MessageResponse(message="登出成功"),
-        message="登出成功"
+        data=MessageResponse(message=t("auth.logoutSuccess")),
+        message=t("auth.logoutSuccess")
     )
 
 
@@ -231,7 +232,7 @@ async def get_current_user_info(
     """
     return success_response(
         data=current_user,
-        message="獲取使用者資訊成功"
+        message=t("auth.getUserSuccess")
     )
 
 
@@ -265,8 +266,8 @@ async def change_password(
     )
 
     return success_response(
-        data=MessageResponse(message="密碼修改成功"),
-        message="密碼修改成功"
+        data=MessageResponse(message=t("auth.changePasswordSuccess")),
+        message=t("auth.changePasswordSuccess")
     )
 
 
@@ -284,6 +285,6 @@ async def verify_token(
     用於前端 initAuth 時驗證 cookie 中的 token
     """
     return success_response(
-        data=MessageResponse(message="Token 有效"),
-        message="Token 有效"
+        data=MessageResponse(message=t("auth.tokenValid")),
+        message=t("auth.tokenValid")
     )

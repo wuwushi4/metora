@@ -3,6 +3,7 @@ import type { FormInst, FormRules } from 'naive-ui'
 import type { LawProcessRequest } from '@/types/dataEngineering'
 import { NButton, NCheckbox, NForm, NFormItem, NInput, NSpace } from 'naive-ui'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   loading?: boolean
@@ -16,6 +17,8 @@ const emit = defineEmits<{
   submit: [data: LawProcessRequest]
 }>()
 
+const { t } = useI18n()
+
 const formRef = ref<FormInst | null>(null)
 
 // 表單資料
@@ -28,15 +31,15 @@ const formData = ref<LawProcessRequest>({
 // 驗證規則
 const rules: FormRules = {
   pcode: [
-    { required: true, message: '請輸入法規編號', trigger: 'blur' },
+    { required: true, message: t('dataEngineering.form.pcodeRequired'), trigger: 'blur' },
     {
       pattern: /^[A-Z]\d{7}$/,
-      message: '格式錯誤，正確格式為：1個大寫英文字母 + 7個數字（例如：M0060027）',
+      message: t('dataEngineering.form.pcodeFormat'),
       trigger: 'blur',
     },
   ],
   law_name: [
-    { max: 200, message: '法規名稱長度不可超過 200 個字元', trigger: 'blur' },
+    { max: 200, message: t('dataEngineering.form.lawNameMaxLength'), trigger: 'blur' },
   ],
 }
 
@@ -81,27 +84,27 @@ defineExpose({
     label-width="auto"
     require-mark-placement="right-hanging"
   >
-    <NFormItem label="法規編號" path="pcode">
+    <NFormItem :label="$t('dataEngineering.form.pcodeLabel')" path="pcode">
       <NInput
         v-model:value="formData.pcode"
-        placeholder="例如：M0060027"
+        :placeholder="$t('dataEngineering.form.pcodePlaceholder')"
         :disabled="loading"
         @keyup.enter="handleSubmit"
       />
     </NFormItem>
 
-    <NFormItem label="法規名稱" path="law_name">
+    <NFormItem :label="$t('dataEngineering.form.lawNameLabel')" path="law_name">
       <NInput
         v-model:value="formData.law_name"
-        placeholder="可選，如未提供則從網頁提取"
+        :placeholder="$t('dataEngineering.form.lawNamePlaceholder')"
         :disabled="loading"
         @keyup.enter="handleSubmit"
       />
     </NFormItem>
 
-    <NFormItem label="強制重新爬取">
+    <NFormItem :label="$t('dataEngineering.form.forceRefresh')">
       <NCheckbox v-model:checked="formData.force_refresh" :disabled="loading">
-        忽略快取，重新從網站爬取資料
+        {{ $t('dataEngineering.form.forceRefreshHint') }}
       </NCheckbox>
     </NFormItem>
 
@@ -113,10 +116,10 @@ defineExpose({
           :disabled="loading"
           @click="handleSubmit"
         >
-          開始處理
+          {{ $t('dataEngineering.form.startProcess') }}
         </NButton>
         <NButton :disabled="loading" @click="reset">
-          重置
+          {{ $t('common.actions.reset') }}
         </NButton>
       </NSpace>
     </NFormItem>

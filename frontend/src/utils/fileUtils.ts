@@ -8,6 +8,9 @@ import type {
   FileValidationError,
   FileValidationRules,
 } from '@/types/upload'
+import i18n from '@/i18n'
+
+const { t } = i18n.global
 
 /**
  * 預設檔案驗證規則
@@ -73,7 +76,7 @@ export function validateFile(
   if (file.size > rules.maxSize) {
     return {
       type: 'FILE_TOO_LARGE',
-      message: `檔案 "${file.name}" 超過大小限制 (${formatFileSize(rules.maxSize)})`,
+      message: t('fileUtils.fileTooLarge', { name: file.name, size: formatFileSize(rules.maxSize) }),
       filename: file.name,
     }
   }
@@ -82,7 +85,7 @@ export function validateFile(
   if (!rules.allowedMimeTypes.includes(file.type)) {
     return {
       type: 'INVALID_FORMAT',
-      message: `檔案 "${file.name}" 格式不支援 (${file.type})`,
+      message: t('fileUtils.invalidFormat', { name: file.name, type: file.type }),
       filename: file.name,
     }
   }
@@ -92,7 +95,7 @@ export function validateFile(
   if (!rules.allowedFormats.includes(ext)) {
     return {
       type: 'INVALID_FORMAT',
-      message: `檔案 "${file.name}" 副檔名不支援 (.${ext})`,
+      message: t('fileUtils.invalidExtension', { name: file.name, ext }),
       filename: file.name,
     }
   }
@@ -111,7 +114,7 @@ export function validateFiles(
   if (files.length > rules.maxFiles) {
     return {
       type: 'TOO_MANY_FILES',
-      message: `最多只能上傳 ${rules.maxFiles} 個檔案`,
+      message: t('fileUtils.tooManyFiles', { max: rules.maxFiles }),
       filename: '',
     }
   }
@@ -262,7 +265,7 @@ export function compressImage(
 
         const ctx = canvas.getContext('2d')
         if (!ctx) {
-          reject(new Error('無法取得 Canvas context'))
+          reject(new Error('Canvas context unavailable'))
           return
         }
 
@@ -273,7 +276,7 @@ export function compressImage(
         canvas.toBlob(
           (blob) => {
             if (!blob) {
-              reject(new Error('圖片壓縮失敗'))
+              reject(new Error(t('fileUtils.compressFailed')))
               return
             }
 
@@ -291,14 +294,14 @@ export function compressImage(
       }
 
       img.onerror = () => {
-        reject(new Error('圖片載入失敗'))
+        reject(new Error(t('fileUtils.imageLoadFailed')))
       }
 
       img.src = e.target?.result as string
     }
 
     reader.onerror = () => {
-      reject(new Error('檔案讀取失敗'))
+      reject(new Error(t('fileUtils.fileReadFailed')))
     }
 
     reader.readAsDataURL(file)

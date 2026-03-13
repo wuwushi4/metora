@@ -40,10 +40,13 @@ from app.middleware.user_context import user_context_middleware
 from app.middleware.logging import logging_middleware
 from app.middleware.rate_limit import rate_limit_middleware
 
+from app.i18n.middleware import locale_middleware
+
 app.middleware("http")(rate_limit_middleware)  # 1. 最外層：速率限制
 app.middleware("http")(logging_middleware)     # 2. 記錄日誌（需要使用 user_context）
 app.middleware("http")(user_context_middleware)  # 3. 提取使用者上下文（供日誌使用）
-app.middleware("http")(request_id_middleware)  # 4. 最內層：生成 request_id（必須最先設置）
+app.middleware("http")(locale_middleware)      # 4. 解析 Accept-Language 設定語系
+app.middleware("http")(request_id_middleware)  # 5. 最內層：生成 request_id（必須最先設置）
 
 
 # ==========================================

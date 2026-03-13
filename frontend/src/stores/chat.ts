@@ -8,8 +8,11 @@ import type { FilePreview } from '@/types/upload'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import * as chatApi from '@/api/chat'
+import i18n from '@/i18n'
 import { revokeFilePreview } from '@/utils/fileUtils'
 import { message } from '@/utils/message'
+
+const { t } = i18n.global
 
 export const useChatStore = defineStore('chat', () => {
   // ==================== State ====================
@@ -58,7 +61,7 @@ export const useChatStore = defineStore('chat', () => {
     }
     catch (error) {
       console.error('載入 Graphs 失敗:', error)
-      message.error('載入 Graph 列表失敗')
+      message.error(t('chat.store.loadGraphsFailed'))
     }
   }
 
@@ -77,7 +80,7 @@ export const useChatStore = defineStore('chat', () => {
     }
     catch (error) {
       console.error('載入 Sessions 失敗:', error)
-      message.error('載入會話列表失敗')
+      message.error(t('chat.store.loadSessionsFailed'))
       throw error
     }
     finally {
@@ -96,12 +99,12 @@ export const useChatStore = defineStore('chat', () => {
       currentSession.value = newSession
       messages.value = []
 
-      message.success('建立會話成功')
+      message.success(t('chat.store.createSuccess'))
       return newSession
     }
     catch (error) {
       console.error('建立 Session 失敗:', error)
-      message.error('建立會話失敗')
+      message.error(t('chat.store.createFailed'))
       throw error
     }
     finally {
@@ -122,7 +125,7 @@ export const useChatStore = defineStore('chat', () => {
     }
     catch (error) {
       console.error('切換 Session 失敗:', error)
-      message.error('切換會話失敗')
+      message.error(t('chat.store.switchFailed'))
       throw error
     }
   }
@@ -141,7 +144,7 @@ export const useChatStore = defineStore('chat', () => {
     }
     catch (error) {
       console.error('載入訊息失敗:', error)
-      message.error('載入訊息失敗')
+      message.error(t('chat.store.loadMessagesFailed'))
     }
     finally {
       loadingStates.value.messages = false
@@ -165,11 +168,11 @@ export const useChatStore = defineStore('chat', () => {
         currentSession.value = updated
       }
 
-      message.success('重命名成功')
+      message.success(t('chat.store.renameSuccess'))
     }
     catch (error) {
       console.error('重命名失敗:', error)
-      message.error('重命名失敗')
+      message.error(t('chat.store.renameFailed'))
       throw error
     }
   }
@@ -189,11 +192,11 @@ export const useChatStore = defineStore('chat', () => {
         messages.value = []
       }
 
-      message.success('刪除成功')
+      message.success(t('chat.store.deleteSuccess'))
     }
     catch (error) {
       console.error('刪除 Session 失敗:', error)
-      message.error('刪除會話失敗')
+      message.error(t('chat.store.deleteFailed'))
       throw error
     }
   }

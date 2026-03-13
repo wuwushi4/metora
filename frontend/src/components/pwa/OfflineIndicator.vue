@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { CloudOfflineOutline } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   show: boolean
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
   <Transition name="slide-down">
     <div v-if="show" class="offline-indicator">
       <NIcon :size="16" :component="CloudOfflineOutline" />
-      <span>目前處於離線狀態</span>
+      <span>{{ t('pwa.offline.message') }}</span>
     </div>
   </Transition>
 </template>

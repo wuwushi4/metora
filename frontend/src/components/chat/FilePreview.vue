@@ -2,7 +2,10 @@
 import type { FilePreview } from '@/types/upload'
 import { CloseCircleOutline, DocumentTextOutline, GridOutline } from '@vicons/ionicons5'
 import { NButton, NCard, NIcon, NImage, NSpin } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 import { formatFileSize } from '@/utils/fileUtils'
+
+const { t } = useI18n()
 
 interface Props {
   file: FilePreview
@@ -22,13 +25,13 @@ function handleRemove() {
 function getStatusText() {
   switch (props.file.status) {
     case 'pending':
-      return '等待上傳'
+      return t('chat.filePreview.pending')
     case 'uploading':
-      return '上傳中...'
+      return t('chat.filePreview.uploading')
     case 'success':
-      return '上傳成功'
+      return t('chat.filePreview.success')
     case 'error':
-      return props.file.error || '上傳失敗'
+      return props.file.error || t('chat.filePreview.failed')
     default:
       return ''
   }

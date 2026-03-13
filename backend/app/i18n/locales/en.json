@@ -1,0 +1,109 @@
+{
+  "auth": {
+    "registerSuccess": "Registration successful",
+    "loginSuccess": "Login successful",
+    "logoutSuccess": "Logout successful",
+    "getUserSuccess": "User info retrieved successfully",
+    "changePasswordSuccess": "Password changed successfully",
+    "tokenRefreshSuccess": "Token refreshed successfully",
+    "tokenValid": "Token is valid",
+    "refreshTokenNotFound": "Refresh token not found",
+    "publicRegDisabled": "Public registration is disabled. Please contact an administrator to create an account."
+  },
+  "collections": {
+    "createSuccess": "Collection created successfully",
+    "updateSuccess": "Collection updated successfully",
+    "deleteSuccess": "Collection deleted successfully"
+  },
+  "datasets": {
+    "uploadSuccess": "File uploaded successfully",
+    "uploadProcessing": "File uploaded successfully, vectorization in progress...",
+    "deleteSuccess": "Dataset deleted successfully"
+  },
+  "users": {
+    "createSuccess": "User created successfully",
+    "updateSuccess": "User updated successfully",
+    "deleteSuccess": "User deleted successfully",
+    "roleAssignSuccess": "Roles assigned successfully",
+    "cannotUpdateOthers": "No permission to update other users' data",
+    "adminOnlyActiveStatus": "Only administrators can change account active status",
+    "cannotDeleteSelf": "Cannot delete your own account"
+  },
+  "prompts": {
+    "listSuccess": "Prompt list retrieved successfully",
+    "createSuccess": "Prompt created successfully",
+    "getSuccess": "Prompt retrieved successfully",
+    "updateSuccess": "Prompt updated successfully",
+    "deleteSuccess": "Prompt deleted successfully",
+    "deleteMessage": "Deleted successfully",
+    "favoriteSuccess": "Prompt {action} successfully",
+    "favorite": "favorited",
+    "unfavorite": "unfavorited"
+  },
+  "regulations": {
+    "uploadSuccess": "Regulation uploaded successfully",
+    "updateSuccess": "Regulation updated successfully",
+    "deleteSuccess": "Regulation deleted successfully"
+  },
+  "feedback": {
+    "querySuccess": "Query successful",
+    "reviewSuccess": "Review submitted successfully"
+  },
+  "settings": {
+    "updateSuccess": "Settings updated successfully"
+  },
+  "dashboard": {
+    "statsSuccess": "Statistics retrieved successfully",
+    "userInfoSuccess": "User info retrieved successfully"
+  },
+  "dataEngineering": {
+    "processSuccess": "Regulation processing successful",
+    "processSuccessCached": "Regulation processing successful (from cache)"
+  },
+  "retrieval": {
+    "searchComplete": "Retrieval complete",
+    "testComplete": "Test retrieval complete",
+    "statsSuccess": "BM25 index statistics retrieved successfully",
+    "invalidateSuccess": "BM25 index for Collection {collection_id} has been invalidated"
+  },
+  "chat": {
+    "fileFormatDisabled": "File upload is not enabled",
+    "tooManyFiles": "Maximum {max} files per message",
+    "promptIdInvalid": "Invalid prompt template ID format",
+    "fileProcessFailed": "File processing failed:\n{errors}",
+    "serverError": "Server error, please try again later",
+    "attachmentNotFound": "Attachment file not found"
+  },
+  "errors": {
+    "authFailed": "Authentication failed",
+    "permissionDenied": "Permission denied",
+    "notFound": "{resource} not found",
+    "notFoundWithId": "{resource} (ID: {identifier}) not found",
+    "dbFailed": "Database operation failed",
+    "duplicate": "{resource} {field} '{value}' already exists",
+    "invalidToken": "Invalid token",
+    "tokenExpired": "Token has expired",
+    "accountDisabled": "Account has been disabled",
+    "rateLimited": "Too many requests, please try again later",
+    "validationFailed": "Request validation failed",
+    "integrityViolation": "Database constraint violation",
+    "duplicateResource": "Duplicate data, resource already exists",
+    "foreignKeyViolation": "Referential integrity violation, related resource does not exist",
+    "nullConstraint": "Required field is missing",
+    "dbError": "Database operation failed",
+    "serverError": "Internal server error"
+  },
+  "common": {
+    "fetchSuccess": "Retrieved successfully"
+  },
+  "resources": {
+    "promptTemplate": "Prompt template",
+    "collection": "Collection",
+    "dataset": "Dataset",
+    "user": "User",
+    "regulation": "Regulation",
+    "setting": "Setting",
+    "message": "Message",
+    "attachment": "Attachment"
+  }
+}

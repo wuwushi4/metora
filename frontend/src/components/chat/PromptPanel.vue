@@ -119,7 +119,7 @@ function isSelected(templateId: string): boolean {
     <div class="panel-header">
       <div class="header-title">
         <span class="title-icon">💡</span>
-        <span class="title-text">提示詞模板</span>
+        <span class="title-text">{{ $t('chat.prompts.title') }}</span>
       </div>
       <NButton
         size="small"
@@ -130,7 +130,7 @@ function isSelected(templateId: string): boolean {
         <template #icon>
           <NIcon><AddIcon /></NIcon>
         </template>
-        新增
+        {{ $t('common.actions.add') }}
       </NButton>
     </div>
 
@@ -160,7 +160,7 @@ function isSelected(templateId: string): boolean {
                     :bordered="false"
                     class="default-tag"
                   >
-                    收藏
+                    {{ $t('chat.prompts.favorite') }}
                   </NTag>
                 </div>
                 <div class="card-actions" @click.stop>
@@ -181,7 +181,7 @@ function isSelected(templateId: string): boolean {
                         </template>
                       </NButton>
                     </template>
-                    {{ template.is_favorite ? '取消收藏' : '收藏' }}
+                    {{ template.is_favorite ? $t('chat.prompts.unfavorite') : $t('chat.prompts.favorite') }}
                   </NTooltip>
 
                   <!-- 編輯按鈕 -->
@@ -198,13 +198,13 @@ function isSelected(templateId: string): boolean {
                         </template>
                       </NButton>
                     </template>
-                    編輯
+                    {{ $t('common.actions.edit') }}
                   </NTooltip>
 
                   <!-- 刪除按鈕 -->
                   <NPopconfirm
-                    positive-text="確認"
-                    negative-text="取消"
+                    :positive-text="$t('common.actions.confirm')"
+                    :negative-text="$t('common.actions.cancel')"
                     @positive-click="handleDelete(template)"
                   >
                     <template #trigger>
@@ -220,10 +220,10 @@ function isSelected(templateId: string): boolean {
                             </template>
                           </NButton>
                         </template>
-                        刪除
+                        {{ $t('common.actions.delete') }}
                       </NTooltip>
                     </template>
-                    確定要刪除此提示詞模板嗎？
+                    {{ $t('chat.prompts.deleteConfirm') }}
                   </NPopconfirm>
                 </div>
               </div>
@@ -251,7 +251,7 @@ function isSelected(templateId: string): boolean {
         <!-- 空狀態 -->
         <div v-else class="empty-state">
           <NEmpty
-            description="尚未建立提示詞模板"
+            :description="$t('chat.prompts.empty')"
             size="large"
           >
             <template #extra>
@@ -262,7 +262,7 @@ function isSelected(templateId: string): boolean {
                 <template #icon>
                   <NIcon><AddIcon /></NIcon>
                 </template>
-                建立第一個模板
+                {{ $t('chat.prompts.createFirst') }}
               </NButton>
             </template>
           </NEmpty>

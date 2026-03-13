@@ -3,6 +3,9 @@ import type { ChatMessage } from '@/types/chat'
 import type { Feedback } from '@/types/feedback'
 import { NEmpty, NSpin } from 'naive-ui'
 import { onMounted, onUnmounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 import { useMessageScroll } from '@/composables/useMessageScroll'
 import { useChatStore } from '@/stores/chat'
 import MessageItem from './MessageItem.vue'
@@ -97,7 +100,7 @@ function handleFeedbackChanged(messageId: string, feedback: Feedback) {
     <div v-if="loading && messages.length === 0" class="loading-container">
       <NSpin size="medium">
         <template #description>
-          載入訊息中...
+          {{ t('chat.messages.loading') }}
         </template>
       </NSpin>
     </div>
@@ -116,14 +119,14 @@ function handleFeedbackChanged(messageId: string, feedback: Feedback) {
       <!-- 串流中的載入提示 -->
       <div v-if="streaming" class="streaming-indicator">
         <NSpin size="small" />
-        <span class="streaming-text">AI 正在思考...</span>
+        <span class="streaming-text">{{ t('chat.messages.thinking') }}</span>
       </div>
     </div>
 
     <!-- 空狀態 -->
     <div v-else class="empty-container">
       <NEmpty
-        description="尚無訊息"
+        :description="t('chat.messages.empty')"
         size="large"
       />
     </div>
@@ -148,7 +151,7 @@ function handleFeedbackChanged(messageId: string, feedback: Feedback) {
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
-        <span>回到底部</span>
+        <span>{{ t('chat.messages.scrollToBottom') }}</span>
       </button>
     </Transition>
   </div>

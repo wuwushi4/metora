@@ -5,6 +5,8 @@
 """
 from typing import Any, Optional, Dict
 
+from app.i18n import t
+
 
 class AppException(Exception):
     """
@@ -50,7 +52,8 @@ class AuthenticationError(AppException):
     當使用者認證失敗時拋出（如：無效的 token、密碼錯誤等）
     """
 
-    def __init__(self, message: str = "認證失敗", details: Optional[Dict[str, Any]] = None):
+    def __init__(self, message: str = "", details: Optional[Dict[str, Any]] = None):
+        message = message or t("errors.authFailed")
         super().__init__(message=message, code="AUTH_ERROR", details=details)
 
 
@@ -61,7 +64,8 @@ class AuthorizationError(AppException):
     當使用者沒有足夠權限執行操作時拋出
     """
 
-    def __init__(self, message: str = "權限不足", details: Optional[Dict[str, Any]] = None):
+    def __init__(self, message: str = "", details: Optional[Dict[str, Any]] = None):
+        message = message or t("errors.permissionDenied")
         super().__init__(message=message, code="PERMISSION_DENIED", details=details)
 
 
@@ -79,9 +83,9 @@ class ResourceNotFoundError(AppException):
         details: Optional[Dict[str, Any]] = None
     ):
         if identifier:
-            message = f"{resource} (ID: {identifier}) 不存在"
+            message = t("errors.notFoundWithId", resource=resource, identifier=identifier)
         else:
-            message = f"{resource} 不存在"
+            message = t("errors.notFound", resource=resource)
 
         super().__init__(
             message=message,
@@ -112,9 +116,10 @@ class DatabaseError(AppException):
 
     def __init__(
         self,
-        message: str = "資料庫操作失敗",
+        message: str = "",
         details: Optional[Dict[str, Any]] = None
     ):
+        message = message or t("errors.dbFailed")
         super().__init__(message=message, code="DATABASE_ERROR", details=details)
 
 
@@ -132,7 +137,7 @@ class DuplicateResourceError(AppException):
         value: str,
         details: Optional[Dict[str, Any]] = None
     ):
-        message = f"{resource} 的 {field} '{value}' 已存在"
+        message = t("errors.duplicate", resource=resource, field=field, value=value)
         super().__init__(
             message=message,
             code="DUPLICATE_RESOURCE",
@@ -147,7 +152,8 @@ class InvalidTokenError(AuthenticationError):
     當 JWT token 無效、過期或格式錯誤時拋出
     """
 
-    def __init__(self, message: str = "無效的 Token", details: Optional[Dict[str, Any]] = None):
+    def __init__(self, message: str = "", details: Optional[Dict[str, Any]] = None):
+        message = message or t("errors.invalidToken")
         super().__init__(message=message, details=details)
         self.code = "INVALID_TOKEN"
 
@@ -159,7 +165,8 @@ class TokenExpiredError(AuthenticationError):
     當 JWT token 已過期時拋出
     """
 
-    def __init__(self, message: str = "Token 已過期", details: Optional[Dict[str, Any]] = None):
+    def __init__(self, message: str = "", details: Optional[Dict[str, Any]] = None):
+        message = message or t("errors.tokenExpired")
         super().__init__(message=message, details=details)
         self.code = "TOKEN_EXPIRED"
 
@@ -171,7 +178,8 @@ class InactiveUserError(AuthenticationError):
     當嘗試使用已停用的帳號時拋出
     """
 
-    def __init__(self, message: str = "帳號已被停用", details: Optional[Dict[str, Any]] = None):
+    def __init__(self, message: str = "", details: Optional[Dict[str, Any]] = None):
+        message = message or t("errors.accountDisabled")
         super().__init__(message=message, details=details)
         self.code = "INACTIVE_USER"
 
@@ -185,19 +193,20 @@ class RateLimitExceededError(AppException):
     
     def __init__(
         self,
-        message: str = "請求次數過多，請稍後再試",
+        message: str = "",
         retry_after: int = 60,
         limit: int = 0,
         window: int = 60,
         details: Optional[Dict[str, Any]] = None
     ):
+        message = message or t("errors.rateLimited")
         error_details = details or {}
         error_details.update({
             "retry_after": retry_after,
             "limit": limit,
             "window": window
         })
-        
+
         super().__init__(
             message=message,
             code="RATE_LIMIT_EXCEEDED",

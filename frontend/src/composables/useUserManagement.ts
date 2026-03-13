@@ -3,6 +3,9 @@ import type { UserListParams, UserResponse } from '@/types/user'
 import { ref } from 'vue'
 import { getUserList } from '@/api/users'
 import { message } from '@/utils/message'
+import i18n from '@/i18n'
+
+const { t } = i18n.global
 
 export function useUserManagement() {
   const loading = ref(false)
@@ -28,7 +31,7 @@ export function useUserManagement() {
       pagination.value = response.pagination
     }
     catch (error: any) {
-      message.error(error.message || '載入使用者列表失敗')
+      message.error(error.message || t('users.loadFailed'))
       throw error
     }
     finally {

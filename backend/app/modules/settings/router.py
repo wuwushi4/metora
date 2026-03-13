@@ -17,6 +17,7 @@ from app.modules.settings.schemas import (
     SettingsGroupResponse,
     SettingUpdate,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, success_response
 
 router = APIRouter(prefix="/admin/settings", tags=["系統設定"])
@@ -79,5 +80,5 @@ async def update_setting(
 
     return success_response(
         data=updated_setting,
-        message="設定更新成功"
+        message=t('settings.updateSuccess')
     )

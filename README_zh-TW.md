@@ -137,7 +137,7 @@ docker build -t metora-sandbox:latest .
 ## 系統架構
 
 <p align="center">
-  <img src="docs/images/architecture-overview.png" alt="系統架構圖" width="800">
+  <img src="docs/images/zh-TW/architecture-overview.png" alt="系統架構圖" width="800">
 </p>
 
 ### 技術棧

@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { dateZhTW, NConfigProvider, NSpin, zhTW } from 'naive-ui'
+import { NConfigProvider, NSpin } from 'naive-ui'
 import { computed } from 'vue'
 import OfflineIndicator from '@/components/pwa/OfflineIndicator.vue'
 import PwaInstallPrompt from '@/components/pwa/PwaInstallPrompt.vue'
 import PwaUpdatePrompt from '@/components/pwa/PwaUpdatePrompt.vue'
+import { useLocale } from '@/composables/useLocale'
 import { usePwa } from '@/composables/usePwa'
 import { themeOverrides } from '@/config/naive-theme'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
+const { naiveLocale, naiveDateLocale } = useLocale()
 const {
   needRefresh,
   applyUpdate,
@@ -39,8 +41,8 @@ function retryInit() {
 
 <template>
   <NConfigProvider
-    :locale="zhTW"
-    :date-locale="dateZhTW"
+    :locale="naiveLocale"
+    :date-locale="naiveDateLocale"
     :theme-overrides="themeOverrides"
   >
     <div id="app">
@@ -55,7 +57,7 @@ function retryInit() {
           </h2>
           <NSpin size="medium" stroke="white" />
           <p class="loading-text">
-            正在載入應用...
+            {{ $t('app.loadingApp') }}
           </p>
         </div>
       </div>
@@ -67,13 +69,13 @@ function retryInit() {
             ⚠️
           </div>
           <h2 class="error-title">
-            初始化失敗
+            {{ $t('app.initError') }}
           </h2>
           <p class="error-message">
             {{ authStore.initError }}
           </p>
           <button class="retry-button" @click="retryInit">
-            重試
+            {{ $t('app.retry') }}
           </button>
         </div>
       </div>

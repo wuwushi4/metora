@@ -2,6 +2,7 @@
 import type { ProcessingStatus } from '@/types/dataEngineering'
 import { NAlert, NSpin } from 'naive-ui'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   status: ProcessingStatus
@@ -17,19 +18,21 @@ const props = withDefaults(defineProps<Props>(), {
   fromCache: false,
 })
 
+const { t } = useI18n()
+
 // 狀態標題
 const statusTitle = computed(() => {
   switch (props.status) {
     case 'idle':
-      return '等待處理'
+      return t('dataEngineering.status.idle')
     case 'processing':
-      return '處理中...'
+      return t('dataEngineering.status.processing')
     case 'success':
-      return '處理成功'
+      return t('dataEngineering.status.success')
     case 'error':
-      return '處理失敗'
+      return t('dataEngineering.status.error')
     default:
-      return '未知狀態'
+      return t('dataEngineering.status.unknown')
   }
 })
 
@@ -50,19 +53,19 @@ const statusType = computed(() => {
 // 狀態訊息
 const statusMessage = computed(() => {
   if (props.status === 'processing') {
-    return '正在爬取法規資料並轉換為 Markdown 和 JSON 格式...'
+    return t('dataEngineering.status.processingMessage')
   }
   if (props.status === 'success') {
-    const cacheInfo = props.fromCache ? '（來自快取）' : ''
+    const cacheInfo = props.fromCache ? t('dataEngineering.status.fromCache') : ''
     const timeInfo = props.processingTime
-      ? `，耗時 ${props.processingTime.toFixed(2)} 秒`
+      ? t('dataEngineering.status.timeTaken', { time: props.processingTime.toFixed(2) })
       : ''
-    return `法規資料處理完成${cacheInfo}${timeInfo}，請在下方下載檔案。`
+    return t('dataEngineering.status.successMessage', { cacheInfo, timeInfo })
   }
   if (props.status === 'error') {
-    return props.error || '發生未知錯誤，請稍後再試。'
+    return props.error || t('dataEngineering.status.errorMessage')
   }
-  return '請在上方輸入法規編號開始處理。'
+  return t('dataEngineering.status.idleMessage')
 })
 </script>
 

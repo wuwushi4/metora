@@ -18,6 +18,9 @@ import RegulationFilters from '@/components/regulations/RegulationFilters.vue'
 import RegulationTable from '@/components/regulations/RegulationTable.vue'
 import RegulationUploadModal from '@/components/regulations/RegulationUploadModal.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 狀態
 const loading = ref(false)
@@ -52,7 +55,7 @@ async function loadRegulations() {
   }
   catch (error: any) {
     console.error('載入法規列表失敗:', error)
-    message.error(error.message || '載入法規列表失敗')
+    message.error(error.message || t('regulations.loadFailed'))
   }
   finally {
     loading.value = false
@@ -95,13 +98,13 @@ function handleUploadRegulation() {
 async function handleUploadSubmit(content: RegulationContent) {
   try {
     await uploadRegulation({ content })
-    message.success('法規上傳成功')
+    message.success(t('regulations.uploadSuccess'))
     showUploadModal.value = false
     loadRegulations()
   }
   catch (error: any) {
     console.error('上傳法規失敗:', error)
-    message.error(error.message || '上傳法規失敗')
+    message.error(error.message || t('regulations.uploadFailed'))
   }
 }
 
@@ -109,18 +112,18 @@ async function handleUploadSubmit(content: RegulationContent) {
 async function handleDeleteRegulation(regulationId: number) {
   try {
     await deleteRegulation(regulationId)
-    message.success('法規刪除成功')
+    message.success(t('regulations.deleteSuccess'))
     loadRegulations()
   }
   catch (error: any) {
     console.error('刪除法規失敗:', error)
-    message.error(error.message || '刪除法規失敗')
+    message.error(error.message || t('regulations.deleteFailed'))
   }
 }
 
 // 處理導出法規
 async function handleExportRegulation(regulation: Regulation) {
-  const loadingMessage = message.loading('正在導出法規...', { duration: 0 })
+  const loadingMessage = message.loading(t('regulations.exportLoading'), { duration: 0 })
 
   try {
     const blob = await exportRegulation(regulation.id)
@@ -140,12 +143,12 @@ async function handleExportRegulation(regulation: Regulation) {
     URL.revokeObjectURL(url)
 
     loadingMessage.destroy()
-    message.success('法規導出成功')
+    message.success(t('regulations.exportSuccess'))
   }
   catch (error: any) {
     console.error('導出法規失敗:', error)
     loadingMessage.destroy()
-    message.error(error.message || '導出法規失敗')
+    message.error(error.message || t('regulations.exportFailed'))
   }
 }
 
@@ -161,10 +164,10 @@ onMounted(() => {
     <div class="page-header">
       <div class="header-content">
         <h1 class="page-title">
-          法規管理
+          {{ t('regulations.title') }}
         </h1>
         <p class="page-description">
-          管理法規文件、章節條文與應用情境
+          {{ t('regulations.description') }}
         </p>
       </div>
       <div class="header-actions">
@@ -174,7 +177,7 @@ onMounted(() => {
               <UploadIcon />
             </NIcon>
           </template>
-          上傳法規
+          {{ t('regulations.upload') }}
         </NButton>
       </div>
     </div>

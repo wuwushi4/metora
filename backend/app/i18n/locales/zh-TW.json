@@ -1,0 +1,109 @@
+{
+  "auth": {
+    "registerSuccess": "註冊成功",
+    "loginSuccess": "登入成功",
+    "logoutSuccess": "登出成功",
+    "getUserSuccess": "獲取使用者資訊成功",
+    "changePasswordSuccess": "密碼修改成功",
+    "tokenRefreshSuccess": "Token 刷新成功",
+    "tokenValid": "Token 有效",
+    "refreshTokenNotFound": "未找到 Refresh Token",
+    "publicRegDisabled": "本系統不開放公開註冊。請聯繫管理員建立帳號。"
+  },
+  "collections": {
+    "createSuccess": "集合建立成功",
+    "updateSuccess": "集合資料更新成功",
+    "deleteSuccess": "集合刪除成功"
+  },
+  "datasets": {
+    "uploadSuccess": "檔案上傳成功",
+    "uploadProcessing": "檔案上傳成功，向量化處理中...",
+    "deleteSuccess": "資料集刪除成功"
+  },
+  "users": {
+    "createSuccess": "使用者建立成功",
+    "updateSuccess": "使用者資料更新成功",
+    "deleteSuccess": "使用者刪除成功",
+    "roleAssignSuccess": "角色分配成功",
+    "cannotUpdateOthers": "無權限更新其他使用者的資料",
+    "adminOnlyActiveStatus": "只有管理員可以修改帳號啟用狀態",
+    "cannotDeleteSelf": "無法刪除自己的帳號"
+  },
+  "prompts": {
+    "listSuccess": "獲取提示詞列表成功",
+    "createSuccess": "建立提示詞成功",
+    "getSuccess": "獲取提示詞成功",
+    "updateSuccess": "更新提示詞成功",
+    "deleteSuccess": "刪除提示詞成功",
+    "deleteMessage": "刪除成功",
+    "favoriteSuccess": "{action}提示詞成功",
+    "favorite": "收藏",
+    "unfavorite": "取消收藏"
+  },
+  "regulations": {
+    "uploadSuccess": "法規上傳成功",
+    "updateSuccess": "法規更新成功",
+    "deleteSuccess": "法規刪除成功"
+  },
+  "feedback": {
+    "querySuccess": "查詢成功",
+    "reviewSuccess": "審查提交成功"
+  },
+  "settings": {
+    "updateSuccess": "設定更新成功"
+  },
+  "dashboard": {
+    "statsSuccess": "統計資料獲取成功",
+    "userInfoSuccess": "使用者資訊獲取成功"
+  },
+  "dataEngineering": {
+    "processSuccess": "法規處理成功",
+    "processSuccessCached": "法規處理成功（來自快取）"
+  },
+  "retrieval": {
+    "searchComplete": "檢索完成",
+    "testComplete": "測試檢索完成",
+    "statsSuccess": "取得 BM25 索引統計成功",
+    "invalidateSuccess": "已使 Collection {collection_id} 的 BM25 索引失效"
+  },
+  "chat": {
+    "fileFormatDisabled": "檔案上傳功能未啟用",
+    "tooManyFiles": "最多上傳 {max} 個檔案",
+    "promptIdInvalid": "提示詞模板 ID 格式錯誤",
+    "fileProcessFailed": "檔案處理失敗：\n{errors}",
+    "serverError": "伺服器錯誤,請稍後再試",
+    "attachmentNotFound": "附件檔案不存在"
+  },
+  "errors": {
+    "authFailed": "認證失敗",
+    "permissionDenied": "權限不足",
+    "notFound": "{resource} 不存在",
+    "notFoundWithId": "{resource} (ID: {identifier}) 不存在",
+    "dbFailed": "資料庫操作失敗",
+    "duplicate": "{resource} 的 {field} '{value}' 已存在",
+    "invalidToken": "無效的 Token",
+    "tokenExpired": "Token 已過期",
+    "accountDisabled": "帳號已被停用",
+    "rateLimited": "請求次數過多，請稍後再試",
+    "validationFailed": "請求資料驗證失敗",
+    "integrityViolation": "資料庫約束違反",
+    "duplicateResource": "資料重複，該資源已存在",
+    "foreignKeyViolation": "參照完整性違反，關聯的資源不存在",
+    "nullConstraint": "必要欄位缺失",
+    "dbError": "資料庫操作失敗",
+    "serverError": "伺服器內部錯誤"
+  },
+  "common": {
+    "fetchSuccess": "獲取成功"
+  },
+  "resources": {
+    "promptTemplate": "提示詞模板",
+    "collection": "集合",
+    "dataset": "資料集",
+    "user": "使用者",
+    "regulation": "法規",
+    "setting": "設定",
+    "message": "訊息",
+    "attachment": "附件"
+  }
+}

@@ -28,6 +28,9 @@ async function showErrorMessage(content: string) {
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // Cookie 會自動發送，不需要手動添加 token
+    // 自動帶上 Accept-Language header
+    const locale = localStorage.getItem('locale') || navigator.language || 'zh-TW'
+    config.headers['Accept-Language'] = locale
     return config
   },
   (error) => {

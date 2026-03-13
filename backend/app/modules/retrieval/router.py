@@ -12,6 +12,7 @@ from app.modules.retrieval.schemas import (
     DocumentResponse,
 )
 from app.core.dependencies import get_retrieval_service
+from app.i18n import t
 from app.utils.response import success_response, ApiResponse
 
 router = APIRouter(prefix="/retrieval", tags=["檢索"])
@@ -68,7 +69,7 @@ async def search(
 
     return success_response(
         data=result,
-        message="檢索完成"
+        message=t('retrieval.searchComplete')
     )
 
 
@@ -104,7 +105,7 @@ async def test_search(
             "results": [doc.to_dict() for doc in documents],
             "total": len(documents)
         },
-        message="測試檢索完成"
+        message=t('retrieval.testComplete')
     )
 
 
@@ -129,7 +130,7 @@ async def bm25_stats(
 
     return success_response(
         data=stats,
-        message="取得 BM25 索引統計成功"
+        message=t('retrieval.statsSuccess')
     )
 
 
@@ -156,5 +157,5 @@ async def invalidate_bm25_index(
 
     return success_response(
         data={"collection_id": collection_id},
-        message=f"已使 Collection {collection_id} 的 BM25 索引失效"
+        message=t('retrieval.invalidateSuccess', collection_id=collection_id)
     )

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DownloadOutline, ShareOutline } from '@vicons/ionicons5'
 import { NButton, NIcon } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   show: boolean
@@ -11,6 +12,8 @@ defineEmits<{
   install: []
   dismiss: []
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -21,17 +24,15 @@ defineEmits<{
         <div class="install-content">
           <NIcon :size="20" :component="ShareOutline" class="install-icon" />
           <div class="install-text-group">
-            <span class="install-text">安裝 Metora 到主畫面</span>
+            <span class="install-text">{{ t('pwa.install.title') }}</span>
             <span class="install-hint">
-              點擊 Safari 底部
-              <NIcon :size="14" :component="ShareOutline" style="vertical-align: -2px;" />
-              分享按鈕，然後選擇「加入主畫面」
+              {{ t('pwa.install.iosMessage') }}
             </span>
           </div>
         </div>
         <div class="install-actions">
           <NButton size="small" quaternary @click="$emit('dismiss')">
-            知道了
+            {{ t('pwa.install.dismissButton') }}
           </NButton>
         </div>
       </template>
@@ -40,14 +41,14 @@ defineEmits<{
       <template v-else>
         <div class="install-content">
           <NIcon :size="20" :component="DownloadOutline" class="install-icon" />
-          <span class="install-text">安裝 Metora</span>
+          <span class="install-text">{{ t('pwa.install.title') }}</span>
         </div>
         <div class="install-actions">
           <NButton size="small" type="primary" @click="$emit('install')">
-            安裝
+            {{ t('pwa.install.installButton') }}
           </NButton>
           <NButton size="small" quaternary @click="$emit('dismiss')">
-            稍後
+            {{ t('pwa.install.dismissButton') }}
           </NButton>
         </div>
       </template>

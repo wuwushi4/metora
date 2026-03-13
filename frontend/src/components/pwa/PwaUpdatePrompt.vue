@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NAlert, NButton } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   show: boolean
@@ -9,6 +10,8 @@ defineEmits<{
   update: []
   dismiss: []
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -16,14 +19,14 @@ defineEmits<{
     <div v-if="show" class="pwa-update-prompt">
       <NAlert type="info" :bordered="false">
         <template #header>
-          有新版本可用
+          {{ t('pwa.update.title') }}
         </template>
         <div class="update-actions">
           <NButton size="small" type="primary" @click="$emit('update')">
-            立即更新
+            {{ t('pwa.update.updateButton') }}
           </NButton>
           <NButton size="small" quaternary @click="$emit('dismiss')">
-            稍後
+            {{ t('pwa.update.dismissButton') }}
           </NButton>
         </div>
       </NAlert>

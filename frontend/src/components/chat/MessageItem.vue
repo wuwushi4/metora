@@ -8,6 +8,9 @@ import MessageContent from './message/MessageContent.vue'
 import MessageMetadata from './message/MessageMetadata.vue'
 import ToolOutputFiles from './message/ToolOutputFiles.vue'
 import MessageFeedback from './MessageFeedback.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Props {
   message: ChatMessage
@@ -58,7 +61,7 @@ function handleFeedbackChanged(feedback: Feedback) {
     <!-- 使用者訊息 -->
     <div v-if="isUser" class="message-content user-message">
       <div class="message-header">
-        <span class="message-role">使用者</span>
+        <span class="message-role">{{ t('chat.messages.userRole') }}</span>
         <span class="message-time">{{ formatTime(message.created_at) }}</span>
       </div>
 
@@ -78,7 +81,7 @@ function handleFeedbackChanged(feedback: Feedback) {
     <!-- Assistant 訊息 -->
     <div v-else class="message-content assistant-message">
       <div class="message-header">
-        <span class="message-role">AI 助理</span>
+        <span class="message-role">{{ t('chat.messages.assistantRole') }}</span>
         <span class="message-time">{{ formatTime(message.created_at) }}</span>
       </div>
 

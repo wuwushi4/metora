@@ -9,8 +9,11 @@ import {
   NSpace,
 } from 'naive-ui'
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { changePassword } from '@/api/auth'
 import { message } from '@/utils/message'
+
+const { t } = useI18n()
 
 interface Props {
   show: boolean
@@ -37,13 +40,13 @@ const formData = ref({
 // 自訂新密碼驗證
 function validateNewPassword(_rule: FormItemRule, value: string): boolean | Error {
   if (!value) {
-    return new Error('請輸入新密碼')
+    return new Error(t('auth.changePassword.newPasswordRequired'))
   }
   if (value.length < 6) {
-    return new Error('密碼長度至少 6 個字元')
+    return new Error(t('auth.changePassword.minLength'))
   }
   if (value === formData.value.old_password) {
-    return new Error('新密碼不能與舊密碼相同')
+    return new Error(t('auth.changePassword.notSameAsOld'))
   }
   return true
 }
@@ -51,10 +54,10 @@ function validateNewPassword(_rule: FormItemRule, value: string): boolean | Erro
 // 自訂確認密碼驗證
 function validateConfirmPassword(_rule: FormItemRule, value: string): boolean | Error {
   if (!value) {
-    return new Error('請確認新密碼')
+    return new Error(t('auth.changePassword.confirmRequired'))
   }
   if (value !== formData.value.new_password) {
-    return new Error('兩次輸入的密碼不一致')
+    return new Error(t('auth.changePassword.mismatch'))
   }
   return true
 }
@@ -62,8 +65,8 @@ function validateConfirmPassword(_rule: FormItemRule, value: string): boolean | 
 // 驗證規則
 const rules: FormRules = {
   old_password: [
-    { required: true, message: '請輸入目前的密碼', trigger: 'blur' },
-    { min: 6, message: '密碼長度至少 6 個字元', trigger: 'blur' },
+    { required: true, message: () => t('auth.changePassword.currentPasswordRequired'), trigger: 'blur' },
+    { min: 6, message: () => t('auth.changePassword.minLength'), trigger: 'blur' },
   ],
   new_password: [
     { required: true, validator: validateNewPassword, trigger: 'blur' },
@@ -107,12 +110,12 @@ async function handleSubmit() {
       new_password: formData.value.new_password,
     })
 
-    message.success('密碼修改成功')
+    message.success(t('auth.changePassword.success'))
     handleClose()
   }
   catch (error: any) {
     console.error('修改密碼失敗:', error)
-    message.error(error.message || '修改密碼失敗，請檢查您的舊密碼是否正確')
+    message.error(error.message || t('auth.changePassword.failed'))
   }
   finally {
     loading.value = false
@@ -125,7 +128,7 @@ async function handleSubmit() {
     :show="show"
     :mask-closable="false"
     preset="card"
-    title="修改密碼"
+    :title="t('auth.changePassword.title')"
     style="width: 500px"
     @update:show="handleClose"
   >
@@ -137,31 +140,31 @@ async function handleSubmit() {
       label-width="100px"
       require-mark-placement="right-hanging"
     >
-      <NFormItem path="old_password" label="目前密碼">
+      <NFormItem path="old_password" :label="t('auth.changePassword.currentPassword')">
         <NInput
           v-model:value="formData.old_password"
           type="password"
-          placeholder="請輸入目前的密碼"
+          :placeholder="t('auth.changePassword.currentPasswordPlaceholder')"
           show-password-on="click"
           clearable
         />
       </NFormItem>
 
-      <NFormItem path="new_password" label="新密碼">
+      <NFormItem path="new_password" :label="t('auth.changePassword.newPassword')">
         <NInput
           v-model:value="formData.new_password"
           type="password"
-          placeholder="請輸入新密碼（至少 6 個字元）"
+          :placeholder="t('auth.changePassword.newPasswordPlaceholder')"
           show-password-on="click"
           clearable
         />
       </NFormItem>
 
-      <NFormItem path="confirm_password" label="確認新密碼">
+      <NFormItem path="confirm_password" :label="t('auth.changePassword.confirmPassword')">
         <NInput
           v-model:value="formData.confirm_password"
           type="password"
-          placeholder="請再次輸入新密碼"
+          :placeholder="t('auth.changePassword.confirmPasswordPlaceholder')"
           show-password-on="click"
           clearable
         />
@@ -169,7 +172,7 @@ async function handleSubmit() {
 
       <div class="form-tip">
         <p class="tip-text">
-          💡 提示：密碼長度至少 6 個字元，修改成功後您將繼續保持登入狀態。
+          {{ t('auth.changePassword.tip') }}
         </p>
       </div>
     </NForm>
@@ -177,10 +180,10 @@ async function handleSubmit() {
     <template #footer>
       <NSpace justify="end">
         <NButton @click="handleClose">
-          取消
+          {{ t('common.actions.cancel') }}
         </NButton>
         <NButton type="primary" :loading="loading" @click="handleSubmit">
-          確認修改
+          {{ t('auth.changePassword.confirmButton') }}
         </NButton>
       </NSpace>
     </template>

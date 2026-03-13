@@ -20,6 +20,7 @@ from app.modules.datasets.schemas import (
     UploadResponse,
 )
 from app.modules.settings.manager import settings_manager
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse, success_response, paginated_response
 
 router = APIRouter(prefix="/datasets", tags=["資料集管理"])
@@ -263,12 +264,12 @@ async def upload_dataset(
 
     upload_response = UploadResponse(
         dataset=dataset_response,
-        message="檔案上傳成功，向量化處理中..."
+        message=t('datasets.uploadProcessing')
     )
 
     return success_response(
         data=upload_response,
-        message="檔案上傳成功"
+        message=t('datasets.uploadSuccess')
     )
 
 
@@ -306,6 +307,6 @@ async def delete_dataset(
     )
 
     return success_response(
-        data=MessageResponse(message="資料集刪除成功"),
-        message="資料集刪除成功"
+        data=MessageResponse(message=t('datasets.deleteSuccess')),
+        message=t('datasets.deleteSuccess')
     )

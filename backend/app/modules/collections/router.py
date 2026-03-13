@@ -19,6 +19,7 @@ from app.modules.collections.schemas import (
     CollectionListParams,
     OwnerInfo,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse, success_response, paginated_response
 
 router = APIRouter(prefix="/collections", tags=["資料集合管理"])
@@ -202,7 +203,7 @@ async def create_collection(
 
     return success_response(
         data=collection_response,
-        message="集合建立成功"
+        message=t('collections.createSuccess')
     )
 
 
@@ -263,7 +264,7 @@ async def update_collection(
 
     return success_response(
         data=collection_response,
-        message="集合資料更新成功"
+        message=t('collections.updateSuccess')
     )
 
 
@@ -301,6 +302,6 @@ async def delete_collection(
     )
 
     return success_response(
-        data=MessageResponse(message="集合刪除成功"),
-        message="集合刪除成功"
+        data=MessageResponse(message=t('collections.deleteSuccess')),
+        message=t('collections.deleteSuccess')
     )

@@ -1,0 +1,864 @@
+{
+  "common": {
+    "actions": {
+      "save": "儲存",
+      "cancel": "取消",
+      "delete": "刪除",
+      "edit": "編輯",
+      "create": "建立",
+      "confirm": "確認",
+      "retry": "重試",
+      "refresh": "重新整理",
+      "view": "查看",
+      "export": "導出",
+      "upload": "上傳",
+      "close": "關閉",
+      "search": "搜尋",
+      "reset": "重置",
+      "submit": "送出",
+      "back": "返回",
+      "backToList": "返回列表",
+      "update": "更新",
+      "add": "新增",
+      "rename": "重新命名",
+      "viewDetail": "查看詳情"
+    },
+    "status": {
+      "loading": "載入中...",
+      "success": "操作成功",
+      "failed": "操作失敗",
+      "enabled": "啟用",
+      "disabled": "停用",
+      "processing": "處理中",
+      "completed": "已完成"
+    },
+    "fields": {
+      "id": "ID",
+      "name": "名稱",
+      "description": "描述",
+      "createdAt": "建立時間",
+      "updatedAt": "更新時間",
+      "owner": "所有者",
+      "actions": "操作",
+      "status": "狀態",
+      "email": "電子郵件",
+      "role": "角色",
+      "none": "無"
+    },
+    "time": {
+      "justNow": "剛剛",
+      "minutesAgo": "分鐘前",
+      "hoursAgo": "小時前",
+      "daysAgo": "天前"
+    },
+    "unit": {
+      "messages": "則訊息",
+      "items": "條",
+      "matches": "匹配"
+    },
+    "confirm": {
+      "deleteTitle": "確認刪除"
+    }
+  },
+  "app": {
+    "initFailed": "應用初始化失敗",
+    "unknownError": "未知錯誤",
+    "reload": "重新載入",
+    "loadingApp": "正在載入應用...",
+    "initError": "初始化失敗",
+    "retry": "重試"
+  },
+  "auth": {
+    "login": {
+      "title": "登入系統",
+      "subtitle": "Turn AI Agents into Real Systems",
+      "usernamePlaceholder": "請輸入帳號",
+      "passwordPlaceholder": "請輸入密碼",
+      "usernameRequired": "請輸入帳號",
+      "passwordRequired": "請輸入密碼",
+      "loginButton": "登入系統",
+      "loggingIn": "驗證中...",
+      "success": "登入成功!",
+      "failed": "登入失敗,請稍後再試"
+    },
+    "logout": {
+      "success": "已登出",
+      "failed": "登出失敗"
+    },
+    "initFailed": "初始化失敗",
+    "changePassword": {
+      "title": "修改密碼",
+      "currentPassword": "目前密碼",
+      "newPassword": "新密碼",
+      "confirmPassword": "確認新密碼",
+      "currentPasswordPlaceholder": "請輸入目前的密碼",
+      "newPasswordPlaceholder": "請輸入新密碼（至少 6 個字元）",
+      "confirmPasswordPlaceholder": "請再次輸入新密碼",
+      "newPasswordRequired": "請輸入新密碼",
+      "minLength": "密碼長度至少 6 個字元",
+      "notSameAsOld": "新密碼不能與舊密碼相同",
+      "confirmRequired": "請確認新密碼",
+      "mismatch": "兩次輸入的密碼不一致",
+      "currentPasswordRequired": "請輸入目前的密碼",
+      "success": "密碼修改成功",
+      "failed": "修改密碼失敗，請檢查您的舊密碼是否正確",
+      "tip": "密碼長度至少 6 個字元，修改成功後您將繼續保持登入狀態。",
+      "confirmButton": "確認修改"
+    }
+  },
+  "navbar": {
+    "profile": "個人資料",
+    "changePassword": "修改密碼",
+    "settings": "系統設定",
+    "logout": "登出",
+    "notifications": {
+      "title": "系統通知",
+      "empty": "您有 0 則未讀通知"
+    },
+    "profileWip": "個人資料功能開發中...",
+    "settingsWip": "系統設定功能開發中...",
+    "language": "語言"
+  },
+  "sidebar": {
+    "groups": {
+      "main": "主要功能",
+      "data": "資料管理",
+      "engineering": "資料工程",
+      "system": "系統設定"
+    },
+    "menu": {
+      "dashboard": "儀表板",
+      "chat": "Agent Chat",
+      "collections": "知識庫管理",
+      "regulations": "法規管理",
+      "feedbacks": "反饋記錄管理",
+      "lawProcessing": "法規爬蟲作業",
+      "users": "使用者管理",
+      "settings": "系統設定"
+    }
+  },
+  "errors": {
+    "http": {
+      "400": "請求參數錯誤",
+      "401": "登入已過期,請重新登入",
+      "403": "無權限訪問此資源",
+      "404": "請求的資源不存在",
+      "408": "請求超時,請稍後再試",
+      "500": "伺服器內部錯誤",
+      "502": "網關錯誤",
+      "503": "服務暫時不可用",
+      "504": "網關超時"
+    },
+    "network": "網路錯誤,請檢查您的網路連線",
+    "timeout": "請求超時,請檢查網路連線",
+    "configError": "請求配置錯誤",
+    "unknown": "發生未知錯誤",
+    "requestFailed": "請求失敗 (狀態碼: {status})",
+    "connectionFailed": "無法連接到伺服器，請檢查網路連線",
+    "serverError": "伺服器發生錯誤，請稍後再試",
+    "unknownError": "發生未知錯誤，請稍後再試"
+  },
+  "chat": {
+    "loadFailed": "載入聊天資料失敗",
+    "promptPanel": "提示詞面板",
+    "selectOrCreate": "請先選擇或建立一個對話",
+    "sendFailed": "發送訊息失敗:",
+    "sessions": {
+      "title": "對話列表",
+      "new": "新建對話",
+      "searchPlaceholder": "搜尋對話標題或內容...",
+      "searchResults": "找到 {count} 個相關對話",
+      "clearSearch": "清除搜尋",
+      "searching": "搜尋中...",
+      "searchMinChars": "搜尋關鍵字至少需要 2 個字元",
+      "searchRateLimit": "搜尋請求過於頻繁，請稍後再試",
+      "searchInvalid": "搜尋關鍵字無效，請重新輸入",
+      "searchFailed": "搜尋失敗，請稍後再試",
+      "noResults": "沒有找到相關對話",
+      "empty": "尚無對話記錄",
+      "viewAll": "查看全部對話",
+      "createFirst": "建立第一個對話",
+      "renameTitle": "重新命名對話",
+      "renamePlaceholder": "請輸入新的標題",
+      "deleteConfirm": "確定要刪除這個對話嗎?",
+      "titleRequired": "標題不能為空",
+      "moreMatches": "還有 {count} 條相關訊息",
+      "switchFailed": "切換對話失敗",
+      "createFailed": "建立對話失敗",
+      "renameFailed": "重命名失敗",
+      "deleteFailed": "刪除對話失敗"
+    },
+    "graphs": {
+      "base_graph": "通用助理",
+      "rag_graph": "知識專家",
+      "regulation_graph": "法規顧問",
+      "agent_graph": "工具 Agent",
+      "base_graphDesc": "我可以協助您處理各種日常問題,基於豐富的通用知識為您提供解答",
+      "rag_graphDesc": "我專精於您的知識庫內容,能夠精準檢索並回答基於文檔的專業問題",
+      "regulation_graphDesc": "我專注於法規分析與解讀,能夠協助您查詢條文、追蹤引用關係並提供專業建議",
+      "agent_graphDesc": "我可以撰寫並執行 Python 程式碼來解決複雜問題,包括資料分析、圖表生成和 API 呼叫",
+      "base_graphRole": "通用對話專家",
+      "rag_graphRole": "知識檢索專家",
+      "regulation_graphRole": "法規查詢專家",
+      "agent_graphRole": "程式碼執行專家",
+      "selectorHeader": "選擇要聊天的 AI 助理，不同的助理擁有各自的專長領域",
+      "selectorHint": "知識專家和法規顧問需要先選擇知識庫；工具 Agent 可執行程式碼解決複雜問題",
+      "loadFailed": "載入 Graph 列表失敗"
+    },
+    "config": {
+      "title": "開始新的對話",
+      "sessionTitle": "對話標題",
+      "titleHint": "可選,留空自動生成",
+      "titlePlaceholder": "請輸入對話標題 (可選)",
+      "selectCollection": "選擇知識庫",
+      "requiredForRag": "知識專家",
+      "requiredForRegulation": "法規顧問",
+      "tip": "建立對話後可以隨時切換模式或修改標題",
+      "createButton": "建立對話",
+      "incomplete": "請完成所有必填項目"
+    },
+    "messages": {
+      "userRole": "使用者",
+      "assistantRole": "AI 助理",
+      "loading": "載入訊息中...",
+      "thinking": "AI 正在思考...",
+      "empty": "尚無訊息",
+      "scrollToBottom": "回到底部",
+      "loadFailed": "載入訊息失敗"
+    },
+    "store": {
+      "loadGraphsFailed": "載入 Graph 列表失敗",
+      "loadSessionsFailed": "載入會話列表失敗",
+      "createSuccess": "建立會話成功",
+      "createFailed": "建立會話失敗",
+      "switchFailed": "切換會話失敗",
+      "loadMessagesFailed": "載入訊息失敗",
+      "renameSuccess": "重命名成功",
+      "renameFailed": "重命名失敗",
+      "deleteSuccess": "刪除成功",
+      "deleteFailed": "刪除會話失敗"
+    },
+    "input": {
+      "placeholder": "輸入訊息... (Shift + Enter 換行, Enter 發送)",
+      "maxFiles": "最多只能上傳 {max} 個檔案 (目前已有 {current} 個)",
+      "uploadFile": "上傳檔案",
+      "send": "發送",
+      "stop": "停止",
+      "dropHint": "拖放檔案到這裡上傳"
+    },
+    "feedback": {
+      "copy": "複製",
+      "helpful": "有幫助",
+      "notHelpful": "沒有幫助",
+      "moreThoughts": "告訴我們更多想法",
+      "issueType": "問題類型（可多選）",
+      "additionalComment": "補充說明（選填）",
+      "commentPlaceholder": "請描述具體問題或建議...",
+      "issues": {
+        "inaccurate": "回答不準確",
+        "tooShort": "內容太簡短",
+        "formatError": "格式錯誤",
+        "irrelevant": "檢索結果不相關",
+        "inappropriateTone": "語氣不恰當"
+      },
+      "thankYou": "感謝你的回饋!",
+      "submitFailed": "提交反饋失敗",
+      "copied": "已複製到剪貼簿",
+      "copyFailed": "複製失敗，請手動複製"
+    },
+    "filePreview": {
+      "pending": "等待上傳",
+      "uploading": "上傳中...",
+      "success": "上傳成功",
+      "failed": "上傳失敗"
+    },
+    "empty": {
+      "title": "開始對話",
+      "descRag": "選擇知識庫並開始提問,AI 將根據您的文檔內容回答問題",
+      "descBase": "直接開始對話,AI 將基於通用知識回答您的問題",
+      "descRegulation": "查詢法規條文和適用情境,AI 將根據法規資料庫回答您的問題",
+      "descAgent": "AI 可以撰寫並執行 Python 程式碼,協助您進行資料分析、圖表生成等任務",
+      "descDefault": "請先選擇對話模式開始使用",
+      "examplesTitle": "試試這些問題:",
+      "tip": "使用 Enter 發送訊息, Shift + Enter 換行",
+      "baseExamples": [
+        "你好,能介紹一下你的功能嗎?",
+        "幫我解釋一下什麼是機器學習?",
+        "你能做些什麼?",
+        "這個專案的主要功能是什麼?"
+      ],
+      "ragExamples": [
+        "請幫我總結一下這份文件的重點",
+        "有哪些相關的技術文檔?",
+        "幫我解釋一下什麼是機器學習?",
+        "這個專案的主要功能是什麼?"
+      ],
+      "regulationExamples": [
+        "動物保護法第3條是什麼?",
+        "有人虐待流浪狗會觸犯哪條法律?",
+        "寵物受傷沒有立即送醫會違法嗎?",
+        "幫我解釋一下什麼是機器學習?"
+      ],
+      "agentExamples": [
+        "幫我計算 1 到 100 的質數有哪些?",
+        "用 matplotlib 畫一個 sin 和 cos 的對比圖",
+        "分析這組資料的統計分佈: [23, 45, 67, 89, 12, 34, 56, 78, 90, 11]",
+        "幫我解釋一下什麼是機器學習?"
+      ]
+    },
+    "prompts": {
+      "title": "提示詞模板",
+      "favorite": "收藏",
+      "unfavorite": "取消收藏",
+      "deleteConfirm": "確定要刪除此提示詞模板嗎？",
+      "empty": "尚未建立提示詞模板",
+      "createFirst": "建立第一個模板",
+      "editor": {
+        "createTitle": "建立提示詞模板",
+        "editTitle": "編輯提示詞模板",
+        "nameLabel": "模板名稱",
+        "namePlaceholder": "請輸入模板名稱（最多 100 字）",
+        "contentLabel": "提示詞內容",
+        "contentPlaceholder": "請輸入提示詞內容（最多 5000 字）\n\n範例：\n你是一個專業的助手。請用繁體中文回答使用者的問題。",
+        "descLabel": "描述（選填）",
+        "descPlaceholder": "請輸入提示詞描述，說明此模板的用途",
+        "favoriteLabel": "收藏此提示詞",
+        "favoriteHint": "開啟後，此提示詞將顯示收藏標記"
+      }
+    },
+    "promptsStore": {
+      "loadFailed": "載入提示詞模板失敗",
+      "createSuccess": "建立提示詞模板成功",
+      "createFailed": "建立提示詞模板失敗",
+      "updateSuccess": "更新提示詞模板成功",
+      "updateFailed": "更新提示詞模板失敗",
+      "deleteSuccess": "刪除提示詞模板成功",
+      "deleteFailed": "刪除提示詞模板失敗",
+      "favoriteSuccess": "收藏提示詞成功",
+      "unfavoriteSuccess": "取消收藏提示詞成功",
+      "toggleFailed": "操作失敗"
+    },
+    "collectionSelector": {
+      "placeholder": "請選擇知識庫...",
+      "empty": "尚無可用的知識庫",
+      "loadFailed": "載入知識庫列表失敗",
+      "selected": "已選擇 {count} 個知識庫",
+      "documents": "{count} 個文檔"
+    },
+    "sse": {
+      "networkError": "網路連線失敗",
+      "authError": "認證失敗",
+      "serverError": "伺服器錯誤"
+    }
+  },
+  "collections": {
+    "title": "知識庫管理",
+    "description": "管理文件集合、分塊策略與資料集",
+    "addNew": "新增知識庫",
+    "createSuccess": "知識庫建立成功",
+    "updateSuccess": "知識庫更新成功",
+    "deleteSuccess": "知識庫刪除成功",
+    "loadFailed": "載入知識庫列表失敗",
+    "deleteFailed": "刪除知識庫失敗",
+    "form": {
+      "createTitle": "新增知識庫",
+      "editTitle": "編輯知識庫",
+      "nameLabel": "知識庫名稱",
+      "namePlaceholder": "請輸入知識庫名稱",
+      "descPlaceholder": "請輸入知識庫描述（可選）",
+      "chunkingStrategy": "分塊策略",
+      "chunkingPlaceholder": "請選擇分塊策略",
+      "strategies": {
+        "qa_multi_representation": "QA 多重表徵 - 適用於問答對資料（JSON）",
+        "regulation_hierarchical": "法規-階層式 - 使用完整法規結構（JSON）",
+        "regulation_scenario_description": "法規-情境描述 - 法規結構與情境描述 HyDE（JSON）",
+        "recursive_text": "遞迴文字分塊 - 適用於 PDF、TXT、Markdown"
+      },
+      "tipCreate": "分塊策略在建立後無法修改。請根據資料類型選擇：\n• QA 多重表徵：適用於問答對格式的 JSON 資料\n• 法規-階層式：適用於法規 JSON，使用完整法規結構\n• 法規-情境描述：適用於法規 JSON，法規結構與情境描述（HyDE）\n• 遞迴文字分塊：適用於 PDF、TXT、Markdown 等非結構化文件",
+      "tipEdit": "分塊策略建立後無法修改。",
+      "validationFailed": "請檢查表單欄位"
+    },
+    "filters": {
+      "nameLabel": "知識庫名稱",
+      "namePlaceholder": "搜尋知識庫名稱",
+      "strategyLabel": "分塊策略",
+      "strategyPlaceholder": "選擇分塊策略",
+      "all": "全部",
+      "strategyOptions": {
+        "qa_multi_representation": "QA 多重表徵",
+        "regulation_hierarchical": "法規階層式",
+        "regulation_manual_scenario": "法規手動情境"
+      }
+    },
+    "table": {
+      "chunkingStrategy": "分塊策略",
+      "datasetCount": "資料集數量",
+      "collectionName": "知識庫名稱",
+      "deleteConfirm": "確定要刪除這個知識庫嗎？此操作將同時刪除所有關聯的資料集。",
+      "totalItems": "共 {count} 筆"
+    },
+    "detail": {
+      "description": "知識庫詳細資訊與資料集管理",
+      "info": "知識庫資訊",
+      "datasetList": "資料集列表",
+      "uploadFiles": "上傳檔案",
+      "uploadSuccess": "成功上傳 {count} 個檔案，正在處理向量化...",
+      "deleteDatasetSuccess": "資料集刪除成功",
+      "refreshSuccess": "重新整理成功",
+      "loadFailed": "載入知識庫失敗",
+      "uploadFailed": "上傳檔案失敗",
+      "deleteDatasetFailed": "刪除資料集失敗",
+      "loadDatasetsFailed": "載入資料集列表失敗",
+      "strategies": {
+        "qa_multi_representation": "QA 多重表徵",
+        "regulation_hierarchical": "法規-階層式",
+        "regulation_scenario_description": "法規-情境增強",
+        "regulation_manual_scenario": "法規-情境描述",
+        "recursive_text": "遞迴文字分塊"
+      },
+      "defaultOwner": "使用者 #{id}"
+    },
+    "dataset": {
+      "originalFilename": "原始檔名",
+      "fileType": "檔案類型",
+      "fileSize": "檔案大小",
+      "chunkCount": "分塊數量",
+      "vectorStatus": "向量化狀態",
+      "statusFailed": "失敗",
+      "statusCompleted": "已完成",
+      "statusProcessing": "處理中",
+      "uploadModal": {
+        "noFiles": "請先選擇要上傳的檔案",
+        "noValidFiles": "沒有有效的檔案可上傳",
+        "chunkParams": "分塊參數設定",
+        "title": "上傳資料集",
+        "dragText": "點擊或拖曳檔案到此區域上傳",
+        "supportedTypes": "支援的檔案類型：{types}",
+        "maxFiles": "最多可一次上傳 10 個檔案",
+        "chunkSizeLabel": "分塊大小（字元數）",
+        "chunkSizePlaceholder": "預設 1000",
+        "chunkSizeHint": "每個分塊的最大字元數",
+        "overlapLabel": "重疊大小（字元數）",
+        "overlapPlaceholder": "預設 200",
+        "overlapHint": "相鄰分塊之間重疊的字元數，用於保持上下文連續性",
+        "defaultParamsHint": "以上參數已帶入系統預設值，您可依需求自行調整",
+        "tipAutoProcess": "上傳後的檔案將自動進行分塊處理和向量化",
+        "tipLargeFile": "大型檔案的向量化處理可能需要較長時間，請耐心等待",
+        "tipRefresh": "您可以在列表頁面手動重新整理查看向量化狀態",
+        "startUpload": "開始上傳",
+        "deleteConfirm": "確定要刪除這個資料集嗎？此操作將同時刪除所有關聯的向量資料。"
+      }
+    }
+  },
+  "regulations": {
+    "title": "法規管理",
+    "description": "管理法規文件、章節條文與應用情境",
+    "upload": "上傳法規",
+    "uploadSuccess": "法規上傳成功",
+    "deleteSuccess": "法規刪除成功",
+    "exportLoading": "正在導出法規...",
+    "exportSuccess": "法規導出成功",
+    "loadFailed": "載入法規列表失敗",
+    "uploadFailed": "上傳法規失敗",
+    "deleteFailed": "刪除法規失敗",
+    "exportFailed": "導出法規失敗",
+    "filters": {
+      "all": "全部",
+      "nameLabel": "法規名稱",
+      "categoryLabel": "法規類別",
+      "categoryPlaceholder": "選擇法規類別",
+      "statusLabel": "法規狀態",
+      "statusPlaceholder": "選擇法規狀態",
+      "categories": {
+        "constitution": "憲法",
+        "law": "法律",
+        "order": "命令",
+        "adminRule": "行政規則",
+        "localRegulation": "自治法規"
+      },
+      "statuses": {
+        "active": "現行",
+        "abolished": "廢止",
+        "suspended": "停止適用",
+        "notEffective": "尚未生效"
+      },
+      "searchPlaceholder": "搜尋法規名稱"
+    },
+    "uploadModal": {
+      "title": "上傳法規 JSON 文件",
+      "readFailed": "讀取檔案失敗",
+      "noValidFiles": "沒有有效的檔案可上傳",
+      "dragText": "點擊或拖曳 JSON 檔案到此區域上傳",
+      "onlyJson": "僅支援 .json 格式的法規文件",
+      "singleFile": "一次只能上傳一個法規檔案",
+      "tipRequired": "JSON 文件必須包含 law_metadata 和 chapters 欄位",
+      "tipValidate": "系統會自動驗證 JSON 格式的正確性",
+      "tipDuplicate": "如果法規代碼已存在，上傳將會失敗",
+      "selectFile": "請先選擇要上傳的 JSON 檔案",
+      "jsonMetadataError": "JSON 格式錯誤：缺少必要欄位 law_metadata 或 chapters",
+      "jsonFieldError": "JSON 格式錯誤：law_metadata 缺少必要欄位（name, category, status, code, source_url）",
+      "jsonSourceUrlEmpty": "JSON 格式錯誤：source_url 不可為空",
+      "jsonChaptersArray": "JSON 格式錯誤：chapters 必須是陣列",
+      "jsonChapterStructure": "JSON 格式錯誤：章節結構不正確",
+      "jsonArticlesArray": "JSON 格式錯誤：articles 必須是陣列",
+      "jsonArticleStructure": "JSON 格式錯誤：條文結構不正確",
+      "jsonScenariosArray": "JSON 格式錯誤：scenarios 必須是陣列",
+      "jsonSyntaxError": "JSON 格式錯誤：無效的 JSON 語法"
+    },
+    "table": {
+      "lawCode": "法規代碼",
+      "lawName": "法規名稱",
+      "category": "類別",
+      "chapterCount": "章節數",
+      "articleCount": "條文數",
+      "scenarioCount": "情境數",
+      "lastUpdated": "最後更新",
+      "deleteConfirm": "確定要刪除這個法規嗎？此操作無法復原。",
+      "totalItems": "共 {count} 筆"
+    },
+    "detail": {
+      "description": "法規詳細資訊與章節條文",
+      "basicInfo": "法規基本資訊",
+      "code": "法規代碼",
+      "name": "法規名稱",
+      "category": "法規類別",
+      "status": "法規狀態",
+      "lastUpdated": "最後更新",
+      "chapterCount": "章節總數",
+      "articleCount": "條文總數",
+      "scenarioCount": "情境總數",
+      "chaptersAndArticles": "章節與條文",
+      "articleTag": "條",
+      "scenarios": "應用情境：",
+      "scenarioPlaceholder": "輸入情境描述（支援多行），點擊「新增情境」按鈕加入",
+      "addScenario": "新增情境",
+      "noArticles": "此章節無條文",
+      "noChapters": "此法規無章節內容",
+      "editScenario": "編輯情境",
+      "updateSuccess": "法規更新成功",
+      "refreshSuccess": "重新整理成功",
+      "exportSuccess": "法規導出成功",
+      "loadFailed": "載入法規失敗",
+      "updateFailed": "更新法規失敗",
+      "exportFailed": "導出法規失敗"
+    }
+  },
+  "feedbacks": {
+    "title": "反饋記錄管理",
+    "description": "查看和管理用戶反饋記錄",
+    "loadFailed": "載入反饋列表失敗",
+    "refreshSuccess": "重新整理成功",
+    "filters": {
+      "all": "全部",
+      "like": "喜歡",
+      "dislike": "不喜歡",
+      "reviewed": "已審查",
+      "notReviewed": "未審查",
+      "graphTypes": {
+        "base_graph": "基礎對話",
+        "rag_graph": "RAG 對話",
+        "regulation_graph": "法規查詢"
+      },
+      "feedbackTypeLabel": "反饋類型",
+      "feedbackTypePlaceholder": "選擇反饋類型",
+      "reviewStatusLabel": "審查狀態",
+      "reviewStatusPlaceholder": "選擇審查狀態",
+      "agentTypeLabel": "Agent 類型",
+      "agentTypePlaceholder": "選擇 Agent 類型",
+      "collectionLabel": "知識庫",
+      "collectionPlaceholder": "選擇知識庫",
+      "dateLabel": "建立時間"
+    },
+    "table": {
+      "user": "使用者",
+      "messagePreview": "訊息預覽",
+      "interrupted": "中斷",
+      "collection": "知識庫",
+      "feedbackType": "反饋類型",
+      "issueLabels": "問題標籤",
+      "reviewStatus": "審查狀態",
+      "agentType": "Agent 類型",
+      "totalItems": "共 {count} 筆"
+    },
+    "detail": {
+      "loadFailed": "載入反饋詳情失敗",
+      "loadError": "載入失敗",
+      "feedbackInfo": "反饋資訊",
+      "feedbackId": "反饋 ID",
+      "messageId": "訊息 ID",
+      "agentType": "Agent 類型",
+      "collection": "知識庫",
+      "user": "使用者",
+      "feedbackType": "反饋類型",
+      "like": "喜歡",
+      "dislike": "不喜歡",
+      "issueLabels": "問題標籤",
+      "userComment": "使用者評論",
+      "conversationContent": "對話內容",
+      "userQuestion": "使用者問題",
+      "aiReply": "AI 回覆",
+      "userInterrupted": "使用者中斷",
+      "noQuestion": "無問題記錄",
+      "unknownUser": "未知使用者",
+      "unknown": "未知",
+      "expertReview": "專家審查",
+      "reviewer": "審查人員",
+      "expertOpinion": "專家意見",
+      "suggestedReply": "建議回覆內容",
+      "reviewTime": "審查時間"
+    },
+    "expertReview": {
+      "title": "專家審查",
+      "opinionLabel": "專家意見",
+      "opinionRequired": "請輸入專家意見",
+      "opinionMinLength": "專家意見至少需要 10 個字元",
+      "opinionPlaceholder": "請輸入您的專業意見,包括問題分析、原因判斷等 (至少 10 個字元)",
+      "suggestedResponseLabel": "建議回覆內容 (選填)",
+      "suggestedResponsePlaceholder": "如果認為 AI 回覆不當,請提供建議的回覆內容(用於 DPO 微調)",
+      "submitReview": "提交審查",
+      "validationFailed": "請檢查表單填寫是否正確",
+      "success": "專家審查提交成功",
+      "failed": "提交專家審查失敗"
+    },
+    "retrieval": {
+      "title": "RAG 檢索結果",
+      "totalResults": "共 {count} 條結果",
+      "unknownDoc": "未知文檔",
+      "score": "分數",
+      "collectionLabel": "知識庫",
+      "contentLabel": "內容",
+      "metadataLabel": "元資料"
+    }
+  },
+  "users": {
+    "title": "使用者管理",
+    "description": "管理系統使用者帳號、角色與權限",
+    "addNew": "新增使用者",
+    "createSuccess": "使用者建立成功",
+    "updateSuccess": "使用者更新成功",
+    "deleteSuccess": "使用者刪除成功",
+    "loadFailed": "載入使用者列表失敗",
+    "deleteFailed": "刪除使用者失敗",
+    "roleAssignSuccess": "角色分配成功",
+    "roleAssignFailed": "角色分配失敗",
+    "table": {
+      "username": "使用者名稱",
+      "email": "電子郵件",
+      "fullName": "真實姓名",
+      "cannotDeleteSelf": "不能刪除自己的帳號",
+      "cannotDeleteSuperAdmin": "不能刪除超級管理員",
+      "deleteConfirm": "確定要刪除這個使用者嗎？此操作將停用該帳號。",
+      "totalItems": "共 {count} 筆",
+      "assignRoles": "角色"
+    },
+    "form": {
+      "createTitle": "新增使用者",
+      "editTitle": "編輯使用者",
+      "usernameLabel": "使用者名稱",
+      "usernamePlaceholder": "請輸入使用者名稱",
+      "emailLabel": "電子郵件",
+      "emailPlaceholder": "請輸入電子郵件",
+      "passwordLabel": "密碼",
+      "passwordPlaceholder": "請輸入密碼（至少 6 個字元）",
+      "confirmPasswordLabel": "確認密碼",
+      "confirmPasswordPlaceholder": "請再次輸入密碼",
+      "fullNameLabel": "真實姓名",
+      "fullNamePlaceholder": "請輸入真實姓名（可選）",
+      "rolesLabel": "角色",
+      "rolesPlaceholder": "請選擇角色",
+      "statusLabel": "狀態",
+      "roleOptions": {
+        "admin": "管理員",
+        "user": "一般使用者",
+        "editor": "編輯者",
+        "viewer": "檢視者"
+      },
+      "tipEdit": "使用者名稱不可修改。如需修改密碼,請使用密碼重置功能。",
+      "validationFailed": "請檢查表單欄位",
+      "usernameRequired": "請輸入使用者名稱",
+      "usernameLength": "長度在 3 到 50 個字元",
+      "emailRequired": "請輸入電子郵件",
+      "emailInvalid": "請輸入有效的電子郵件",
+      "passwordRequired": "請輸入密碼",
+      "passwordMinLength": "密碼長度至少 6 個字元",
+      "confirmPasswordRequired": "請確認密碼",
+      "confirmPasswordMismatch": "兩次輸入的密碼不一致",
+      "rolesRequired": "請選擇至少一個角色"
+    },
+    "filters": {
+      "usernameLabel": "使用者名稱",
+      "usernamePlaceholder": "搜尋使用者名稱",
+      "emailLabel": "電子郵件",
+      "emailPlaceholder": "搜尋電子郵件",
+      "statusLabel": "狀態",
+      "statusPlaceholder": "選擇狀態",
+      "roleLabel": "角色",
+      "rolePlaceholder": "選擇角色",
+      "all": "全部",
+      "statusOptions": {
+        "enabled": "啟用",
+        "disabled": "停用"
+      },
+      "roleOptions": {
+        "admin": "管理員",
+        "user": "一般使用者",
+        "editor": "編輯者",
+        "viewer": "檢視者"
+      }
+    },
+    "roleAssign": {
+      "title": "角色分配",
+      "usernameLabel": "使用者名稱：",
+      "emailLabel": "電子郵件：",
+      "statusLabel": "狀態：",
+      "currentRoles": "當前角色",
+      "assignRoles": "分配角色",
+      "selectRolePlaceholder": "請選擇角色",
+      "noRole": "無角色",
+      "tipMinRole": "每個使用者至少需要一個角色",
+      "tipSuperAdmin": "超級管理員擁有所有權限,無需分配角色",
+      "gotIt": "知道了"
+    }
+  },
+  "settings": {
+    "title": "系統設定",
+    "description": "管理系統的各項配置參數",
+    "tabs": {
+      "auth": "認證與安全",
+      "rag": "RAG 系統",
+      "agent": "Agent 對話",
+      "upload": "檔案上傳"
+    },
+    "loadFailed": "載入設定失敗",
+    "updateSuccess": "設定更新成功",
+    "updateFailed": "更新設定失敗",
+    "restartWarning": "部分設定需要重啟應用才能生效",
+    "requiresRestart": "需要重啟",
+    "authTitle": "認證與安全設定",
+    "chatTitle": "Agent 對話設定",
+    "ragTitle": "RAG 檢索系統設定",
+    "uploadTitle": "檔案上傳設定"
+  },
+  "dashboard": {
+    "title": "儀表板",
+    "admin": {
+      "title": "系統管理員儀表板",
+      "subtitle": "系統運營監控與 AI 品質分析",
+      "refresh": "刷新",
+      "timeRange": {
+        "today": "今日",
+        "thisWeek": "本週",
+        "thisMonth": "本月",
+        "last7Days": "最近 7 天",
+        "last30Days": "最近 30 天",
+        "all": "全部"
+      },
+      "chatMetrics": "聊天互動指標",
+      "totalSessions": "總對話數",
+      "totalMessages": "總訊息數",
+      "dailyAvgMessages": "日均訊息量",
+      "agentDistribution": "Agent 類型分布",
+      "baseGraph": "基礎對話",
+      "ragGraph": "RAG 對話",
+      "regulationGraph": "法規查詢",
+      "feedbackMetrics": "AI 品質反饋指標",
+      "thumbsUp": "讚數",
+      "thumbsDown": "踩數",
+      "thumbsUpRate": "讚比例",
+      "feedbackRate": "反饋率",
+      "pendingReview": "待審查",
+      "topIssueTags": "常見問題標籤 Top 10",
+      "unitSessions": "個",
+      "unitMessages": "則",
+      "unitMessagesPerDay": "則/天"
+    },
+    "user": {
+      "subtitle": "這是您的個人儀表板",
+      "quickActions": "快速操作",
+      "startChat": "開始新對話",
+      "myCollections": "我的知識庫",
+      "myStats": "我的統計",
+      "mySessions": "我的對話數",
+      "myMessages": "我的訊息數"
+    },
+    "issueTagList": {
+      "times": "次",
+      "empty": "暫無問題標籤"
+    }
+  },
+  "dataEngineering": {
+    "title": "法規爬蟲作業",
+    "subtitle": "輸入法規編號，自動爬取法規內容並轉換為 Markdown 和 JSON 格式 (目標網站：https://law.moj.gov.tw/Index.aspx)。",
+    "inputTitle": "輸入法規資訊",
+    "processSuccess": "法規處理完成",
+    "form": {
+      "pcodeLabel": "法規編號",
+      "pcodePlaceholder": "例如：M0060027",
+      "pcodeRequired": "請輸入法規編號",
+      "pcodeFormat": "格式錯誤，正確格式為：1個大寫英文字母 + 7個數字（例如：M0060027）",
+      "lawNameLabel": "法規名稱",
+      "lawNamePlaceholder": "可選，如未提供則從網頁提取",
+      "lawNameMaxLength": "法規名稱長度不可超過 200 個字元",
+      "forceRefresh": "強制重新爬取",
+      "forceRefreshHint": "忽略快取，重新從網站爬取資料",
+      "startProcess": "開始處理"
+    },
+    "status": {
+      "idle": "等待處理",
+      "processing": "處理中...",
+      "success": "處理成功",
+      "error": "處理失敗",
+      "unknown": "未知狀態",
+      "processingMessage": "正在爬取法規資料並轉換為 Markdown 和 JSON 格式...",
+      "successMessage": "法規資料處理完成{cacheInfo}{timeInfo}，請在下方下載檔案。",
+      "fromCache": "（來自快取）",
+      "timeTaken": "，耗時 {time} 秒",
+      "errorMessage": "發生未知錯誤，請稍後再試。",
+      "idleMessage": "請在上方輸入法規編號開始處理。"
+    },
+    "result": {
+      "title": "處理結果",
+      "fromCache": "來自快取",
+      "pcodeLabel": "法規編號",
+      "lawNameLabel": "法規名稱",
+      "chapters": "章數",
+      "articles": "條數",
+      "items": "項數",
+      "subitems": "款數",
+      "processingTime": "處理時間",
+      "seconds": "秒",
+      "downloadMarkdown": "下載 Markdown 檔案",
+      "downloadJson": "下載 JSON 檔案",
+      "downloadMarkdownFailed": "下載 Markdown 檔案失敗",
+      "downloadJsonFailed": "下載 JSON 檔案失敗",
+      "downloaded": "已下載 {filename}"
+    }
+  },
+  "fileUtils": {
+    "fileTooLarge": "檔案 \"{name}\" 超過大小限制 ({size})",
+    "invalidFormat": "檔案 \"{name}\" 格式不支援 ({type})",
+    "invalidExtension": "檔案 \"{name}\" 副檔名不支援 (.{ext})",
+    "tooManyFiles": "最多只能上傳 {max} 個檔案",
+    "compressFailed": "圖片壓縮失敗",
+    "imageLoadFailed": "圖片載入失敗",
+    "fileReadFailed": "檔案讀取失敗"
+  },
+  "pwa": {
+    "offline": {
+      "message": "目前處於離線模式"
+    },
+    "update": {
+      "title": "有新版本可用",
+      "message": "新版本已準備就緒，點擊更新即可體驗最新功能。",
+      "updateButton": "立即更新",
+      "dismissButton": "稍後再說"
+    },
+    "install": {
+      "title": "安裝 Metora",
+      "message": "將 Metora 安裝到您的裝置，享受更快的載入速度和離線使用體驗。",
+      "iosMessage": "點擊 Safari 分享按鈕，然後選擇「加入主畫面」來安裝此應用。",
+      "installButton": "安裝應用",
+      "dismissButton": "暫不安裝"
+    }
+  }
+}

@@ -11,7 +11,10 @@ import {
   NSpace,
 } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { message } from '@/utils/message'
+
+const { t } = useI18n()
 
 interface Props {
   show: boolean
@@ -47,41 +50,40 @@ const editFormData = ref<CollectionUpdateRequest>({
 })
 
 // 分塊策略選項
-const chunkingStrategyOptions = [
-  { label: 'QA 多重表徵 - 適用於問答對資料（JSON）', value: 'qa_multi_representation' },
-  { label: '法規-階層式 - 使用完整法規結構（JSON）', value: 'regulation_hierarchical' },
-  // { label: '法規情境增強 - 自動生成情境描述（使用 LLM）', value: 'regulation_context_enriched' },
-  { label: '法規-情境描述 - 法規結構與情境描述 HyDE（JSON）', value: 'regulation_manual_scenario' },
-  { label: '遞迴文字分塊 - 適用於 PDF、TXT、Markdown', value: 'recursive_text' },
-]
+const chunkingStrategyOptions = computed(() => [
+  { label: t('collections.form.strategies.qa_multi_representation'), value: 'qa_multi_representation' },
+  { label: t('collections.form.strategies.regulation_hierarchical'), value: 'regulation_hierarchical' },
+  { label: t('collections.form.strategies.regulation_scenario_description'), value: 'regulation_manual_scenario' },
+  { label: t('collections.form.strategies.recursive_text'), value: 'recursive_text' },
+])
 
 // 表單標題
 const title = computed(() => {
-  return props.mode === 'create' ? '新增 Collection' : '編輯 Collection'
+  return props.mode === 'create' ? t('collections.form.createTitle') : t('collections.form.editTitle')
 })
 
 // 驗證規則 - 新增模式
-const createRules: FormRules = {
+const createRules = computed<FormRules>(() => ({
   name: [
-    { required: true, message: '請輸入 Collection 名稱', trigger: 'blur' },
-    { min: 1, max: 100, message: '長度在 1 到 100 個字元', trigger: 'blur' },
+    { required: true, message: t('collections.form.namePlaceholder'), trigger: 'blur' },
+    { min: 1, max: 100, message: t('users.form.usernameLength'), trigger: 'blur' },
   ],
   chunking_strategy: [
-    { required: true, message: '請選擇分塊策略', trigger: 'change' },
+    { required: true, message: t('collections.form.chunkingPlaceholder'), trigger: 'change' },
   ],
-}
+}))
 
 // 驗證規則 - 編輯模式
-const editRules: FormRules = {
+const editRules = computed<FormRules>(() => ({
   name: [
-    { required: true, message: '請輸入 Collection 名稱', trigger: 'blur' },
-    { min: 1, max: 100, message: '長度在 1 到 100 個字元', trigger: 'blur' },
+    { required: true, message: t('collections.form.namePlaceholder'), trigger: 'blur' },
+    { min: 1, max: 100, message: t('users.form.usernameLength'), trigger: 'blur' },
   ],
-}
+}))
 
 // 當前驗證規則
 const rules = computed(() => {
-  return props.mode === 'create' ? createRules : editRules
+  return props.mode === 'create' ? createRules.value : editRules.value
 })
 
 // 監聽 collection prop 變化，更新表單資料
@@ -135,7 +137,7 @@ async function handleSubmit() {
   }
   catch (error: any) {
     console.error('表單驗證失敗:', error)
-    message.error('請檢查表單欄位')
+    message.error(t('collections.form.validationFailed'))
   }
   finally {
     loading.value = false
@@ -162,71 +164,66 @@ async function handleSubmit() {
     >
       <!-- 新增模式 -->
       <template v-if="mode === 'create'">
-        <NFormItem path="name" label="Collection 名稱">
+        <NFormItem path="name" :label="$t('collections.form.nameLabel')">
           <NInput
             v-model:value="formData.name"
-            placeholder="請輸入 Collection 名稱"
+            :placeholder="$t('collections.form.namePlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="description" label="描述">
+        <NFormItem path="description" :label="$t('common.fields.description')">
           <NInput
             v-model:value="formData.description"
             type="textarea"
-            placeholder="請輸入 Collection 描述（可選）"
+            :placeholder="$t('collections.form.descPlaceholder')"
             :rows="3"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="chunking_strategy" label="分塊策略">
+        <NFormItem path="chunking_strategy" :label="$t('collections.form.chunkingStrategy')">
           <NSelect
             v-model:value="formData.chunking_strategy"
             :options="chunkingStrategyOptions"
-            placeholder="請選擇分塊策略"
+            :placeholder="$t('collections.form.chunkingPlaceholder')"
           />
         </NFormItem>
 
         <div class="form-tip">
           <p class="tip-text">
-            💡 提示：分塊策略在建立後無法修改。請根據資料類型選擇：<br>
-            • QA 多重表徵：適用於問答對格式的 JSON 資料<br>
-            • 法規-階層式：適用於法規 JSON，使用完整法規結構<br>
-            <!-- • 法規情境增強：適用於法規 JSON，使用 LLM 自動生成情境描述<br> -->
-            • 法規-情境描述：適用於法規 JSON，法規結構與情境描述（HyDE）<br>
-            • 遞迴文字分塊：適用於 PDF、TXT、Markdown 等非結構化文件
+            {{ $t('collections.form.tipCreate') }}
           </p>
         </div>
       </template>
 
       <!-- 編輯模式 -->
       <template v-else>
-        <NFormItem path="name" label="Collection 名稱">
+        <NFormItem path="name" :label="$t('collections.form.nameLabel')">
           <NInput
             v-model:value="editFormData.name"
-            placeholder="請輸入 Collection 名稱"
+            :placeholder="$t('collections.form.namePlaceholder')"
             clearable
           />
         </NFormItem>
 
-        <NFormItem path="description" label="描述">
+        <NFormItem path="description" :label="$t('common.fields.description')">
           <NInput
             v-model:value="editFormData.description"
             type="textarea"
-            placeholder="請輸入 Collection 描述（可選）"
+            :placeholder="$t('collections.form.descPlaceholder')"
             :rows="3"
             clearable
           />
         </NFormItem>
 
-        <NFormItem label="分塊策略">
+        <NFormItem :label="$t('collections.form.chunkingStrategy')">
           <NInput :value="collection?.chunking_strategy" disabled />
         </NFormItem>
 
         <div class="form-tip">
           <p class="tip-text">
-            💡 提示：分塊策略建立後無法修改。
+            {{ $t('collections.form.tipEdit') }}
           </p>
         </div>
       </template>
@@ -235,10 +232,10 @@ async function handleSubmit() {
     <template #footer>
       <NSpace justify="end">
         <NButton @click="handleClose">
-          取消
+          {{ $t('common.actions.cancel') }}
         </NButton>
         <NButton type="primary" :loading="loading" @click="handleSubmit">
-          {{ mode === 'create' ? '建立' : '儲存' }}
+          {{ mode === 'create' ? $t('common.actions.create') : $t('common.actions.save') }}
         </NButton>
       </NSpace>
     </template>
@@ -259,5 +256,6 @@ async function handleSubmit() {
   font-size: 0.875rem;
   color: #0369a1;
   line-height: 1.5;
+  white-space: pre-line;
 }
 </style>

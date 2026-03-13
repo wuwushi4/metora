@@ -22,6 +22,7 @@ from app.modules.users.schemas import (
     UserListParams,
     AssignRolesRequest,
 )
+from app.i18n import t
 from app.utils.response import ApiResponse, PaginatedResponse, success_response, paginated_response
 from app.utils.exceptions import ValidationError
 
@@ -180,7 +181,7 @@ async def create_user(
 
     return success_response(
         data=user_response,
-        message="使用者建立成功"
+        message=t('users.createSuccess')
     )
 
 
@@ -218,11 +219,11 @@ async def update_user(
     is_self = current_user.id == user_id
 
     if not (is_admin or is_self):
-        raise ValidationError("無權限更新其他使用者的資料")
+        raise ValidationError(t('users.cannotUpdateOthers'))
 
     # 只有 admin 可以修改 is_active
     if request.is_active is not None and not is_admin:
-        raise ValidationError("只有管理員可以修改帳號啟用狀態")
+        raise ValidationError(t('users.adminOnlyActiveStatus'))
 
     service = UserService(db)
     updated_user = await service.update_user(user_id, request)
@@ -240,7 +241,7 @@ async def update_user(
 
     return success_response(
         data=user_response,
-        message="使用者資料更新成功"
+        message=t('users.updateSuccess')
     )
 
 
@@ -271,14 +272,14 @@ async def delete_user(
     """
     # 不能刪除自己
     if current_user.id == user_id:
-        raise ValidationError("無法刪除自己的帳號")
+        raise ValidationError(t('users.cannotDeleteSelf'))
 
     service = UserService(db)
     await service.delete_user(user_id)
 
     return success_response(
-        data=MessageResponse(message="使用者刪除成功"),
-        message="使用者刪除成功"
+        data=MessageResponse(message=t('users.deleteSuccess')),
+        message=t('users.deleteSuccess')
     )
 
 
@@ -325,5 +326,5 @@ async def assign_roles(
 
     return success_response(
         data=user_response,
-        message="角色分配成功"
+        message=t('users.roleAssignSuccess')
     )

@@ -5,6 +5,9 @@ import { fetchEventSource } from '@microsoft/fetch-event-source'
  * 提供通用的 SSE 串流處理功能
  */
 import { onUnmounted, ref } from 'vue'
+import i18n from '@/i18n'
+
+const { t } = i18n.global
 
 export function useFetchSSE() {
   const abortController = ref<AbortController | null>(null)
@@ -135,7 +138,7 @@ export function useFetchSSE() {
             }
           }
           else {
-            error.value = '未知的串流錯誤'
+            error.value = t('errors.unknown')
           }
 
           isStreaming.value = false

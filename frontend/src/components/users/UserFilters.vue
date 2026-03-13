@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import type { UserListParams } from '@/types/user'
 import { NButton, NInput, NSelect, NSpace } from 'naive-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits<{
   search: [params: UserListParams]
   reset: []
 }>()
+
+const { t } = useI18n()
 
 // 篩選條件
 const filters = ref({
@@ -17,20 +20,20 @@ const filters = ref({
 })
 
 // 狀態選項
-const statusOptions = [
-  { label: '全部', value: '' },
-  { label: '啟用', value: 'true' },
-  { label: '停用', value: 'false' },
-]
+const statusOptions = computed(() => [
+  { label: t('users.filters.all'), value: '' },
+  { label: t('users.filters.statusOptions.enabled'), value: 'true' },
+  { label: t('users.filters.statusOptions.disabled'), value: 'false' },
+])
 
 // 角色選項
-const roleOptions = [
-  { label: '全部', value: '' },
-  { label: '管理員', value: 'admin' },
-  { label: '一般使用者', value: 'user' },
-  { label: '編輯者', value: 'editor' },
-  { label: '檢視者', value: 'viewer' },
-]
+const roleOptions = computed(() => [
+  { label: t('users.filters.all'), value: '' },
+  { label: t('users.filters.roleOptions.admin'), value: 'admin' },
+  { label: t('users.filters.roleOptions.user'), value: 'user' },
+  { label: t('users.filters.roleOptions.editor'), value: 'editor' },
+  { label: t('users.filters.roleOptions.viewer'), value: 'viewer' },
+])
 
 // 處理搜尋
 function handleSearch() {
@@ -68,20 +71,20 @@ function handleReset() {
       <!-- 第一行：使用者名稱和電子郵件 -->
       <NSpace :size="16">
         <div class="filter-item">
-          <label class="filter-label">使用者名稱</label>
+          <label class="filter-label">{{ $t('users.filters.usernameLabel') }}</label>
           <NInput
             v-model:value="filters.username"
-            placeholder="搜尋使用者名稱"
+            :placeholder="$t('users.filters.usernamePlaceholder')"
             clearable
             @keyup.enter="handleSearch"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">電子郵件</label>
+          <label class="filter-label">{{ $t('users.filters.emailLabel') }}</label>
           <NInput
             v-model:value="filters.email"
-            placeholder="搜尋電子郵件"
+            :placeholder="$t('users.filters.emailPlaceholder')"
             clearable
             @keyup.enter="handleSearch"
           />
@@ -91,22 +94,22 @@ function handleReset() {
       <!-- 第二行：狀態、角色和操作按鈕 -->
       <NSpace :size="16" align="center">
         <div class="filter-item">
-          <label class="filter-label">狀態</label>
+          <label class="filter-label">{{ $t('users.filters.statusLabel') }}</label>
           <NSelect
             v-model:value="filters.is_active"
             :options="statusOptions"
-            placeholder="選擇狀態"
+            :placeholder="$t('users.filters.statusPlaceholder')"
             clearable
             style="width: 160px"
           />
         </div>
 
         <div class="filter-item">
-          <label class="filter-label">角色</label>
+          <label class="filter-label">{{ $t('users.filters.roleLabel') }}</label>
           <NSelect
             v-model:value="filters.role"
             :options="roleOptions"
-            placeholder="選擇角色"
+            :placeholder="$t('users.filters.rolePlaceholder')"
             clearable
             style="width: 160px"
           />
@@ -115,10 +118,10 @@ function handleReset() {
         <div class="filter-actions">
           <NSpace :size="12">
             <NButton type="primary" @click="handleSearch">
-              搜尋
+              {{ $t('common.actions.search') }}
             </NButton>
             <NButton @click="handleReset">
-              重置
+              {{ $t('common.actions.reset') }}
             </NButton>
           </NSpace>
         </div>

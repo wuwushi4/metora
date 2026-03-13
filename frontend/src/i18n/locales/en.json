@@ -1,0 +1,864 @@
+{
+  "common": {
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "confirm": "Confirm",
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "view": "View",
+      "export": "Export",
+      "upload": "Upload",
+      "close": "Close",
+      "search": "Search",
+      "reset": "Reset",
+      "submit": "Submit",
+      "back": "Back",
+      "backToList": "Back to List",
+      "update": "Update",
+      "add": "Add",
+      "rename": "Rename",
+      "viewDetail": "View Detail"
+    },
+    "status": {
+      "loading": "Loading...",
+      "success": "Operation successful",
+      "failed": "Operation failed",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "processing": "Processing",
+      "completed": "Completed"
+    },
+    "fields": {
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "owner": "Owner",
+      "actions": "Actions",
+      "status": "Status",
+      "email": "Email",
+      "role": "Role",
+      "none": "None"
+    },
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": "min ago",
+      "hoursAgo": "hr ago",
+      "daysAgo": "days ago"
+    },
+    "unit": {
+      "messages": "messages",
+      "items": "items",
+      "matches": "matches"
+    },
+    "confirm": {
+      "deleteTitle": "Confirm Delete"
+    }
+  },
+  "app": {
+    "initFailed": "Application initialization failed",
+    "unknownError": "Unknown error",
+    "reload": "Reload",
+    "loadingApp": "Loading application...",
+    "initError": "Initialization failed",
+    "retry": "Retry"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Turn AI Agents into Real Systems",
+      "usernamePlaceholder": "Enter username",
+      "passwordPlaceholder": "Enter password",
+      "usernameRequired": "Username is required",
+      "passwordRequired": "Password is required",
+      "loginButton": "Sign In",
+      "loggingIn": "Signing in...",
+      "success": "Login successful!",
+      "failed": "Login failed, please try again later"
+    },
+    "logout": {
+      "success": "Logged out",
+      "failed": "Logout failed"
+    },
+    "initFailed": "Initialization failed",
+    "changePassword": {
+      "title": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "newPasswordPlaceholder": "Enter new password (min. 6 characters)",
+      "confirmPasswordPlaceholder": "Re-enter new password",
+      "newPasswordRequired": "New password is required",
+      "minLength": "Password must be at least 6 characters",
+      "notSameAsOld": "New password must differ from the old one",
+      "confirmRequired": "Please confirm your new password",
+      "mismatch": "Passwords do not match",
+      "currentPasswordRequired": "Current password is required",
+      "success": "Password changed successfully",
+      "failed": "Failed to change password. Please check your current password.",
+      "tip": "Password must be at least 6 characters. You will remain logged in after the change.",
+      "confirmButton": "Confirm Change"
+    }
+  },
+  "navbar": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "settings": "Settings",
+    "logout": "Logout",
+    "notifications": {
+      "title": "Notifications",
+      "empty": "You have 0 unread notifications"
+    },
+    "profileWip": "Profile feature is under development...",
+    "settingsWip": "Settings feature is under development...",
+    "language": "Language"
+  },
+  "sidebar": {
+    "groups": {
+      "main": "Main",
+      "data": "Data Management",
+      "engineering": "Data Engineering",
+      "system": "System"
+    },
+    "menu": {
+      "dashboard": "Dashboard",
+      "chat": "Agent Chat",
+      "collections": "Knowledge Base",
+      "regulations": "Regulations",
+      "feedbacks": "Feedback Records",
+      "lawProcessing": "Law Crawler",
+      "users": "User Management",
+      "settings": "Settings"
+    }
+  },
+  "errors": {
+    "http": {
+      "400": "Bad request",
+      "401": "Session expired, please sign in again",
+      "403": "Access denied",
+      "404": "Resource not found",
+      "408": "Request timeout, please try again",
+      "500": "Internal server error",
+      "502": "Bad gateway",
+      "503": "Service temporarily unavailable",
+      "504": "Gateway timeout"
+    },
+    "network": "Network error, please check your connection",
+    "timeout": "Request timeout, please check your connection",
+    "configError": "Request configuration error",
+    "unknown": "An unknown error occurred",
+    "requestFailed": "Request failed (status: {status})",
+    "connectionFailed": "Cannot connect to server, please check your connection",
+    "serverError": "Server error, please try again later",
+    "unknownError": "An unknown error occurred, please try again later"
+  },
+  "chat": {
+    "loadFailed": "Failed to load chat data",
+    "promptPanel": "Prompt Panel",
+    "selectOrCreate": "Please select or create a conversation first",
+    "sendFailed": "Failed to send message:",
+    "sessions": {
+      "title": "Conversations",
+      "new": "New Chat",
+      "searchPlaceholder": "Search titles or content...",
+      "searchResults": "Found {count} conversations",
+      "clearSearch": "Clear Search",
+      "searching": "Searching...",
+      "searchMinChars": "Search keyword must be at least 2 characters",
+      "searchRateLimit": "Too many search requests, please try again later",
+      "searchInvalid": "Invalid search keyword, please try again",
+      "searchFailed": "Search failed, please try again later",
+      "noResults": "No conversations found",
+      "empty": "No conversations yet",
+      "viewAll": "View all conversations",
+      "createFirst": "Create your first conversation",
+      "renameTitle": "Rename Conversation",
+      "renamePlaceholder": "Enter a new title",
+      "deleteConfirm": "Are you sure you want to delete this conversation?",
+      "titleRequired": "Title cannot be empty",
+      "moreMatches": "{count} more matching messages",
+      "switchFailed": "Failed to switch conversation",
+      "createFailed": "Failed to create conversation",
+      "renameFailed": "Rename failed",
+      "deleteFailed": "Failed to delete conversation"
+    },
+    "graphs": {
+      "base_graph": "General Assistant",
+      "rag_graph": "Knowledge Expert",
+      "regulation_graph": "Regulation Advisor",
+      "agent_graph": "Tool Agent",
+      "base_graphDesc": "I can help you with everyday questions, providing answers based on broad general knowledge",
+      "rag_graphDesc": "I specialize in your knowledge base content, accurately retrieving and answering document-based questions",
+      "regulation_graphDesc": "I focus on regulation analysis and interpretation, helping you query articles, trace references, and provide expert advice",
+      "agent_graphDesc": "I can write and execute Python code to solve complex problems, including data analysis, chart generation, and API calls",
+      "base_graphRole": "General Conversation Expert",
+      "rag_graphRole": "Knowledge Retrieval Expert",
+      "regulation_graphRole": "Regulation Query Expert",
+      "agent_graphRole": "Code Execution Expert",
+      "selectorHeader": "Choose an AI assistant — each has its own area of expertise",
+      "selectorHint": "Knowledge Expert and Regulation Advisor require selecting a knowledge base; Tool Agent can execute code for complex tasks",
+      "loadFailed": "Failed to load graph list"
+    },
+    "config": {
+      "title": "Start a New Conversation",
+      "sessionTitle": "Conversation Title",
+      "titleHint": "Optional, auto-generated if left blank",
+      "titlePlaceholder": "Enter conversation title (optional)",
+      "selectCollection": "Select Knowledge Base",
+      "requiredForRag": "Knowledge Expert",
+      "requiredForRegulation": "Regulation Advisor",
+      "tip": "You can switch modes or rename the title anytime after creation",
+      "createButton": "Create Conversation",
+      "incomplete": "Please complete all required fields"
+    },
+    "messages": {
+      "userRole": "User",
+      "assistantRole": "AI Assistant",
+      "loading": "Loading messages...",
+      "thinking": "AI is thinking...",
+      "empty": "No messages yet",
+      "scrollToBottom": "Scroll to Bottom",
+      "loadFailed": "Failed to load messages"
+    },
+    "store": {
+      "loadGraphsFailed": "Failed to load graph list",
+      "loadSessionsFailed": "Failed to load session list",
+      "createSuccess": "Session created",
+      "createFailed": "Failed to create session",
+      "switchFailed": "Failed to switch session",
+      "loadMessagesFailed": "Failed to load messages",
+      "renameSuccess": "Renamed successfully",
+      "renameFailed": "Rename failed",
+      "deleteSuccess": "Deleted successfully",
+      "deleteFailed": "Failed to delete session"
+    },
+    "input": {
+      "placeholder": "Type a message... (Shift + Enter for new line, Enter to send)",
+      "maxFiles": "Maximum {max} files allowed (currently {current})",
+      "uploadFile": "Upload File",
+      "send": "Send",
+      "stop": "Stop",
+      "dropHint": "Drop files here to upload"
+    },
+    "feedback": {
+      "copy": "Copy",
+      "helpful": "Helpful",
+      "notHelpful": "Not Helpful",
+      "moreThoughts": "Tell us more",
+      "issueType": "Issue Type (multi-select)",
+      "additionalComment": "Additional Comment (optional)",
+      "commentPlaceholder": "Describe the issue or suggestion...",
+      "issues": {
+        "inaccurate": "Inaccurate answer",
+        "tooShort": "Too brief",
+        "formatError": "Formatting error",
+        "irrelevant": "Irrelevant retrieval results",
+        "inappropriateTone": "Inappropriate tone"
+      },
+      "thankYou": "Thank you for your feedback!",
+      "submitFailed": "Failed to submit feedback",
+      "copied": "Copied to clipboard",
+      "copyFailed": "Copy failed, please copy manually"
+    },
+    "filePreview": {
+      "pending": "Pending",
+      "uploading": "Uploading...",
+      "success": "Uploaded",
+      "failed": "Upload failed"
+    },
+    "empty": {
+      "title": "Start a Conversation",
+      "descRag": "Select a knowledge base and ask questions — AI will answer based on your documents",
+      "descBase": "Start chatting — AI will answer based on general knowledge",
+      "descRegulation": "Query regulation articles and scenarios — AI will answer from the regulation database",
+      "descAgent": "AI can write and execute Python code to help with data analysis, chart generation, and more",
+      "descDefault": "Please select a conversation mode to begin",
+      "examplesTitle": "Try these questions:",
+      "tip": "Press Enter to send, Shift + Enter for new line",
+      "baseExamples": [
+        "Hi, can you introduce your features?",
+        "Explain what machine learning is.",
+        "What can you do?",
+        "What are the main features of this project?"
+      ],
+      "ragExamples": [
+        "Summarize the key points of this document",
+        "What related technical documents are available?",
+        "Explain what machine learning is.",
+        "What are the main features of this project?"
+      ],
+      "regulationExamples": [
+        "What does Article 3 of the Animal Protection Act say?",
+        "What laws are violated by abusing stray dogs?",
+        "Is it illegal to not take an injured pet to the vet immediately?",
+        "Explain what machine learning is."
+      ],
+      "agentExamples": [
+        "Find all prime numbers from 1 to 100",
+        "Draw a sin and cos comparison chart with matplotlib",
+        "Analyze the statistical distribution of: [23, 45, 67, 89, 12, 34, 56, 78, 90, 11]",
+        "Explain what machine learning is."
+      ]
+    },
+    "prompts": {
+      "title": "Prompt Templates",
+      "favorite": "Favorite",
+      "unfavorite": "Unfavorite",
+      "deleteConfirm": "Are you sure you want to delete this prompt template?",
+      "empty": "No prompt templates yet",
+      "createFirst": "Create your first template",
+      "editor": {
+        "createTitle": "Create Prompt Template",
+        "editTitle": "Edit Prompt Template",
+        "nameLabel": "Template Name",
+        "namePlaceholder": "Enter template name (max 100 chars)",
+        "contentLabel": "Prompt Content",
+        "contentPlaceholder": "Enter prompt content (max 5000 chars)\n\nExample:\nYou are a professional assistant. Please answer the user's questions.",
+        "descLabel": "Description (optional)",
+        "descPlaceholder": "Describe the purpose of this template",
+        "favoriteLabel": "Favorite this prompt",
+        "favoriteHint": "When enabled, this prompt will show a favorite badge"
+      }
+    },
+    "promptsStore": {
+      "loadFailed": "Failed to load prompt templates",
+      "createSuccess": "Prompt template created",
+      "createFailed": "Failed to create prompt template",
+      "updateSuccess": "Prompt template updated",
+      "updateFailed": "Failed to update prompt template",
+      "deleteSuccess": "Prompt template deleted",
+      "deleteFailed": "Failed to delete prompt template",
+      "favoriteSuccess": "Prompt favorited",
+      "unfavoriteSuccess": "Prompt unfavorited",
+      "toggleFailed": "Operation failed"
+    },
+    "collectionSelector": {
+      "placeholder": "Select knowledge base...",
+      "empty": "No knowledge bases available",
+      "loadFailed": "Failed to load knowledge bases",
+      "selected": "{count} knowledge bases selected",
+      "documents": "{count} documents"
+    },
+    "sse": {
+      "networkError": "Network connection failed",
+      "authError": "Authentication failed",
+      "serverError": "Server error"
+    }
+  },
+  "collections": {
+    "title": "Knowledge Base Management",
+    "description": "Manage document collections, chunking strategies, and datasets",
+    "addNew": "New Knowledge Base",
+    "createSuccess": "Knowledge Base created successfully",
+    "updateSuccess": "Knowledge Base updated successfully",
+    "deleteSuccess": "Knowledge Base deleted successfully",
+    "loadFailed": "Failed to load Knowledge Base list",
+    "deleteFailed": "Failed to delete Knowledge Base",
+    "form": {
+      "createTitle": "New Knowledge Base",
+      "editTitle": "Edit Knowledge Base",
+      "nameLabel": "Knowledge Base Name",
+      "namePlaceholder": "Enter Knowledge Base name",
+      "descPlaceholder": "Enter Knowledge Base description (optional)",
+      "chunkingStrategy": "Chunking Strategy",
+      "chunkingPlaceholder": "Select chunking strategy",
+      "strategies": {
+        "qa_multi_representation": "QA Multi-Representation — for Q&A pair data (JSON)",
+        "regulation_hierarchical": "Regulation Hierarchical — uses full regulation structure (JSON)",
+        "regulation_scenario_description": "Regulation Scenario Description — regulation structure with HyDE (JSON)",
+        "recursive_text": "Recursive Text Chunking — for PDF, TXT, Markdown"
+      },
+      "tipCreate": "Chunking strategy cannot be changed after creation. Choose based on data type:\n• QA Multi-Representation: for Q&A pair JSON data\n• Regulation Hierarchical: for regulation JSON using full structure\n• Regulation Scenario Description: for regulation JSON with scenario descriptions (HyDE)\n• Recursive Text Chunking: for unstructured documents like PDF, TXT, Markdown",
+      "tipEdit": "Chunking strategy cannot be changed after creation.",
+      "validationFailed": "Please check the form fields"
+    },
+    "filters": {
+      "nameLabel": "Knowledge Base Name",
+      "namePlaceholder": "Search Knowledge Base name",
+      "strategyLabel": "Chunking Strategy",
+      "strategyPlaceholder": "Select chunking strategy",
+      "all": "All",
+      "strategyOptions": {
+        "qa_multi_representation": "QA Multi-Representation",
+        "regulation_hierarchical": "Regulation Hierarchical",
+        "regulation_manual_scenario": "Regulation Manual Scenario"
+      }
+    },
+    "table": {
+      "chunkingStrategy": "Chunking Strategy",
+      "datasetCount": "Datasets",
+      "collectionName": "Knowledge Base Name",
+      "deleteConfirm": "Are you sure you want to delete this Knowledge Base? All associated Datasets will also be deleted.",
+      "totalItems": "Total {count} items"
+    },
+    "detail": {
+      "description": "Knowledge Base details and dataset management",
+      "info": "Knowledge Base Info",
+      "datasetList": "Dataset List",
+      "uploadFiles": "Upload Files",
+      "uploadSuccess": "Successfully uploaded {count} files, vectorization in progress...",
+      "deleteDatasetSuccess": "Dataset deleted successfully",
+      "refreshSuccess": "Refreshed successfully",
+      "loadFailed": "Failed to load Knowledge Base",
+      "uploadFailed": "Failed to upload files",
+      "deleteDatasetFailed": "Failed to delete dataset",
+      "loadDatasetsFailed": "Failed to load dataset list",
+      "strategies": {
+        "qa_multi_representation": "QA Multi-Representation",
+        "regulation_hierarchical": "Regulation Hierarchical",
+        "regulation_scenario_description": "Regulation Scenario Enhanced",
+        "regulation_manual_scenario": "Regulation Scenario Description",
+        "recursive_text": "Recursive Text Chunking"
+      },
+      "defaultOwner": "User #{id}"
+    },
+    "dataset": {
+      "originalFilename": "Original Filename",
+      "fileType": "File Type",
+      "fileSize": "File Size",
+      "chunkCount": "Chunks",
+      "vectorStatus": "Vector Status",
+      "statusFailed": "Failed",
+      "statusCompleted": "Completed",
+      "statusProcessing": "Processing",
+      "uploadModal": {
+        "noFiles": "Please select files to upload first",
+        "noValidFiles": "No valid files to upload",
+        "chunkParams": "Chunking Parameters",
+        "title": "Upload Dataset",
+        "dragText": "Click or drag files here to upload",
+        "supportedTypes": "Supported file types: {types}",
+        "maxFiles": "Upload up to 10 files at once",
+        "chunkSizeLabel": "Chunk Size (characters)",
+        "chunkSizePlaceholder": "Default 1000",
+        "chunkSizeHint": "Maximum characters per chunk",
+        "overlapLabel": "Overlap Size (characters)",
+        "overlapPlaceholder": "Default 200",
+        "overlapHint": "Overlap characters between adjacent chunks for context continuity",
+        "defaultParamsHint": "Default system values are pre-filled. Adjust as needed.",
+        "tipAutoProcess": "Uploaded files will be automatically chunked and vectorized",
+        "tipLargeFile": "Large file vectorization may take longer, please be patient",
+        "tipRefresh": "You can manually refresh the list to check vectorization status",
+        "startUpload": "Start Upload",
+        "deleteConfirm": "Are you sure you want to delete this Dataset? All associated vector data will also be deleted."
+      }
+    }
+  },
+  "regulations": {
+    "title": "Regulation Management",
+    "description": "Manage regulation documents, chapters, articles, and scenarios",
+    "upload": "Upload Regulation",
+    "uploadSuccess": "Regulation uploaded successfully",
+    "deleteSuccess": "Regulation deleted successfully",
+    "exportLoading": "Exporting regulation...",
+    "exportSuccess": "Regulation exported successfully",
+    "loadFailed": "Failed to load regulation list",
+    "uploadFailed": "Failed to upload regulation",
+    "deleteFailed": "Failed to delete regulation",
+    "exportFailed": "Failed to export regulation",
+    "filters": {
+      "all": "All",
+      "nameLabel": "Regulation Name",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Select category",
+      "statusLabel": "Status",
+      "statusPlaceholder": "Select status",
+      "categories": {
+        "constitution": "Constitution",
+        "law": "Law",
+        "order": "Order",
+        "adminRule": "Administrative Rule",
+        "localRegulation": "Local Regulation"
+      },
+      "statuses": {
+        "active": "Active",
+        "abolished": "Abolished",
+        "suspended": "Suspended",
+        "notEffective": "Not Yet Effective"
+      },
+      "searchPlaceholder": "Search regulation name"
+    },
+    "uploadModal": {
+      "title": "Upload Regulation JSON",
+      "readFailed": "Failed to read file",
+      "noValidFiles": "No valid files to upload",
+      "dragText": "Click or drag JSON file here to upload",
+      "onlyJson": "Only .json regulation files are supported",
+      "singleFile": "Only one file can be uploaded at a time",
+      "tipRequired": "JSON must contain law_metadata and chapters fields",
+      "tipValidate": "System will automatically validate JSON format",
+      "tipDuplicate": "Upload will fail if regulation code already exists",
+      "selectFile": "Please select a JSON file to upload first",
+      "jsonMetadataError": "JSON error: missing required fields law_metadata or chapters",
+      "jsonFieldError": "JSON error: law_metadata missing required fields (name, category, status, code, source_url)",
+      "jsonSourceUrlEmpty": "JSON error: source_url cannot be empty",
+      "jsonChaptersArray": "JSON error: chapters must be an array",
+      "jsonChapterStructure": "JSON error: incorrect chapter structure",
+      "jsonArticlesArray": "JSON error: articles must be an array",
+      "jsonArticleStructure": "JSON error: incorrect article structure",
+      "jsonScenariosArray": "JSON error: scenarios must be an array",
+      "jsonSyntaxError": "JSON error: invalid JSON syntax"
+    },
+    "table": {
+      "lawCode": "Regulation Code",
+      "lawName": "Regulation Name",
+      "category": "Category",
+      "chapterCount": "Chapters",
+      "articleCount": "Articles",
+      "scenarioCount": "Scenarios",
+      "lastUpdated": "Last Updated",
+      "deleteConfirm": "Are you sure you want to delete this regulation? This action cannot be undone.",
+      "totalItems": "Total {count} items"
+    },
+    "detail": {
+      "description": "Regulation details, chapters, and articles",
+      "basicInfo": "Basic Information",
+      "code": "Regulation Code",
+      "name": "Regulation Name",
+      "category": "Category",
+      "status": "Status",
+      "lastUpdated": "Last Updated",
+      "chapterCount": "Chapters",
+      "articleCount": "Articles",
+      "scenarioCount": "Scenarios",
+      "chaptersAndArticles": "Chapters & Articles",
+      "articleTag": "Art.",
+      "scenarios": "Application Scenarios:",
+      "scenarioPlaceholder": "Enter scenario description (supports multi-line), click \"Add Scenario\" to add",
+      "addScenario": "Add Scenario",
+      "noArticles": "No articles in this chapter",
+      "noChapters": "No chapter content for this regulation",
+      "editScenario": "Edit Scenarios",
+      "updateSuccess": "Regulation updated successfully",
+      "refreshSuccess": "Refreshed successfully",
+      "exportSuccess": "Regulation exported successfully",
+      "loadFailed": "Failed to load regulation",
+      "updateFailed": "Failed to update regulation",
+      "exportFailed": "Failed to export regulation"
+    }
+  },
+  "feedbacks": {
+    "title": "Feedback Management",
+    "description": "View and manage user feedback records",
+    "loadFailed": "Failed to load feedback list",
+    "refreshSuccess": "Refreshed successfully",
+    "filters": {
+      "all": "All",
+      "like": "Like",
+      "dislike": "Dislike",
+      "reviewed": "Reviewed",
+      "notReviewed": "Not Reviewed",
+      "graphTypes": {
+        "base_graph": "Basic Chat",
+        "rag_graph": "RAG Chat",
+        "regulation_graph": "Regulation Query"
+      },
+      "feedbackTypeLabel": "Feedback Type",
+      "feedbackTypePlaceholder": "Select feedback type",
+      "reviewStatusLabel": "Review Status",
+      "reviewStatusPlaceholder": "Select review status",
+      "agentTypeLabel": "Agent Type",
+      "agentTypePlaceholder": "Select Agent type",
+      "collectionLabel": "Knowledge Base",
+      "collectionPlaceholder": "Select knowledge base",
+      "dateLabel": "Created At"
+    },
+    "table": {
+      "user": "User",
+      "messagePreview": "Message Preview",
+      "interrupted": "Interrupted",
+      "collection": "Knowledge Base",
+      "feedbackType": "Feedback Type",
+      "issueLabels": "Issue Labels",
+      "reviewStatus": "Review Status",
+      "agentType": "Agent Type",
+      "totalItems": "Total {count} items"
+    },
+    "detail": {
+      "loadFailed": "Failed to load feedback details",
+      "loadError": "Failed to load",
+      "feedbackInfo": "Feedback Information",
+      "feedbackId": "Feedback ID",
+      "messageId": "Message ID",
+      "agentType": "Agent Type",
+      "collection": "Knowledge Base",
+      "user": "User",
+      "feedbackType": "Feedback Type",
+      "like": "Like",
+      "dislike": "Dislike",
+      "issueLabels": "Issue Labels",
+      "userComment": "User Comment",
+      "conversationContent": "Conversation Content",
+      "userQuestion": "User Question",
+      "aiReply": "AI Reply",
+      "userInterrupted": "User Interrupted",
+      "noQuestion": "No question recorded",
+      "unknownUser": "Unknown User",
+      "unknown": "Unknown",
+      "expertReview": "Expert Review",
+      "reviewer": "Reviewer",
+      "expertOpinion": "Expert Opinion",
+      "suggestedReply": "Suggested Reply",
+      "reviewTime": "Review Time"
+    },
+    "expertReview": {
+      "title": "Expert Review",
+      "opinionLabel": "Expert Opinion",
+      "opinionRequired": "Expert opinion is required",
+      "opinionMinLength": "Expert opinion must be at least 10 characters",
+      "opinionPlaceholder": "Enter your expert opinion, including analysis and root cause (min. 10 characters)",
+      "suggestedResponseLabel": "Suggested Response (optional)",
+      "suggestedResponsePlaceholder": "If the AI response is inappropriate, provide a suggested response (for DPO fine-tuning)",
+      "submitReview": "Submit Review",
+      "validationFailed": "Please check the form",
+      "success": "Expert review submitted successfully",
+      "failed": "Failed to submit expert review"
+    },
+    "retrieval": {
+      "title": "RAG Retrieval Results",
+      "totalResults": "{count} results",
+      "unknownDoc": "Unknown Document",
+      "score": "Score",
+      "collectionLabel": "Knowledge Base",
+      "contentLabel": "Content",
+      "metadataLabel": "Metadata"
+    }
+  },
+  "users": {
+    "title": "User Management",
+    "description": "Manage system user accounts, roles, and permissions",
+    "addNew": "Add User",
+    "createSuccess": "User created successfully",
+    "updateSuccess": "User updated successfully",
+    "deleteSuccess": "User deleted successfully",
+    "loadFailed": "Failed to load user list",
+    "deleteFailed": "Failed to delete user",
+    "roleAssignSuccess": "Roles assigned successfully",
+    "roleAssignFailed": "Failed to assign roles",
+    "table": {
+      "username": "Username",
+      "email": "Email",
+      "fullName": "Full Name",
+      "cannotDeleteSelf": "Cannot delete your own account",
+      "cannotDeleteSuperAdmin": "Cannot delete super administrator",
+      "deleteConfirm": "Are you sure you want to delete this user? This will deactivate the account.",
+      "totalItems": "Total {count} items",
+      "assignRoles": "Roles"
+    },
+    "form": {
+      "createTitle": "Add User",
+      "editTitle": "Edit User",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter username",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter password (min. 6 characters)",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter password",
+      "fullNameLabel": "Full Name",
+      "fullNamePlaceholder": "Enter full name (optional)",
+      "rolesLabel": "Roles",
+      "rolesPlaceholder": "Select roles",
+      "statusLabel": "Status",
+      "roleOptions": {
+        "admin": "Administrator",
+        "user": "User",
+        "editor": "Editor",
+        "viewer": "Viewer"
+      },
+      "tipEdit": "Username cannot be changed. Use the password reset feature to change passwords.",
+      "validationFailed": "Please check the form fields",
+      "usernameRequired": "Username is required",
+      "usernameLength": "Must be 3-50 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "confirmPasswordMismatch": "Passwords do not match",
+      "rolesRequired": "Please select at least one role"
+    },
+    "filters": {
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Search username",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Search email",
+      "statusLabel": "Status",
+      "statusPlaceholder": "Select status",
+      "roleLabel": "Role",
+      "rolePlaceholder": "Select role",
+      "all": "All",
+      "statusOptions": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "roleOptions": {
+        "admin": "Administrator",
+        "user": "User",
+        "editor": "Editor",
+        "viewer": "Viewer"
+      }
+    },
+    "roleAssign": {
+      "title": "Assign Roles",
+      "usernameLabel": "Username:",
+      "emailLabel": "Email:",
+      "statusLabel": "Status:",
+      "currentRoles": "Current Roles",
+      "assignRoles": "Assign Roles",
+      "selectRolePlaceholder": "Select roles",
+      "noRole": "No roles",
+      "tipMinRole": "Each user must have at least one role",
+      "tipSuperAdmin": "Super administrators have all permissions and don't need role assignment",
+      "gotIt": "Got it"
+    }
+  },
+  "settings": {
+    "title": "System Settings",
+    "description": "Manage system configuration parameters",
+    "tabs": {
+      "auth": "Authentication & Security",
+      "rag": "RAG System",
+      "agent": "Agent Chat",
+      "upload": "File Upload"
+    },
+    "loadFailed": "Failed to load settings",
+    "updateSuccess": "Setting updated successfully",
+    "updateFailed": "Failed to update setting",
+    "restartWarning": "Some settings require application restart to take effect",
+    "requiresRestart": "Restart required",
+    "authTitle": "Authentication & Security Settings",
+    "chatTitle": "Agent Chat Settings",
+    "ragTitle": "RAG Retrieval System Settings",
+    "uploadTitle": "File Upload Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "admin": {
+      "title": "Admin Dashboard",
+      "subtitle": "System monitoring and AI quality analytics",
+      "refresh": "Refresh",
+      "timeRange": {
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month",
+        "last7Days": "Last 7 Days",
+        "last30Days": "Last 30 Days",
+        "all": "All Time"
+      },
+      "chatMetrics": "Chat Interaction Metrics",
+      "totalSessions": "Total Sessions",
+      "totalMessages": "Total Messages",
+      "dailyAvgMessages": "Daily Avg Messages",
+      "agentDistribution": "Agent Type Distribution",
+      "baseGraph": "Basic Chat",
+      "ragGraph": "RAG Chat",
+      "regulationGraph": "Regulation Query",
+      "feedbackMetrics": "AI Quality Feedback Metrics",
+      "thumbsUp": "Likes",
+      "thumbsDown": "Dislikes",
+      "thumbsUpRate": "Like Rate",
+      "feedbackRate": "Feedback Rate",
+      "pendingReview": "Pending Review",
+      "topIssueTags": "Top 10 Issue Tags",
+      "unitSessions": "",
+      "unitMessages": "",
+      "unitMessagesPerDay": "/day"
+    },
+    "user": {
+      "subtitle": "This is your personal dashboard",
+      "quickActions": "Quick Actions",
+      "startChat": "Start New Chat",
+      "myCollections": "My Knowledge Bases",
+      "myStats": "My Statistics",
+      "mySessions": "My Sessions",
+      "myMessages": "My Messages"
+    },
+    "issueTagList": {
+      "times": "times",
+      "empty": "No issue tags yet"
+    }
+  },
+  "dataEngineering": {
+    "title": "Law Crawler",
+    "subtitle": "Enter regulation number to automatically crawl and convert to Markdown and JSON format (Currently, this feature only supports automatic crawling of Taiwan regulation websites).",
+    "inputTitle": "Enter Regulation Info",
+    "processSuccess": "Regulation processing completed",
+    "form": {
+      "pcodeLabel": "Regulation Code",
+      "pcodePlaceholder": "e.g., M0060027",
+      "pcodeRequired": "Regulation code is required",
+      "pcodeFormat": "Invalid format. Correct format: 1 uppercase letter + 7 digits (e.g., M0060027)",
+      "lawNameLabel": "Regulation Name",
+      "lawNamePlaceholder": "Optional, will be extracted from web if not provided",
+      "lawNameMaxLength": "Regulation name cannot exceed 200 characters",
+      "forceRefresh": "Force Re-crawl",
+      "forceRefreshHint": "Ignore cache and re-crawl from website",
+      "startProcess": "Start Processing"
+    },
+    "status": {
+      "idle": "Awaiting Processing",
+      "processing": "Processing...",
+      "success": "Processing Successful",
+      "error": "Processing Failed",
+      "unknown": "Unknown Status",
+      "processingMessage": "Crawling regulation data and converting to Markdown and JSON format...",
+      "successMessage": "Regulation data processing completed{cacheInfo}{timeInfo}. Download files below.",
+      "fromCache": " (from cache)",
+      "timeTaken": ", took {time} seconds",
+      "errorMessage": "An unknown error occurred, please try again later.",
+      "idleMessage": "Enter a regulation code above to start processing."
+    },
+    "result": {
+      "title": "Processing Result",
+      "fromCache": "From Cache",
+      "pcodeLabel": "Regulation Code",
+      "lawNameLabel": "Regulation Name",
+      "chapters": "Chapters",
+      "articles": "Articles",
+      "items": "Items",
+      "subitems": "Sub-items",
+      "processingTime": "Processing Time",
+      "seconds": "seconds",
+      "downloadMarkdown": "Download Markdown File",
+      "downloadJson": "Download JSON File",
+      "downloadMarkdownFailed": "Failed to download Markdown file",
+      "downloadJsonFailed": "Failed to download JSON file",
+      "downloaded": "Downloaded {filename}"
+    }
+  },
+  "fileUtils": {
+    "fileTooLarge": "File \"{name}\" exceeds size limit ({size})",
+    "invalidFormat": "File \"{name}\" format not supported ({type})",
+    "invalidExtension": "File \"{name}\" extension not supported (.{ext})",
+    "tooManyFiles": "Maximum {max} files allowed",
+    "compressFailed": "Image compression failed",
+    "imageLoadFailed": "Image loading failed",
+    "fileReadFailed": "File reading failed"
+  },
+  "pwa": {
+    "offline": {
+      "message": "You are currently offline"
+    },
+    "update": {
+      "title": "New Version Available",
+      "message": "A new version is ready. Click update to enjoy the latest features.",
+      "updateButton": "Update Now",
+      "dismissButton": "Later"
+    },
+    "install": {
+      "title": "Install Metora",
+      "message": "Install Metora on your device for faster loading and offline access.",
+      "iosMessage": "Tap the Safari share button, then select \"Add to Home Screen\" to install this app.",
+      "installButton": "Install App",
+      "dismissButton": "Not Now"
+    }
+  }
+}

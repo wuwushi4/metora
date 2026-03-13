@@ -24,7 +24,9 @@ import RetrievalResultsCard from '@/components/feedbacks/RetrievalResultsCard.vu
 import { useAuthStore } from '@/stores/auth'
 import { formatDateTime } from '@/utils/date'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
@@ -61,18 +63,15 @@ const isInterrupted = computed(
 
 // Agent 類型標籤映射
 function getGraphTypeLabel(graphType: string): string {
-  const labels: Record<string, string> = {
-    base_graph: '基礎對話',
-    rag_graph: 'RAG 對話',
-    regulation_graph: '法規查詢',
-  }
-  return labels[graphType] || graphType
+  const key = `feedbacks.filters.graphTypes.${graphType}`
+  const translated = t(key)
+  return translated !== key ? translated : graphType
 }
 
 async function loadDetail() {
   const id = feedbackId.value
   if (!id) {
-    loadError.value = '反饋 ID 不存在'
+    loadError.value = t('feedbacks.detail.loadFailed')
     message.error(loadError.value)
     return
   }
@@ -85,7 +84,7 @@ async function loadDetail() {
   }
   catch (error: any) {
     console.error('載入反饋詳情失敗:', error)
-    const errorMsg = error.message || '載入反饋詳情失敗'
+    const errorMsg = error.message || t('feedbacks.detail.loadFailed')
     loadError.value = errorMsg
     message.error(errorMsg)
   }
@@ -99,7 +98,7 @@ function handleBack() {
 }
 
 async function handleReviewSubmitted() {
-  message.success('審查提交成功,正在重新載入...')
+  message.success(t('feedbacks.expertReview.success'))
   await loadDetail()
 }
 
@@ -116,7 +115,7 @@ onMounted(() => {
         <template #icon>
           <NIcon :component="BackIcon" />
         </template>
-        返回列表
+        {{ t('common.actions.backToList') }}
       </NButton>
     </div>
 
@@ -128,12 +127,12 @@ onMounted(() => {
     <!-- 載入錯誤 -->
     <NEmpty
       v-else-if="loadError || !feedback"
-      description="載入失敗"
+      :description="t('feedbacks.detail.loadError')"
       :show-description="true"
     >
       <template #extra>
         <NButton @click="loadDetail">
-          重試
+          {{ t('common.actions.retry') }}
         </NButton>
       </template>
     </NEmpty>
@@ -141,20 +140,20 @@ onMounted(() => {
     <!-- 內容 -->
     <div v-else class="content-container">
       <!-- 反饋資訊卡片 -->
-      <NCard title="反饋資訊">
+      <NCard :title="t('feedbacks.detail.feedbackInfo')">
         <NDescriptions :column="descriptionColumn" label-placement="left" bordered>
-          <NDescriptionsItem label="反饋 ID">
+          <NDescriptionsItem :label="t('feedbacks.detail.feedbackId')">
             {{ feedback.id }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="訊息 ID">
+          <NDescriptionsItem :label="t('feedbacks.detail.messageId')">
             {{ feedback.message_id }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="Agent 類型">
+          <NDescriptionsItem :label="t('feedbacks.detail.agentType')">
             <NTag type="info" size="small">
               {{ getGraphTypeLabel(feedback.graph_type) }}
             </NTag>
           </NDescriptionsItem>
-          <NDescriptionsItem label="知識庫">
+          <NDescriptionsItem :label="t('feedbacks.detail.collection')">
             <NSpace v-if="feedback.collection_names && feedback.collection_names.length > 0" :size="8">
               <NTag
                 v-for="name in feedback.collection_names"
@@ -167,20 +166,20 @@ onMounted(() => {
             </NSpace>
             <span v-else>-</span>
           </NDescriptionsItem>
-          <NDescriptionsItem label="使用者">
-            {{ feedback.user?.full_name || feedback.user?.username || '未知使用者' }}
+          <NDescriptionsItem :label="t('feedbacks.detail.user')">
+            {{ feedback.user?.full_name || feedback.user?.username || t('feedbacks.detail.unknownUser') }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="反饋類型">
+          <NDescriptionsItem :label="t('feedbacks.detail.feedbackType')">
             <NTag
               :type="feedback.feedback_type === 'thumbs_up' ? 'success' : 'error'"
               size="small"
             >
-              {{ feedback.feedback_type === 'thumbs_up' ? '喜歡' : '不喜歡' }}
+              {{ feedback.feedback_type === 'thumbs_up' ? t('feedbacks.detail.like') : t('feedbacks.detail.dislike') }}
             </NTag>
           </NDescriptionsItem>
           <NDescriptionsItem
             v-if="feedback.issue_tags && feedback.issue_tags.length > 0"
-            label="問題標籤"
+            :label="t('feedbacks.detail.issueLabels')"
             :span="2"
           >
             <NSpace :size="8">
@@ -194,21 +193,21 @@ onMounted(() => {
               </NTag>
             </NSpace>
           </NDescriptionsItem>
-          <NDescriptionsItem v-if="feedback.comment" label="使用者評論" :span="2">
+          <NDescriptionsItem v-if="feedback.comment" :label="t('feedbacks.detail.userComment')" :span="2">
             {{ feedback.comment }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="建立時間" :span="2">
+          <NDescriptionsItem :label="t('common.fields.createdAt')" :span="2">
             {{ formatDateTime(feedback.created_at) }}
           </NDescriptionsItem>
         </NDescriptions>
       </NCard>
 
       <!-- 對話內容卡片 -->
-      <NCard title="對話內容" class="mt-4">
+      <NCard :title="t('feedbacks.detail.conversationContent')" class="mt-4">
         <div class="conversation">
           <div class="user-question">
             <h3 class="section-title">
-              使用者問題
+              {{ t('feedbacks.detail.userQuestion') }}
             </h3>
 
             <!-- 附件顯示區 -->
@@ -236,7 +235,7 @@ onMounted(() => {
                   >
                     <NImage
                       :src="getAttachmentUrl(feedback.user_message!.id, attachment.id)"
-                      :alt="`${attachment.original_filename} - 第 ${attachment.extra_data?.page_number} 頁`"
+                      :alt="`${attachment.original_filename} - p.${attachment.extra_data?.page_number}`"
                       object-fit="cover"
                       class="attachment-image"
                       :preview-src="getAttachmentUrl(feedback.user_message!.id, attachment.id)"
@@ -257,14 +256,14 @@ onMounted(() => {
 
             <!-- 文字內容 -->
             <div class="question-content">
-              {{ feedback.user_question || '無問題記錄' }}
+              {{ feedback.user_question || t('feedbacks.detail.noQuestion') }}
             </div>
           </div>
 
           <div class="assistant-response">
             <div class="section-header">
               <h3 class="section-title">
-                AI 回覆
+                {{ t('feedbacks.detail.aiReply') }}
               </h3>
               <NTag v-if="isInterrupted" type="warning" size="small" :bordered="false">
                 <template #icon>
@@ -274,7 +273,7 @@ onMounted(() => {
                     </svg>
                   </NIcon>
                 </template>
-                使用者中斷
+                {{ t('feedbacks.detail.userInterrupted') }}
               </NTag>
             </div>
             <div class="response-content markdown-content">
@@ -300,29 +299,29 @@ onMounted(() => {
       />
 
       <!-- 已審查資訊 -->
-      <NCard v-if="feedback.expert_review" title="專家審查" class="mt-4">
+      <NCard v-if="feedback.expert_review" :title="t('feedbacks.detail.expertReview')" class="mt-4">
         <NDescriptions :column="1" label-placement="left" bordered>
-          <NDescriptionsItem label="審查人員">
+          <NDescriptionsItem :label="t('feedbacks.detail.reviewer')">
             {{
               feedback.expert_review.reviewer?.full_name
                 || feedback.expert_review.reviewer?.username
-                || '未知'
+                || t('feedbacks.detail.unknown')
             }}
           </NDescriptionsItem>
-          <NDescriptionsItem label="專家意見">
+          <NDescriptionsItem :label="t('feedbacks.detail.expertOpinion')">
             <div class="expert-opinion">
               {{ feedback.expert_review.expert_opinion }}
             </div>
           </NDescriptionsItem>
           <NDescriptionsItem
             v-if="feedback.expert_review.suggested_response"
-            label="建議回覆內容"
+            :label="t('feedbacks.detail.suggestedReply')"
           >
             <div class="suggested-response">
               {{ feedback.expert_review.suggested_response }}
             </div>
           </NDescriptionsItem>
-          <NDescriptionsItem label="審查時間">
+          <NDescriptionsItem :label="t('feedbacks.detail.reviewTime')">
             {{ formatDateTime(feedback.expert_review.created_at) }}
           </NDescriptionsItem>
         </NDescriptions>

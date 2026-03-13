@@ -19,6 +19,9 @@ import CollectionFilters from '@/components/collections/CollectionFilters.vue'
 import CollectionForm from '@/components/collections/CollectionForm.vue'
 import CollectionTable from '@/components/collections/CollectionTable.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 狀態
 const loading = ref(false)
@@ -55,7 +58,7 @@ async function loadCollections() {
   }
   catch (error: any) {
     console.error('載入 Collection 列表失敗:', error)
-    message.error(error.message || '載入 Collection 列表失敗')
+    message.error(error.message || t('collections.loadFailed'))
   }
   finally {
     loading.value = false
@@ -109,14 +112,14 @@ async function handleFormSubmit(data: CollectionCreateRequest | CollectionUpdate
     if (formMode.value === 'create') {
       // 建立 Collection
       await createCollection(data as CollectionCreateRequest)
-      message.success('Collection 建立成功')
+      message.success(t('collections.createSuccess'))
     }
     else {
       // 更新 Collection
       if (!currentCollection.value)
         return
       await updateCollection(currentCollection.value.id, data as CollectionUpdateRequest)
-      message.success('Collection 更新成功')
+      message.success(t('collections.updateSuccess'))
     }
 
     showFormModal.value = false
@@ -124,7 +127,7 @@ async function handleFormSubmit(data: CollectionCreateRequest | CollectionUpdate
   }
   catch (error: any) {
     console.error('操作失敗:', error)
-    message.error(error.message || '操作失敗')
+    message.error(error.message || t('common.status.failed'))
   }
 }
 
@@ -132,12 +135,12 @@ async function handleFormSubmit(data: CollectionCreateRequest | CollectionUpdate
 async function handleDeleteCollection(collectionId: number) {
   try {
     await deleteCollection(collectionId)
-    message.success('Collection 刪除成功')
+    message.success(t('collections.deleteSuccess'))
     loadCollections()
   }
   catch (error: any) {
     console.error('刪除 Collection 失敗:', error)
-    message.error(error.message || '刪除 Collection 失敗')
+    message.error(error.message || t('collections.deleteFailed'))
   }
 }
 
@@ -153,10 +156,10 @@ onMounted(() => {
     <div class="page-header">
       <div class="header-content">
         <h1 class="page-title">
-          Collection 管理
+          {{ t('collections.title') }}
         </h1>
         <p class="page-description">
-          管理文件集合、分塊策略與資料集
+          {{ t('collections.description') }}
         </p>
       </div>
       <div class="header-actions">
@@ -166,7 +169,7 @@ onMounted(() => {
               <CollectionIcon />
             </NIcon>
           </template>
-          新增 Collection
+          {{ t('collections.addNew') }}
         </NButton>
       </div>
     </div>

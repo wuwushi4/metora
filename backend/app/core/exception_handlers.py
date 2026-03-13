@@ -9,6 +9,7 @@ from fastapi.exceptions import RequestValidationError
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from loguru import logger
 
+from app.i18n import t
 from app.utils.exceptions import (
     AppException,
     AuthenticationError,
@@ -119,7 +120,7 @@ async def validation_exception_handler(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={
             "success": False,
-            "message": "請求資料驗證失敗",
+            "message": t("errors.validationFailed"),
             "code": "VALIDATION_ERROR",
             "details": {"errors": errors}
         }
@@ -150,19 +151,19 @@ async def integrity_error_handler(
     )
 
     # 解析錯誤訊息，嘗試提供更友善的錯誤提示
-    error_message = "資料庫約束違反"
+    error_message = t("errors.integrityViolation")
     error_code = "INTEGRITY_ERROR"
 
     # 檢查是否為唯一性約束違反
     orig_error = str(exc.orig).lower()
     if "unique" in orig_error or "duplicate" in orig_error:
-        error_message = "資料重複，該資源已存在"
+        error_message = t("errors.duplicateResource")
         error_code = "DUPLICATE_RESOURCE"
     elif "foreign key" in orig_error:
-        error_message = "參照完整性違反，關聯的資源不存在"
+        error_message = t("errors.foreignKeyViolation")
         error_code = "FOREIGN_KEY_ERROR"
     elif "not null" in orig_error:
-        error_message = "必要欄位缺失"
+        error_message = t("errors.nullConstraint")
         error_code = "NULL_CONSTRAINT_ERROR"
 
     return JSONResponse(
@@ -200,7 +201,7 @@ async def sqlalchemy_error_handler(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
             "success": False,
-            "message": "資料庫操作失敗",
+            "message": t("errors.dbError"),
             "code": "DATABASE_ERROR"
         }
     )
@@ -233,7 +234,7 @@ async def general_exception_handler(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
             "success": False,
-            "message": "伺服器內部錯誤",
+            "message": t("errors.serverError"),
             "code": "INTERNAL_SERVER_ERROR"
         }
     )

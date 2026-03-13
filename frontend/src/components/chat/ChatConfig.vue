@@ -5,8 +5,11 @@ import { useWindowSize } from '@vueuse/core'
 import { NButton, NDivider, NInput, NModal, NSpace, NText } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
 import CollectionSelector from './CollectionSelector.vue'
 import GraphSelector from './GraphSelector.vue'
+
+const { t } = useI18n()
 
 interface Props {
   show: boolean
@@ -134,7 +137,7 @@ function handleClose() {
 // 確認配置
 function handleConfirm() {
   if (!canConfirm.value || !selectedGraph.value) {
-    message.warning('請完成所有必填項目')
+    message.warning(t('chat.config.incomplete'))
     return
   }
 
@@ -161,7 +164,7 @@ function handleConfirm() {
     :show="show"
     :mask-closable="false"
     preset="card"
-    title="開始新的對話"
+    :title="t('chat.config.title')"
     :style="modalStyle"
     :content-style="contentStyle"
     @update:show="handleClose"
@@ -171,15 +174,15 @@ function handleConfirm() {
       <div class="config-section">
         <div class="section-header">
           <NText strong>
-            對話標題
+            {{ t('chat.config.sessionTitle') }}
           </NText>
           <NText :depth="3" style="font-size: 0.8125rem">
-            可選,留空自動生成
+            {{ t('chat.config.titleHint') }}
           </NText>
         </div>
         <NInput
           v-model:value="sessionTitle"
-          placeholder="請輸入對話標題 (可選)"
+          :placeholder="t('chat.config.titlePlaceholder')"
           :maxlength="100"
           show-count
           clearable
@@ -203,15 +206,15 @@ function handleConfirm() {
           <NDivider style="margin: 8px 0" />
           <div class="section-header">
             <NText strong>
-              選擇知識庫
+              {{ t('chat.config.selectCollection') }}
             </NText>
             <NText :depth="3" style="font-size: 0.8125rem">
-              *{{ selectedGraph === 'regulation_graph' ? '法規顧問' : '知識專家' }}需要使用知識庫
+              *{{ selectedGraph === 'regulation_graph' ? t('chat.config.requiredForRegulation') : t('chat.config.requiredForRag') }}
             </NText>
           </div>
           <CollectionSelector
             v-model="selectedCollections"
-            placeholder="請選擇一個或多個知識庫..."
+            :placeholder="t('chat.collectionSelector.placeholder')"
           />
         </div>
       </Transition>
@@ -219,7 +222,7 @@ function handleConfirm() {
       <!-- 配置說明 -->
       <div class="config-hint">
         <NText :depth="3" style="font-size: 0.8125rem; line-height: 1.6">
-          💡 提示: 建立對話後可以隨時切換模式或修改標題
+          {{ t('chat.config.tip') }}
         </NText>
       </div>
     </div>
@@ -227,7 +230,7 @@ function handleConfirm() {
     <template #footer>
       <NSpace justify="end" :size="12">
         <NButton @click="handleClose">
-          取消
+          {{ t('common.actions.cancel') }}
         </NButton>
         <NButton
           type="primary"
@@ -235,7 +238,7 @@ function handleConfirm() {
           :loading="loading"
           @click="handleConfirm"
         >
-          建立對話
+          {{ t('chat.config.createButton') }}
         </NButton>
       </NSpace>
     </template>

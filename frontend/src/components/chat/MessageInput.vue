@@ -3,7 +3,10 @@ import type { FilePreview as FilePreviewType } from '@/types/upload'
 import { AttachOutline, StopCircleOutline } from '@vicons/ionicons5'
 import { NButton, NIcon, NInput, NSpace } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useChatStore } from '@/stores/chat'
+
+const { t } = useI18n()
 import {
   createFilePreview,
   DEFAULT_FILE_RULES,
@@ -21,7 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   loading: false,
-  placeholder: '輸入訊息... (Shift + Enter 換行, Enter 發送)',
+  placeholder: undefined,
 })
 
 const emit = defineEmits<Emits>()
@@ -104,7 +107,7 @@ function handleFileSelect(event: Event) {
   const maxFiles = DEFAULT_FILE_RULES.maxFiles
 
   if (newCount > maxFiles) {
-    message.error(`最多只能上傳 ${maxFiles} 個檔案 (目前已有 ${currentCount} 個)`)
+    message.error(t('chat.input.maxFiles', { max: maxFiles, current: currentCount }))
     input.value = '' // 清空 input
     return
   }
@@ -150,7 +153,7 @@ function handleDrop(event: DragEvent) {
   const maxFiles = DEFAULT_FILE_RULES.maxFiles
 
   if (newCount > maxFiles) {
-    message.error(`最多只能上傳 ${maxFiles} 個檔案 (目前已有 ${currentCount} 個)`)
+    message.error(t('chat.input.maxFiles', { max: maxFiles, current: currentCount }))
     return
   }
 
@@ -204,6 +207,7 @@ defineExpose({
 <template>
   <div
     class="message-input-container" :class="[{ 'is-dragging': isDragging }]"
+    :data-drop-hint="$t('chat.input.dropHint')"
     @drop="handleDrop"
     @dragover="handleDragOver"
     @dragleave="handleDragLeave"
@@ -227,7 +231,7 @@ defineExpose({
         ref="inputRef"
         v-model:value="inputValue"
         type="textarea"
-        :placeholder="placeholder"
+        :placeholder="placeholder || t('chat.input.placeholder')"
         :disabled="disabled || loading"
         :autosize="{
           minRows: 1,
@@ -255,7 +259,7 @@ defineExpose({
                 <AttachOutline />
               </NIcon>
             </template>
-            上傳檔案
+            {{ $t('chat.input.uploadFile') }}
             <span
               v-if="fileCountInfo.current > 0"
               :style="{ color: fileCountInfo.isMax ? '#ef4444' : '#6b7280', marginLeft: '4px' }"
@@ -282,7 +286,7 @@ defineExpose({
           :disabled="!canSend"
           @click="handleSend"
         >
-          發送
+          {{ $t('chat.input.send') }}
         </NButton>
         <NButton
           v-else
@@ -294,7 +298,7 @@ defineExpose({
               <StopCircleOutline />
             </NIcon>
           </template>
-          停止
+          {{ $t('chat.input.stop') }}
         </NButton>
       </NSpace>
     </div>
@@ -314,7 +318,7 @@ defineExpose({
 
 /* 拖拽狀態遮罩 */
 .message-input-container.is-dragging::before {
-  content: '拖放檔案到這裡上傳';
+  content: attr(data-drop-hint);
   position: absolute;
   top: 0;
   left: 0;

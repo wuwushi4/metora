@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { NCard, NSpace, NText } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
+
+const { tm } = useI18n()
 
 interface Props {
   graphType?: 'base_graph' | 'rag_graph' | 'regulation_graph' | 'agent_graph' | null
@@ -14,28 +17,12 @@ const emit = defineEmits<{
   selectExample: [question: string]
 }>()
 
-// 示例問題
-const exampleQuestions = {
-  base_graph: [
-    '你好,能介紹一下你的功能嗎?',
-    '幫我解釋一下什麼是機器學習?',
-    '你能做些什麼?',
-  ],
-  rag_graph: [
-    '這個專案的主要功能是什麼?',
-    '請幫我總結一下這份文件的重點',
-    '有哪些相關的技術文檔?',
-  ],
-  regulation_graph: [
-    '動物保護法第3條是什麼?',
-    '有人虐待流浪狗會觸犯哪條法律?',
-    '寵物受傷沒有立即送醫會違法嗎?',
-  ],
-  agent_graph: [
-    '幫我計算 1 到 100 的質數有哪些?',
-    '用 matplotlib 畫一個 sin 和 cos 的對比圖',
-    '分析這組資料的統計分佈: [23, 45, 67, 89, 12, 34, 56, 78, 90, 11]',
-  ],
+// 示例問題 key 映射
+const exampleKeyMap: Record<string, string> = {
+  base_graph: 'chat.empty.baseExamples',
+  rag_graph: 'chat.empty.ragExamples',
+  regulation_graph: 'chat.empty.regulationExamples',
+  agent_graph: 'chat.empty.agentExamples',
 }
 
 // 獲取當前模式的示例問題
@@ -43,7 +30,10 @@ function getExamples(): string[] {
   if (!props.graphType) {
     return []
   }
-  return exampleQuestions[props.graphType] || []
+  const key = exampleKeyMap[props.graphType]
+  if (!key) return []
+  const examples = tm(key)
+  return Array.isArray(examples) ? examples : []
 }
 
 function handleExampleClick(question: string) {
@@ -73,23 +63,23 @@ function handleExampleClick(question: string) {
     <!-- 歡迎文字 -->
     <div class="welcome-text">
       <h2 class="welcome-title">
-        開始對話
+        {{ $t('chat.empty.title') }}
       </h2>
       <p class="welcome-description">
         <template v-if="graphType === 'rag_graph'">
-          選擇知識庫並開始提問,AI 將根據您的文檔內容回答問題
+          {{ $t('chat.empty.descRag') }}
         </template>
         <template v-else-if="graphType === 'base_graph'">
-          直接開始對話,AI 將基於通用知識回答您的問題
+          {{ $t('chat.empty.descBase') }}
         </template>
         <template v-else-if="graphType === 'regulation_graph'">
-          查詢法規條文和適用情境,AI 將根據法規資料庫回答您的問題
+          {{ $t('chat.empty.descRegulation') }}
         </template>
         <template v-else-if="graphType === 'agent_graph'">
-          AI 可以撰寫並執行 Python 程式碼,協助您進行資料分析、圖表生成等任務
+          {{ $t('chat.empty.descAgent') }}
         </template>
         <template v-else>
-          請先選擇對話模式開始使用
+          {{ $t('chat.empty.descDefault') }}
         </template>
       </p>
     </div>
@@ -97,7 +87,7 @@ function handleExampleClick(question: string) {
     <!-- 示例問題 -->
     <div v-if="getExamples().length > 0" class="examples-section">
       <NText class="examples-title" :depth="3">
-        試試這些問題:
+        {{ $t('chat.empty.examplesTitle') }}
       </NText>
       <NSpace vertical :size="12">
         <NCard
@@ -152,7 +142,7 @@ function handleExampleClick(question: string) {
           <line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
         <NText :depth="3" class="tip-text">
-          提示: 使用 Enter 發送訊息, Shift + Enter 換行
+          {{ $t('chat.empty.tip') }}
         </NText>
       </div>
     </div>

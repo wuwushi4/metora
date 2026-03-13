@@ -17,6 +17,7 @@ import {
 import { NIcon, NLayoutSider, NMenu } from 'naive-ui'
 
 import { computed, h, markRaw } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { usePermission } from '@/composables/usePermission'
 
@@ -28,6 +29,7 @@ const props = defineProps<{
 const route = useRoute()
 const router = useRouter()
 const { hasRole } = usePermission()
+const { t } = useI18n()
 
 // 使用 markRaw 防止圖示元件被 reactive 化
 const icons = {
@@ -53,21 +55,16 @@ const menuOptions = computed<MenuOption[]>(() => {
   const options: MenuOption[] = [
     {
       type: 'group',
-      label: '主要功能',
+      label: t('sidebar.groups.main'),
       key: 'main-group',
       children: [
         {
-          label: '儀表板',
+          label: t('sidebar.menu.dashboard'),
           key: 'dashboard',
           icon: () => h(NIcon, null, { default: () => h(icons.dashboard) }),
         },
-        // {
-        //   label: '首頁',
-        //   key: 'home',
-        //   icon: () => h(NIcon, null, { default: () => h(icons.home) }),
-        // },
         {
-          label: 'Agent Chat',
+          label: t('sidebar.menu.chat'),
           key: 'chat',
           icon: () => h(NIcon, null, { default: () => h(icons.chat) }),
         },
@@ -75,48 +72,33 @@ const menuOptions = computed<MenuOption[]>(() => {
     },
     {
       type: 'group',
-      label: '資料管理',
+      label: t('sidebar.groups.data'),
       key: 'data-group',
       children: [
         {
-          label: 'Collection 管理',
+          label: t('sidebar.menu.collections'),
           key: 'collections',
           icon: () => h(NIcon, null, { default: () => h(icons.collections) }),
         },
         {
-          label: '法規管理',
+          label: t('sidebar.menu.regulations'),
           key: 'regulations',
           icon: () => h(NIcon, null, { default: () => h(icons.regulations) }),
         },
         {
-          label: '反饋記錄管理',
+          label: t('sidebar.menu.feedbacks'),
           key: 'feedbacks',
           icon: () => h(NIcon, null, { default: () => h(icons.feedbacks) }),
         },
-        // {
-        //   label: '專案管理',
-        //   key: 'projects',
-        //   icon: () => h(NIcon, null, { default: () => h(icons.project) }),
-        // },
-        // {
-        //   label: '資料分析',
-        //   key: 'analytics',
-        //   icon: () => h(NIcon, null, { default: () => h(icons.analytics) }),
-        // },
-        // {
-        //   label: '文件中心',
-        //   key: 'documents',
-        //   icon: () => h(NIcon, null, { default: () => h(icons.document) }),
-        // },
       ],
     },
     {
       type: 'group',
-      label: '資料工程',
+      label: t('sidebar.groups.engineering'),
       key: 'engineering-group',
       children: [
         {
-          label: '法規爬蟲作業',
+          label: t('sidebar.menu.lawProcessing'),
           key: 'law-processing',
           icon: () => h(NIcon, null, { default: () => h(icons.engineering) }),
         },
@@ -128,16 +110,16 @@ const menuOptions = computed<MenuOption[]>(() => {
   if (hasRole('admin')) {
     options.push({
       type: 'group',
-      label: '系統設定',
+      label: t('sidebar.groups.system'),
       key: 'system-group',
       children: [
         {
-          label: '使用者管理',
+          label: t('sidebar.menu.users'),
           key: 'users',
           icon: () => h(NIcon, null, { default: () => h(icons.users) }),
         },
         {
-          label: '系統設定',
+          label: t('sidebar.menu.settings'),
           key: 'settings',
           icon: () => h(NIcon, null, { default: () => h(icons.settings) }),
         },

@@ -22,6 +22,9 @@ import UserFilters from '@/components/users/UserFilters.vue'
 import UserForm from '@/components/users/UserForm.vue'
 import UserTable from '@/components/users/UserTable.vue'
 import { message } from '@/utils/message'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // 狀態
 const loading = ref(false)
@@ -61,7 +64,7 @@ async function loadUsers() {
   }
   catch (error: any) {
     console.error('載入使用者列表失敗:', error)
-    message.error(error.message || '載入使用者列表失敗')
+    message.error(error.message || t('users.loadFailed'))
   }
   finally {
     loading.value = false
@@ -115,14 +118,14 @@ async function handleFormSubmit(data: UserCreateRequest | UserUpdateRequest) {
     if (formMode.value === 'create') {
       // 建立使用者
       await createUser(data as UserCreateRequest)
-      message.success('使用者建立成功')
+      message.success(t('users.createSuccess'))
     }
     else {
       // 更新使用者
       if (!currentUser.value)
         return
       await updateUser(currentUser.value.id, data as UserUpdateRequest)
-      message.success('使用者更新成功')
+      message.success(t('users.updateSuccess'))
     }
 
     showFormModal.value = false
@@ -130,7 +133,7 @@ async function handleFormSubmit(data: UserCreateRequest | UserUpdateRequest) {
   }
   catch (error: any) {
     console.error('操作失敗:', error)
-    message.error(error.message || '操作失敗')
+    message.error(error.message || t('common.status.failed'))
   }
 }
 
@@ -138,12 +141,12 @@ async function handleFormSubmit(data: UserCreateRequest | UserUpdateRequest) {
 async function handleDeleteUser(userId: number) {
   try {
     await deleteUser(userId)
-    message.success('使用者刪除成功')
+    message.success(t('users.deleteSuccess'))
     loadUsers()
   }
   catch (error: any) {
     console.error('刪除使用者失敗:', error)
-    message.error(error.message || '刪除使用者失敗')
+    message.error(error.message || t('users.deleteFailed'))
   }
 }
 
@@ -160,13 +163,13 @@ async function handleRoleSubmit(data: AssignRolesRequest) {
       return
 
     await assignRoles(roleUser.value.id, data)
-    message.success('角色分配成功')
+    message.success(t('users.roleAssignSuccess'))
     showRoleModal.value = false
     loadUsers()
   }
   catch (error: any) {
     console.error('角色分配失敗:', error)
-    message.error(error.message || '角色分配失敗')
+    message.error(error.message || t('users.roleAssignFailed'))
   }
 }
 
@@ -182,10 +185,10 @@ onMounted(() => {
     <div class="page-header">
       <div class="header-content">
         <h1 class="page-title">
-          使用者管理
+          {{ t('users.title') }}
         </h1>
         <p class="page-description">
-          管理系統使用者帳號、角色與權限
+          {{ t('users.description') }}
         </p>
       </div>
       <div class="header-actions">
@@ -195,7 +198,7 @@ onMounted(() => {
               <AddUserIcon />
             </NIcon>
           </template>
-          新增使用者
+          {{ t('users.addNew') }}
         </NButton>
       </div>
     </div>
