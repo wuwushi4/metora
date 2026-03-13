@@ -349,6 +349,36 @@
       "networkError": "網路連線失敗",
       "authError": "認證失敗",
       "serverError": "伺服器錯誤"
+    },
+    "metadata": {
+      "retrievalResults": "檢索結果",
+      "source": "來源 {n}",
+      "relevance": "相關度: {score}%",
+      "queryRewrite": "查詢重寫",
+      "queryRestructure": "查詢重構",
+      "targetArticles": "目標條文：",
+      "articleNumber": "第 {n} 條",
+      "rewrittenQueries": "重寫查詢：",
+      "citationRelationships": "引用關係",
+      "relatedArticle": "相關條文 {n}",
+      "unknownArticle": "未知條文",
+      "processingInfo": "處理資訊",
+      "queryType": "查詢類型:",
+      "queryTypes": {
+        "article_lookup": "條文查詢",
+        "scenario": "情境查詢",
+        "comparison": "條文比對",
+        "interpretation": "法規解釋"
+      },
+      "intentAnalysis": "意圖分析:",
+      "retrievalMode": "檢索模式:",
+      "ragRetrieval": "RAG 檢索",
+      "directAnswer": "直接回答",
+      "processingTime": "處理時間:"
+    },
+    "toolOutput": {
+      "title": "工具產出檔案",
+      "downloadFile": "下載檔案"
     }
   },
   "collections": {

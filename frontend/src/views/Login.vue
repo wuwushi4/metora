@@ -105,7 +105,7 @@ function handleKeyup(e: KeyboardEvent) {
             Metora
           </h1>
           <p class="brand-subtitle">
-            Turn AI Agents into Real Systems
+            {{ t('auth.login.subtitle') }}
           </p>
           <div class="title-divider" />
         </div>
