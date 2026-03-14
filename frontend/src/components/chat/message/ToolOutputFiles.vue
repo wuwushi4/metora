@@ -2,12 +2,15 @@
 import type { ToolOutputFile, ToolResultRecord } from '@/types/chat'
 import { computed } from 'vue'
 import { NButton, NCard, NImage, NTag, NText } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 
 interface Props {
   toolResults: ToolResultRecord[]
 }
 
 const props = defineProps<Props>()
+
+const { t } = useI18n()
 
 interface DisplayOutputFile extends ToolOutputFile {
   tool_name: string
@@ -51,7 +54,7 @@ function formatFileSize(size: number): string {
 <template>
   <div v-if="outputFiles.length > 0" class="tool-output-files">
     <div class="section-title">
-      <NText strong>工具產出檔案</NText>
+      <NText strong>{{ t('chat.toolOutput.title') }}</NText>
     </div>
 
     <div class="output-grid">
@@ -84,7 +87,7 @@ function formatFileSize(size: number): string {
 
         <div v-else class="file-actions">
           <NButton size="small" secondary @click="downloadFile(file)">
-            下載檔案
+            {{ t('chat.toolOutput.downloadFile') }}
           </NButton>
         </div>
 

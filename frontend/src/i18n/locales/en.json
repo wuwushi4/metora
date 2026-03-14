@@ -349,6 +349,36 @@
       "networkError": "Network connection failed",
       "authError": "Authentication failed",
       "serverError": "Server error"
+    },
+    "metadata": {
+      "retrievalResults": "Retrieval Results",
+      "source": "Source {n}",
+      "relevance": "Relevance: {score}%",
+      "queryRewrite": "Query Rewriting",
+      "queryRestructure": "Query Restructuring",
+      "targetArticles": "Target Articles:",
+      "articleNumber": "Article {n}",
+      "rewrittenQueries": "Rewritten Queries:",
+      "citationRelationships": "Citation Relationships",
+      "relatedArticle": "Related Article {n}",
+      "unknownArticle": "Unknown Article",
+      "processingInfo": "Processing Info",
+      "queryType": "Query Type:",
+      "queryTypes": {
+        "article_lookup": "Article Lookup",
+        "scenario": "Scenario Query",
+        "comparison": "Article Comparison",
+        "interpretation": "Regulation Interpretation"
+      },
+      "intentAnalysis": "Intent Analysis:",
+      "retrievalMode": "Retrieval Mode:",
+      "ragRetrieval": "RAG Retrieval",
+      "directAnswer": "Direct Answer",
+      "processingTime": "Processing Time:"
+    },
+    "toolOutput": {
+      "title": "Tool Output Files",
+      "downloadFile": "Download File"
     }
   },
   "collections": {

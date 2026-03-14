@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ChatMessage } from '@/types/chat'
 import { NCard, NCollapse, NCollapseItem, NSpace, NTag, NText } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 import { useMessageMetadata } from '@/composables/useMessageMetadata'
 
 interface Props {
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const { t } = useI18n()
 
 const {
   hasRetrievalResults,
@@ -41,7 +44,7 @@ function truncateText(text: string, maxLength: number = 100): string {
       <NCollapseItem
         v-if="hasRetrievalResults"
         name="retrieval"
-        title="檢索結果"
+        :title="t('chat.metadata.retrievalResults')"
       >
         <NSpace vertical :size="12">
           <NCard
@@ -54,7 +57,7 @@ function truncateText(text: string, maxLength: number = 100): string {
             <div class="result-header">
               <NSpace align="center" :size="8">
                 <NTag :bordered="false" type="info" size="small">
-                  來源 {{ index + 1 }}
+                  {{ t('chat.metadata.source', { n: index + 1 }) }}
                 </NTag>
                 <NText class="result-filename" :depth="3">
                   {{ result.filename }}
@@ -64,7 +67,7 @@ function truncateText(text: string, maxLength: number = 100): string {
                   :type="result.score >= 0.8 ? 'success' : result.score >= 0.5 ? 'warning' : 'default'"
                   size="small"
                 >
-                  相關度: {{ (result.score * 100).toFixed(1) }}%
+                  {{ t('chat.metadata.relevance', { score: (result.score * 100).toFixed(1) }) }}
                 </NTag>
               </NSpace>
             </div>
@@ -81,7 +84,7 @@ function truncateText(text: string, maxLength: number = 100): string {
       <NCollapseItem
         v-if="hasSubQueries"
         name="sub_queries"
-        title="查詢重寫"
+        :title="t('chat.metadata.queryRewrite')"
       >
         <NSpace vertical :size="8">
           <div
@@ -103,13 +106,13 @@ function truncateText(text: string, maxLength: number = 100): string {
       <NCollapseItem
         v-if="hasTargetArticles || hasRewrittenQueries"
         name="query_rewrite"
-        title="查詢重構"
+        :title="t('chat.metadata.queryRestructure')"
       >
         <NSpace vertical :size="12">
           <!-- 目標條文 -->
           <div v-if="hasTargetArticles" class="regulation-section">
             <NText strong style="font-size: 0.875rem">
-              目標條文：
+              {{ t('chat.metadata.targetArticles') }}
             </NText>
             <NSpace :size="8" style="margin-top: 8px">
               <NTag
@@ -119,7 +122,7 @@ function truncateText(text: string, maxLength: number = 100): string {
                 type="success"
                 size="small"
               >
-                第 {{ article }} 條
+                {{ t('chat.metadata.articleNumber', { n: article }) }}
               </NTag>
             </NSpace>
           </div>
@@ -127,7 +130,7 @@ function truncateText(text: string, maxLength: number = 100): string {
           <!-- 重寫查詢 -->
           <div v-if="hasRewrittenQueries" class="regulation-section">
             <NText strong style="font-size: 0.875rem">
-              重寫查詢：
+              {{ t('chat.metadata.rewrittenQueries') }}
             </NText>
             <NSpace vertical :size="8" style="margin-top: 8px">
               <div
@@ -151,7 +154,7 @@ function truncateText(text: string, maxLength: number = 100): string {
       <NCollapseItem
         v-if="hasRelatedArticles"
         name="related_articles"
-        title="引用關係"
+        :title="t('chat.metadata.citationRelationships')"
       >
         <NSpace vertical :size="12">
           <NCard
@@ -164,10 +167,10 @@ function truncateText(text: string, maxLength: number = 100): string {
             <div class="result-header">
               <NSpace align="center" :size="8">
                 <NTag :bordered="false" type="warning" size="small">
-                  相關條文 {{ Number(index) + 1 }}
+                  {{ t('chat.metadata.relatedArticle', { n: Number(index) + 1 }) }}
                 </NTag>
                 <NText class="result-filename" :depth="3">
-                  {{ article.metadata?.article_num ? `第 ${article.metadata.article_num} 條` : '未知條文' }}
+                  {{ article.metadata?.article_num ? t('chat.metadata.articleNumber', { n: article.metadata.article_num }) : t('chat.metadata.unknownArticle') }}
                 </NText>
                 <NTag
                   v-if="article.score"
@@ -175,7 +178,7 @@ function truncateText(text: string, maxLength: number = 100): string {
                   :type="article.score >= 0.8 ? 'success' : article.score >= 0.5 ? 'warning' : 'default'"
                   size="small"
                 >
-                  相關度: {{ (article.score * 100).toFixed(1) }}%
+                  {{ t('chat.metadata.relevance', { score: (article.score * 100).toFixed(1) }) }}
                 </NTag>
               </NSpace>
             </div>
@@ -192,40 +195,34 @@ function truncateText(text: string, maxLength: number = 100): string {
       <NCollapseItem
         v-if="message.metadata?.processing_time || message.metadata?.need_rag !== undefined || message.metadata?.query_type || message.metadata?.intent_reason"
         name="stats"
-        title="處理資訊"
+        :title="t('chat.metadata.processingInfo')"
       >
         <NSpace vertical :size="8">
           <div v-if="message.metadata?.query_type" class="stat-item">
             <NText :depth="3">
-              查詢類型:
+              {{ t('chat.metadata.queryType') }}
             </NText>
             <NTag :bordered="false" type="info" size="small">
-              {{
-                message.metadata.query_type === 'article_lookup' ? '條文查詢'
-                : message.metadata.query_type === 'scenario' ? '情境查詢'
-                  : message.metadata.query_type === 'comparison' ? '條文比對'
-                    : message.metadata.query_type === 'interpretation' ? '法規解釋'
-                      : message.metadata.query_type
-              }}
+              {{ t(`chat.metadata.queryTypes.${message.metadata.query_type}`, message.metadata.query_type) }}
             </NTag>
           </div>
           <div v-if="message.metadata?.intent_reason" class="stat-item">
             <NText :depth="3">
-              意圖分析:
+              {{ t('chat.metadata.intentAnalysis') }}
             </NText>
             <NText>{{ message.metadata.intent_reason }}</NText>
           </div>
           <div v-if="message.metadata?.need_rag !== undefined" class="stat-item">
             <NText :depth="3">
-              檢索模式:
+              {{ t('chat.metadata.retrievalMode') }}
             </NText>
             <NTag :bordered="false" :type="message.metadata.need_rag ? 'info' : 'default'" size="small">
-              {{ message.metadata.need_rag ? 'RAG 檢索' : '直接回答' }}
+              {{ message.metadata.need_rag ? t('chat.metadata.ragRetrieval') : t('chat.metadata.directAnswer') }}
             </NTag>
           </div>
           <div v-if="message.metadata?.processing_time" class="stat-item">
             <NText :depth="3">
-              處理時間:
+              {{ t('chat.metadata.processingTime') }}
             </NText>
             <NTag :bordered="false" size="small">
               {{ formatProcessingTime(message.metadata.processing_time) }}
